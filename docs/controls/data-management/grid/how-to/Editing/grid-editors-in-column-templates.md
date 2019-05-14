@@ -1,17 +1,17 @@
 ---
 title: Render Grid Editor in Column Template
-page_title: Render Grid Editor in Column Template | Kendo UI Grid
-description: "Learn how to edit the Kendo UI Grid widget by using a column template."
+page_title: jQuery Grid Documentation | Editor in Column Template | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to edit the widget by using a column template."
 slug: howto_render_editor_column_template_grid
 ---
 
 # Render Grid Editor in Column Template
 
-The example below demonstrates how to render an input editor in a column template and provide the editing functionality.
+The following example demonstrates how to render an input editor in a column template and provide the editing functionality.
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       function onDataBound(e) {
@@ -28,7 +28,7 @@ The example below demonstrates how to render an input editor in a column templat
       }
 
       $(document).ready(function () {
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
@@ -76,9 +76,8 @@ The example below demonstrates how to render an input editor in a column templat
           height: 430,
           toolbar: ["create", "save", "cancel"],
           columns: [
-
-            { template: "<input data-bind='value:ProductName' />", title: "Product Name", width: 110 },
-            { template: "<input data-bind='value:UnitsInStock' />", title: "Units In Stock", width: 110 },
+            { template: "<input data-bind='value:ProductName' class='k-textbox' />", title: "Product Name", width: 110 },
+            { template: "<input data-bind='value:UnitsInStock' class='k-textbox'/>", title: "Units In Stock", width: 110 },
             { field: "Discontinued", width: 110 },
             { command: "destroy", title: "&nbsp;", width: 90 }],
           editable: true,
@@ -90,9 +89,7 @@ The example below demonstrates how to render an input editor in a column templat
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -108,4 +105,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

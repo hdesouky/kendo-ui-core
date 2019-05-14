@@ -1,18 +1,18 @@
 ---
 title: Initialize Data Attribute with Detail Template
-page_title: Initialize Data Attribute with Detail Template | Kendo UI Grid
-description: "Learn how to initialize a Kendo UI Grid widget by using data attributes and including a detail template."
-orevious_url: /controls/data-management/grid/how-to/data-attribute-initialization-with-detail-template
+page_title: jQuery Grid Documentation | Data Attribute Initialization | Kendo UI
+description: "Learn how to initialize a Kendo UI jQuery Grid widget by using data attributes and including a detail template."
+previous_url: /controls/data-management/grid/how-to/data-attribute-initialization-with-detail-template, /web/grid/how-to/data-attribute-initialization-with-detail-template
 slug: howto_initialize_data_attributewith_detail_template_grid
 ---
 
 # Initialize Data Attribute with Detail Template
 
-The example below demonstrates how to initialize a Kendo UI Grid using data attributes and include a detail template.
+The following example demonstrates how to initialize a Grid by using data attributes and include a detail template.
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"
          data-role="grid"
          data-sortable="true"
@@ -25,7 +25,7 @@ The example below demonstrates how to initialize a Kendo UI Grid using data attr
       var dataSource = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
         },
         pageSize: 6,
         serverPaging: true,
@@ -39,7 +39,7 @@ The example below demonstrates how to initialize a Kendo UI Grid using data attr
             dataSource: {
               type: "odata",
               transport: {
-                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
               },
               serverPaging: true,
               serverSorting: true,
@@ -68,9 +68,7 @@ The example below demonstrates how to initialize a Kendo UI Grid using data attr
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -83,4 +81,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

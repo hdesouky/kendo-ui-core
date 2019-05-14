@@ -9,34 +9,36 @@ position: 4
 
 # Only What You Need
 
+Depending on the requirements of your project, you might need to skip some of the Kendo UI utilities and install only what you need.  
+
 ## Combined Scripts
 
-To facilitate the common project types, the following combined scripts are available in the bundles or on CDN:
+To facilitate the common project types, Kendo UI ships the following combined scripts in the bundles or on CDN:
 
 *  The `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution]({% slug bundle_supportfor_kendoui_components %}). The relevant script is available in the Kendo UI Core package as well.
 *  The `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
-> **Important**
->
-> The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](http://www.telerik.com/download/custom-download).
+  > **Important**
+  >
+  > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](http://www.telerik.com/download/custom-download).
 
 * The `kendo.web.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all desktop browser widgets (previously distributed as Kendo UI Web).
 * The `kendo.dataviz.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all data visualization widgets (previously distributed as Kendo UI DataViz).
 * The `kendo.mobile.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all mobile device specific widgets (previously distributed as Kendo UI Mobile).
 
-> **Important**
->
-> Only one of the combined JavaScript files can be included at a time, because they include the Kendo UI framework. To simultaneously use widgets from different Kendo UI suites, use the `kendo.all.min.js` or build a custom script.
+    > **Important**
+    >
+    > Only one of the combined JavaScript files can be included at a time, because they include the Kendo UI framework. To simultaneously use widgets from different Kendo UI suites, use the `kendo.all.min.js` or build a custom script.
 
-In addition, none of the combined script files should be registered together with an individual widget script from the same suite. For example, `kendo.grid.js` should not be registered together with `kendo.web.js` or `kendo.all.js` because they already include the Grid scripts.
+    Do not register any of the combined script files together with an individual widget script from the same suite. For example, do not register `kendo.grid.js` together with `kendo.web.js` or `kendo.all.js` because they already include the Grid scripts.
 
-> **Important**
->
-> Registering duplicate scripts might cause JavaScript errors and unexpected behavior.
+    > **Important**
+    >
+    > Registering duplicate scripts might cause JavaScript errors and unexpected behavior.
 
-## Individual Widget Scripts
+## Individual Scripts
 
-Below are listed the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project.
+The following list provides the references to the script files which, whether minified or not, that can be included on a per-widget basis depending on your preferences and requirements of your project.
 
 + [List of Kendo UI widgets in terms of their bundle support]({% slug bundle_supportfor_kendoui_components %})
 + [Script Files for Data Management]({% slug script_filesfor_datamanagement_widgets %})
@@ -53,7 +55,9 @@ Below are listed the references to the script files which, whether minified or n
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 
-## Build Scripts
+## Custom Scripts
+
+You can create your own custom scripts that provide just the widgets and features your project requires.
 
 ### Employ Download Builder
 
@@ -61,7 +65,8 @@ Users with a commercial license might use the [custom download builder tool](htt
 
 > **Important**
 >
-> Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
+> * Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
+> * It is not possible to load Download Builder packages by using RequireJS because the tool will not create the required AMD modules.
 
 ### Use Gulp
 
@@ -80,13 +85,21 @@ As of the Kendo UI 2014 Q3 release, the necessary build scripts are shipped in t
 
 List the components you want to be included in the custom build and separate them with a comma (`,`). The example above builds a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
+To build the entire Kendo UI library, run `gulp custom -c all`.
+
 > **Important**
 >
 > When complete, the `gulp` command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The Gulp build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-## See Also
+To compile a custom script version that is not minified, remove or comment out the following line from the `gulpfile.js`:
 
-Other articles on getting started with Kendo UI:
+```JavaScript
+    ...
+    .pipe(uglify())
+    ...
+```
+
+## See Also
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})

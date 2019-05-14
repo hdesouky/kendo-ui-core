@@ -26,7 +26,7 @@ The preferred method of getting Kendo UI is to browse to [telerik.com](http://ww
 
 **Figure 1. The Kendo UI directory structure**
 
-![kendo-commecrial-zip-layout](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-commecrial-zip-layout.png)
+![kendo-commecrial-zip-layout](images/kendo-commecrial-zip-layout.png)
 
 The `\js` and `\styles` folders in the root of the `.zip` file contain the minified versions of the Kendo UI `.js` and `.css` files. If you have the commercial version of Kendo UI, you may also notice the `\source` folder. This folder also contains `\js` and `\styles` folders, but these are the full, non-minified versions of the `.js` and `.css`. These are typically used for local development and debugging, but the minified versions are the ones that should be deployed in a real application. For that reason, the examples use the minified files in this project.
 
@@ -40,7 +40,7 @@ Kendo UI is also available using the NuGet package manager in Visual Studio. Sea
 
 **Figure 2. The search result for Kendo UI using the NuGet package manager**
 
-![kendo-nuget](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-nuget.png)
+![kendo-nuget](images/kendo-nuget.png)
 
 ### Additional Information
 
@@ -54,7 +54,7 @@ ASP.NET MVC 4 is able to bundle and minify JavaScript and Style Sheets. The Musi
 
 Also, in the `Debug` mode the bundler does not include minified files by default.
 
-The example below demonstrates the making of a bundle from the Kendo UI `.css` files.
+The following example demonstrates the making of a bundle from the Kendo UI `.css` files.
 
 ###### Example
 
@@ -132,7 +132,7 @@ The `Release` version of the `web.config` file set debug to `false`.
 
 You are now able to add Kendo UI and any other third-party libraries to the pages. The Music Store uses the `Views\Shared\_Layout.cshtml` master page, so add Kendo UI here. Make sure that the Kendo UI JavaScript files come after jQuery. For styling, include `kendo.common.min.css`, plus one of the Kendo UI themes.
 
-The example below demonstrates how to use the `kendo.default.min.css` which is the Default theme.
+The following example demonstrates how to use the `kendo.default.min.css` which is the Default theme.
 
 ###### Example
 
@@ -154,7 +154,7 @@ The example below demonstrates how to use the `kendo.default.min.css` which is t
         @RenderSection("scripts", required: false)
     </body>
 
-It is a common practice to include as much JavaScript at the bottom of the `<body>` element as possible. In the Music Store project, you are actually including jQuery in the `<head>`. This aspect is discussed in the tutorial&mdash;however, the reason for it is that on a later stage you are going to use some of [UI for ASP.NET MVC]({% slug aspnetmvc4_aspnetmvc %}) which inserts `<script>` tags into the `<body>` of the page, and requires that jQuery is already defined.
+It is a common practice to include as much JavaScript at the bottom of the `<body>` element as possible. In the Music Store project, you are actually including jQuery in the `<head>`. This aspect is discussed in the tutorial&mdash;however, the reason for it is that on a later stage you are going to use some of [Telerik UI for ASP.NET MVC]({% slug aspnetmvc4_aspnetmvc %}) which inserts `<script>` tags into the `<body>` of the page, and requires that jQuery is already defined.
 
 ## Handle the Database
 
@@ -167,8 +167,6 @@ The connection string configured in the `web.config` file is set to use `LocalDB
 To run the Kendo UI Music Store Dashboard demo, make sure your system meets these requirements or change the connection string to use an SQL Server instance available on your computer.
 
 ## See Also
-
-Other articles on the Kendo UI Music Store Web Application sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})

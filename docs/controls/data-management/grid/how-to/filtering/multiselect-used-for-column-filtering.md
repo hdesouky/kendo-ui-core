@@ -1,19 +1,19 @@
 ---
 title: Use MultiSelect for Column Filtering
-page_title: Use MultiSelect for Column Filtering | Kendo UI Grid
-description: "Learn how to use Kendo UI MultiSelect for column filtering in the Kendo UI Grid widget."
-previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect, /controls/data-management/grid/how-to/multiselect-used-for-column-filtering.html 
+page_title: jQuery Grid Documentation | MultiSelect for Column Filtering | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use MultiSelect for column filtering."
+previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect, /controls/data-management/grid/how-to/multiselect-used-for-column-filtering, /web/grid/how-to/multiselect-used-for-column-filtering
 slug: howto_use_multiselect_forcolumn_filtering_grid
 ---
 
 # Use MultiSelect for Column Filtering
 
-The example below demonstrates how to use Kendo UI MultiSelect as a column filter for the Grid.
+The following example demonstrates how to use the MultiSelect as a column filter for the Grid.
 
 ###### Example
 
-```html
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+```dojo
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <div id="grid"></div>
     <script>
       var data = [
@@ -84,9 +84,7 @@ The example below demonstrates how to use Kendo UI MultiSelect as a column filte
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -100,4 +98,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

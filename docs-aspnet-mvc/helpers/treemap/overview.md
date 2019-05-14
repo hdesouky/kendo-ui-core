@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeMap HtmlHelper
+page_title: TreeMap | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TreeMap widget for ASP.NET MVC."
 slug: overview_treemaphelper_aspnetmvc
 position: 1
@@ -10,77 +10,68 @@ position: 1
 
 The TreeMap HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeMap](https://demos.telerik.com/kendo-ui/treemap/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI TreeMap.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Add a TreeMap.
+1. Add a TreeMap.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().TreeMap()
-                .Name("treeMap")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read
-                        .Action("_PopulationUSA", "TreeMap")
-                    )
-                    .Model(m => m.Children("Items"))
+            .Name("treeMap")
+            .DataSource(dataSource => dataSource
+                .Read(read => read
+                    .Action("_PopulationUSA", "TreeMap")
                 )
-                .ValueField("Value")
-                .TextField("Name")
+                .Model(m => m.Children("Items"))
+            )
+            .ValueField("Value")
+            .TextField("Name")
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         $(Html.Kendo().TreeMap()
-              .Name("treeMap")
-              .DataSource(dataSource => dataSource
-                  .Read(read => read
-                      .Action("_PopulationUSA", "TreeMap")
-                  )
-                  .Model(m => m.Children("Items"))
-              )
-              .ValueField("Value")
-              .TextField("Name")
+            .Name("treeMap")
+            .DataSource(dataSource => dataSource
+                .Read(read => read
+                    .Action("_PopulationUSA", "TreeMap")
+                )
+                .Model(m => m.Children("Items"))
+            )
+            .ValueField("Value")
+            .TextField("Name")
         )
-```
+    ```
 
 ## Event Handling
 
-You can subscribe to all TreeMap [events](../../../kendo-ui/api/javascript/dataviz/ui/treemap#events).
+You can subscribe to all TreeMap [events](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap#events).
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%= Html.Kendo().TreeMap()
+            .Name("treemap")
+            .Events(events => events
+                .ItemCreated("onItemCreated")
+                .DataBound("onDataBound")
+            )
+    %>
 
-```tab-ASPX
-
-        <%= Html.Kendo().TreeMap()
-                .Name("treemap")
-                .Events(events => events
-                    .ItemCreated("onItemCreated")
-                    .DataBound("onDataBound")
-                )
-        %>
-
-        <script>
+    <script>
         function onItemCreated() {
             //Handle the itemCreated event.
         }
@@ -88,19 +79,18 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function onDataBound() {
             //Handle the dataBound event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    $(Html.Kendo().TreeMap()
+            .Name("treemap")
+            .Events(events => events
+                .ItemCreated("onItemCreated")
+                .DataBound("onDataBound")
+            )
+    )
 
-        $(Html.Kendo().TreeMap()
-              .Name("treemap")
-              .Events(events => events
-                  .ItemCreated("onItemCreated")
-                  .DataBound("onDataBound")
-              )
-        )
-
-        <script>
+    <script>
         function onItemCreated() {
             //Handle the itemCreated event.
         }
@@ -108,55 +98,50 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function onDataBound() {
             //Handle the dataBound event.
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().TreeMap()
-              .Name("treemap")
-              .Events(e => e
-                  .ItemCreated(@<text>
-                    function() {
-                        //Handle the itemCreated event.
-                    }
-                  </text>)
-                  .DataBound(@<text>
-                    function() {
-                        //Handle the dataBound event.
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().TreeMap()
+        .Name("treemap")
+        .Events(e => e
+            .ItemCreated(@<text>
+            function() {
+                //Handle the itemCreated event.
+            }
+            </text>)
+            .DataBound(@<text>
+            function() {
+                //Handle the dataBound event.
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TreeMap instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeMap API](../../../kendo-ui/api/javascript/dataviz/ui/treemap#methods) to control its behavior.
+To reference an existing Kendo UI TreeMap instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeMap API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap#methods) to control its behavior.
 
 ###### Example
 
-        // Put this after your Kendo UI TreeMap for ASP.NET MVC declaration.
-        <script>
+    // Put this after your Kendo UI TreeMap for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the TreeMap is used to get its client-side instance.
             var treemap = $("#treemap").data("kendoTreeMap");
         });
-        </script>
+    </script>
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the TreeMap:
-
-* [ASP.NET MVC API Reference: TreeMapBuilder](/api/Kendo.Mvc.UI.Fluent/TreeMapBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: TreeMapBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeMapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

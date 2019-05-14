@@ -1,23 +1,27 @@
 ---
 title: Create Checkbox Filter Menu
-page_title: Create Checkbox Filter Menu | Kendo UI Grid
-description: "Learn how to create a checkbox filter menu functionality in the Kendo UI Grid widget."
-previous_url: /controls/data-management/grid/how-to/checkbox-filter-menu.html
+page_title: jQuery Grid Documentation | Create Checkbox Filter Menu | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to create a checkbox filter menu functionality in the widget."
+previous_url: /controls/data-management/grid/how-to/checkbox-filter-menu, /web/grid/how-to/checkbox-filter-menu
 slug: howto_create_checkbox_filter_menu_grid
 ---
 
 # Create Checkbox Filter Menu
 
-The example below demonstrates how to create a menu functionality based on a checkbox filter in a Kendo UI Grid.
+The following example demonstrates how to create a menu functionality based on a checkbox filter in a Grid.
+
+> Important
+>
+> The functionality is available out of the box using the [columns.filterable.multi](/api/javascript/ui/grid/configuration/columns.filterable.multi) property.
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"></div>
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read: {
@@ -157,9 +161,7 @@ The example below demonstrates how to create a menu functionality based on a che
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -173,4 +175,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

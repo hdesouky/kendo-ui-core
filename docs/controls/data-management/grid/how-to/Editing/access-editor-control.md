@@ -1,25 +1,24 @@
 ---
 title: Access Editor Controls in Edit Events
-page_title:  Access Editor Controls in Edit Events | Kendo UI Grid
-description: "Learn how to access an editor control in the edit event handler of the Kendo UI Grid widget."
+page_title:  jQuery Grid Documentation | Editor Controls in Edit Events | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to access an editor control in the edit event handler of the widget."
 slug: howto_access_editor_controlsin_edit_events_grid
 ---
 
 # Access Editor Controls in Edit Events
 
-The example below demonstrates how to access an editor control in the `edit` event handler of the Kendo UI Grid widget.
+The following example demonstrates how to access an editor in the `edit` event handler of the Grid.
 
 The functionality relies on the following concepts:
+* The [`edit`](/api/javascript/ui/grid/events/edit) event handler of the Grid provides a reference to the DOM element of the edit container.
+* The Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element. This attribute holds the widget object.
 
-* The [`edit` event](/api/javascript/ui/grid#events-edit) handler of the Grid provides a reference to the DOM element of the edit container.
-* Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element, which holds the widget object.
-
-Note that for brevity the demo below has no Kendo UI DataSource transport configured. However, a transport configuration is required for [CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}) to work.
+For brevity, the following demo does not include the configuration for the Data Source transport. However, for the [CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}) to work properly, they require a transport configuration.
 
 ###### Example
 
-```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+```dojo
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 <div id="example">
     <div id="grid"></div>
 
@@ -84,7 +83,7 @@ Note that for brevity the demo below has no Kendo UI DataSource transport config
                     dataSource: {
                         type: "odata",
                         transport: {
-                            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                         }
                     }
                 });
@@ -96,9 +95,7 @@ Note that for brevity the demo below has no Kendo UI DataSource transport config
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -115,4 +112,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

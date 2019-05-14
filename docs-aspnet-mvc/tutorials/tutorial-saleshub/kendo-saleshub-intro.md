@@ -13,13 +13,13 @@ This article is an overview of the Kendo UI Sales Hub sample project. The Kendo 
 
 **Figure 1. A screenshot of the Kendo UI Sales Hub Home page**
 
-![kendo-saleshub-intro-home-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-intro-home-screenshot.png)
+![kendo-saleshub-intro-home-screenshot](images/kendo-saleshub-intro-home-screenshot.png)
 
 ## Basic Concepts
 
 The Sales Hub project is an Order Management System that demonstrates the usage of Telerik UI for ASP.NET MVC in an enterprise environment.
 
-The goal of this sample project to is show how to use a subset of Kendo UI widgets using Telerik UI for ASP.NET MVC as well as to show how to easily implement server-side filtering for [DataSource](../../../kendo-ui/api/javascript/data/datasource) requests, using the server-side components that Telerik UI for ASP.NET MVC provides.
+The goal of this sample project to is show how to use a subset of Kendo UI widgets using Telerik UI for ASP.NET MVC as well as to show how to easily implement server-side filtering for [DataSource](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource) requests, using the server-side components that Telerik UI for ASP.NET MVC provides.
 
 This sample is not feature-complete and is only meant to be used as a reference for how to use Telerik UI for ASP.NET MVC.
 
@@ -31,7 +31,7 @@ To view the demo of the Kendo UI Sales Hub sample project, refer to [demos.teler
 
 ### Get the Source Code
 
-Start by getting the source for the [SalesHub from GitHub](https://github.com/telerik/kendo-saleshub-demo).
+Start by getting the source for the [SalesHub from GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/saleshub).
 
 > **Important**
 >
@@ -49,7 +49,8 @@ Once you download and install the extensions, copy `\wrappers\aspnetmvc\Binaries
 
 > **Important**
 >
-> The standard installation directory for the extensions is `C:\Program Files (x86)\Telerik\Telerik UI for ASP.NET MVC <version>`.
+> The standard installation directory for the extensions is `C:\Program Files (x86)\Progress\UI for ASP.NET MVC <version>`.
+> For versions prior to R3 2017, the default installation folder is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC <version>`.
 
 ### Build and Run the Application
 
@@ -61,7 +62,7 @@ The first time the application launches, it creates and seeds its database. Seed
 
 **Figure 2. The Solution Explorer structure**
 
-![kendo-saleshub-intro-project-structure-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-intro-project-structure-screenshot.png)
+![kendo-saleshub-intro-project-structure-screenshot](images/kendo-saleshub-intro-project-structure-screenshot.png)
 
 There are three main projects in the Kendo UI Sales Hub sample application, as listed below.
 

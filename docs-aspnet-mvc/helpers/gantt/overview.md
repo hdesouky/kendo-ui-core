@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Gantt HtmlHelper
+page_title: Gantt | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Gantt widget for ASP.NET MVC."
 slug: overview_gantthelper_aspnetmvc
 position: 1
@@ -8,19 +8,17 @@ position: 1
 
 # Gantt
 
-The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](../../../kendo-ui/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
+The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](http://docs.telerik.com/kendo-ui/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when binding the Kendo UI Gantt to tasks and dependencies on the server.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create two view models that will be used to transmit the Gantt data to the client side. One is used for the tasks, and the other one for the dependencies between the tasks.
+1. Create two view models that will be used to transmit the Gantt data to the client side. One is used for the tasks, and the other one for the dependencies between the tasks.
 
-###### Example
+    ###### Example
 
         public class TaskViewModel : IGanttTask
         {
@@ -59,9 +57,9 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
             public int Type { get; set; }
         }
 
-**Step 3** In the HomeController, create two action methods that return the tasks and dependencies as JSON.
+1. In the HomeController, create two action methods that return the tasks and dependencies as JSON.
 
-###### Example
+    ###### Example
 
         public JsonResult Tasks([DataSourceRequest] DataSourceRequest request)
         {
@@ -83,12 +81,9 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
             return Json(dependencies.AsQueryable().ToDataSourceResult(request));
         }
 
-**Step 4** Add a Gantt chart to the view and bind it to the above action methods through its two data sources.
+1. Add a Gantt chart to the view and bind it to the above action methods through its two data sources.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
             .Name("Gantt")
             .DataSource(ds => ds
@@ -116,9 +111,8 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
                 })
             )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
             .Name("Gantt")
             .DataSource(ds => ds
@@ -146,19 +140,17 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
                 })
             )
         )
-```
+    ```
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Gantt:
-
-* [ASP.NET MVC API Reference: GanttBuilder](/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: GanttBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
 * [Server Binding of the Gantt HtmlHelper]({% slug serverbinding_gantthelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Gantt Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

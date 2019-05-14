@@ -1,19 +1,21 @@
 ---
-title: Create Custom Widgets
-page_title: Create Custom Widgets | Kendo UI Getting Started
+title: Creating Custom Widgets
+page_title: Creating Custom Widgets | Kendo UI Getting Started
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
 description: "Create your own widget by inheriting from the base widget class in Kendo UI."
 slug: createcustomkendouiwidgets_gettingstarted
 position: 5
 ---
 
-# Create Custom Widgets
+# Creating Custom Widgets
 
-This article explains in detail how to create your own Kendo UI widget by inheriting from the base widget class.
+This article explains in detail how to create your own Kendo UI widget by inheriting from the base `widget` class.
 
 ## The Basics
 
-First, extend the base Kendo UI widget class in the `kendo.ui` namespace. The example below also demonstrates how to create variables to hold values. This helps with the minification too.
+First, extend the base Kendo UI widget class in the `kendo.ui` namespace.
+
+The following example below also demonstrates how to create variables to hold values which helps with the minification too.
 
 ###### Example
 
@@ -32,10 +34,9 @@ First, extend the base Kendo UI widget class in the `kendo.ui` namespace. The ex
 In this example, notice:
 
 1. The entire thing is wrapped in a self-executing anonymous function, so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery.
+2. The widget itself extends the base widget class so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
 
-2. The widget itself extends the base widget class, so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
-
-## Add Initialization Method
+## Add Initialization Methods
 
 You need to provide an `init` method for your widget. This method is called by the framework when the widget is initialized. This `init` function takes two parameters. The first one is the element on which you are initializing the widget. The second one is a set of options that you are going to specify shortly. These will be configuration values.
 
@@ -75,7 +76,7 @@ The call to the base is what translates your widget from declarative initializat
 
 	});
 
-### Create Custom Widget Boilerplate
+### Create Custom Widget Boilerplates
 
 Now add the widget to Kendo UI. Here is the full boilerplate for creating your own Kendo UI widget and making it available like all other Kendo UI widgets are.
 
@@ -110,11 +111,11 @@ Now add the widget to Kendo UI. Here is the full boilerplate for creating your o
 
 	})(jQuery);
 
-## Use DataSource
+## Use Data Sources
 
 To make this widget DataSource- or MVVM-aware, implement some additional items. The section below goes over the process of creation a DataSource-aware widget. The MVVM part is tackled further below. The widget that is demonstrated is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. Think of this as an extremely dumbed-down ListView that for easier handling is named the Repeater.
 
-To make your widget aware of a DataSource, first use the created convenience method on the DataSource base object.
+To make your widget aware of a Data Source, first use the created convenience method on the Data Source base object.
 
 ###### Example
 
@@ -122,7 +123,7 @@ To make your widget aware of a DataSource, first use the created convenience met
 
 This line offers flexibility in the way you initialize the DataSource for your widget. If you actually create a new DataSource either outside your widget initialization or inline, that DataSource is returned.
 
-### Set DataSource to Array
+### Set DataSource to Arrays
 
 Creating a new DataSource to bind a widget is not a must because you are able to set the DataSource to an array, as demonstrated in the example below.
 
@@ -134,7 +135,7 @@ Creating a new DataSource to bind a widget is not a must because you are able to
 
 If you pass this simple array, the `kendo.data.DataSource.create` method creates a new DataSource based on the data in this array and returns it to `that.dataSource`.
 
-### Set DataSource As Configuration Object
+### Set Data Sources as Configuration Objects
 
 You can also create a DataSource just by specifying its configuration values inline, as demonstrated in the example below.
 
@@ -152,7 +153,7 @@ You can also create a DataSource just by specifying its configuration values inl
 
 This example specifies a DataSource configuration, but does not actually create an instance of one. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new DataSource instance with the specified configuration.
 
-> **Important**  
+> **Important**
 >
 > To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly: `kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;`.
 
@@ -209,7 +210,7 @@ The way the widget code now looks is shown in the example below.
 <!--_-->
 Notice that when you bind to the `change` event on the DataSource, you actually bind to the string value of `"change"`. As a best practice, assign these as constants at the top of the widget and then refer to the constant. The entire DataSource configuration is also moved into its own method. This is because `that` signifies the widget since it is the calling object. You can reference all widget properties off of the `that` object after assigning `that` to `this`.
 
-### Fetch from DataSource
+### Fetch from Data Sources
 
 You need to add one more thing to the `dataSource` method&mdash;fetching from the DataSource if necessary. Do that by checking for the `autoBind` configuration value off of `that.options`. Then call `that.dataSource.fetch()`. Note that a `fetch` is different from a `read` because it only populates the DataSource if the DataSource is not yet read from. If a `read` is previously called on the DataSource before the widget is initialized, you are not to cause the DataSource to read again.
 
@@ -247,7 +248,7 @@ The `autoBind` configuration option does not exist yet, so add it to the `option
 
 ## Render Widgets with Templates
 
-### Add Template to Options
+### Add Templates to Options
 
 The HTML, output by widgets, is rendered using the Kendo UI Templates. They allow you to pre-compile HTML and inject data or expressions, which are evaluated, into the HTML and a DOM fragment is returned as an HTML string. Nearly all widgets in Kendo UI allow you to specify some kind of template in addition to the default template that a widget uses. To do this, first add the template to the `options` object and set its value to an empty string. Contrary to other configuration settings, do not set its default value here.
 
@@ -259,7 +260,7 @@ The HTML, output by widgets, is rendered using the Kendo UI Templates. They allo
         template: ""
     }
 
-### Set Default Value Template
+### Set Default Value Templates
 
 To set the default value, add a line directly under the call to the base widget initialization. This pre-compiles the template passed in by the user, or uses a default template. In the case of this Repeater, write out `strong` tags wrapped in a paragraphs and then reference the `data` object, which will be a string if we pass an array of strings. If you pass objects to the template, the default template renders `[object Object]`.
 
@@ -267,7 +268,7 @@ To set the default value, add a line directly under the call to the base widget 
 
     that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>")
 
-## Implement Refresh Function
+## Implement Refresh Functions
 
 ### Set Public Refresh Functions
 
@@ -281,7 +282,7 @@ Since you bound to the `change` method, you need to implement the `refresh` publ
             html = kendo.render(that.template, view);
     }
 
-### Mutate DOM Element HTML
+### Mutate HTML of DOM Elements
 
 Finally, set the HTML of `that.element`&mdash;the element on which you are initializing your widget. If you are handling initialization on an `input` and you want to translate or wrap that `input` with a container, add that logic here before setting its HTML. The `that.element` is a jQuery wrapped element, so you can simply call the `html` method directly off of it. The final refresh method looks like the one demonstrated in the example below.
 
@@ -355,9 +356,86 @@ The demonstration below uses two widgets that are initialized. The first one tak
 
 ###### Example
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/burkeholland/N9DfB/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+```dojo
+   <div id="repeater"></div>
 
-## Use MVVM Pattern
+    <div id="container">
+      <div data-role="repeater" data-source="dataSource" data-template="template"></div>
+    </div>
+
+    <script type="text/x-kendo-template" id="template">
+    <div style="float: left; color: salmon; margin-right: 10px"><h1>#= data.ProductName #</h1></div>
+    </script>
+
+    <script>
+      (function() {
+        var kendo = window.kendo,
+            ui = kendo.ui,
+            Widget = ui.Widget,
+
+            CHANGE = "change";
+
+        var Repeater = Widget.extend({
+          init: function(element, options) {
+            var that = this;
+
+            kendo.ui.Widget.fn.init.call(that, element, options);
+            that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>");
+
+            that._dataSource();
+          },
+          options: {
+            name: "Repeater",
+            autoBind: true,
+            template: ""
+          },
+          refresh: function() {
+            var that = this,
+                view = that.dataSource.view(),
+                html = kendo.render(that.template, view);
+
+            that.element.html(html);
+          },
+          _dataSource: function() {
+            var that = this;
+            // returns the datasource OR creates one if using array or configuration object
+
+            that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
+
+            // bind to the change event to refresh the widget
+            that.dataSource.bind(CHANGE, function() {
+              that.refresh();
+            });
+
+            if (that.options.autoBind) {
+              that.dataSource.fetch();
+            }
+          }
+        });
+
+        ui.plugin(Repeater);
+
+      })(jQuery);
+
+
+
+      var dataSource = new kendo.data.DataSource({
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        }
+      });
+
+      kendo.bind($("#container"));
+
+      $("#repeater").kendoRepeater({
+        dataSource: [ "item1", "item2", "item3" ]
+      });
+    </script>
+
+```
+
+## Use MVVM
 
 ### Define Data-Bound and Data-Binding Events
 
@@ -429,7 +507,7 @@ MVVM expects you to expose the DOM fragments from your widget, which represents 
 	    }
 	});
 
-### Change DataSource
+### Change Data Sources
 
 Since it is possible to change the DataSource by using MVVM, you need to implement the `setDataSource` function. MVVM calls this when the DataSource is set inside a ViewModel. Set your internal DataSource reference equal to the one passed in by MVVM and then rebuild the DataSource using the already defined `dataSource()` function.
 
@@ -444,7 +522,7 @@ Since it is possible to change the DataSource by using MVVM, you need to impleme
 	}
 
 <!--_-->
-### Tweak DataSource
+### Tweak Data Sources
 
 You need to make some small tweaks to your method which assigns or builds the DataSource. The `_dataSource` method that you call in `init` does 3 things:
 
@@ -482,7 +560,7 @@ Since you have already bound the change event on the DataSource possibly once, m
 <!--_-->
 This can be a bit confusing if you have not used the [`proxy`](http://api.jquery.com/jQuery.proxy/) jQuery function before, but all it is doing is saying that when the `_refreshHandler` is called, it should execute the public `refresh` widget function and inside that `refresh` function, this will be a reference to the widget itself, and not something else, such as window. Due to the fact that the the value of the keyword `this` is always changing in JavaScript, this is a good way to ensure that the scope is correct when the `refresh` function executes.
 
-## Trigger Bound and Binding Events
+## The dataBound and dataBinding Events
 
 Finally, you need to trigger the `dataBinding` and `dataBound` events. Do this in the public `refresh`. Note that `dataBinding` happens before you mutate the DOM and `dataBound` happens directly after that.
 
@@ -507,7 +585,7 @@ Now, you have a fully enabled MVVM in your widget. Define the widget as demonstr
 
 ###### Example
 
-    <div data-role="repeater" data-bind="source: dataSource">
+    <div data-role="repeater" data-bind="source: dataSource"></div>
     <script>
         var viewModel = kendo.observable({
             dataSource:  new kendo.data.DataSource({
@@ -526,12 +604,10 @@ In the complete example below note that when you add an item to the DataSource, 
 
 ###### Example
 
-```html
-<label for="newItem">Enter A New Item</input>
+```dojo
+        <label for="newItem">Enter A New Item</label>
         <input id="newItem" data-bind="value: newItem" class="k-input" />
         <button class="k-button" data-bind="click: add">Add Item</button>
-
-        <div id="repeater"></div>
 
         <div data-role="repeater" data-bind="source: items" data-template="template"></div>
 
@@ -560,9 +636,9 @@ kendo.bind(document.body, viewModel);
 In order for a widget to support [`value` binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
 * Add a `value` method to the widget, which sets the current widget value and returns the current value if no arguments are passed.
-* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget#methods-trigger) the widget change event when the widget value is changed.
+* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the widget change event when the widget value is changed.
 
-The examples below demonstrate how to create a simple input widget that selects the value on focus.
+The following examples demonstrate how to create a simple input widget that selects the value on focus.
 
 **Step 1.** Create the widget and implement the functionality that you are looking for.
 
@@ -634,11 +710,11 @@ The examples below demonstrate how to create a simple input widget that selects 
         });
 
 <!--_-->
-The example below combines the snippets and exhibits the full code.
+The following example combines the snippets and exhibits the full code.
 
 ###### Example
 
-```html
+```dojo
     <script>
       (function ($) {
         var kendo = window.kendo;
@@ -700,8 +776,6 @@ The example below combines the snippets and exhibits the full code.
 Custom widgets that inherit from Kendo UI widgets are not subject to technical support service, unless the question or issue can be discussed in the context of the originating widget that is provided in the Kendo UI installer.
 
 ## See Also
-
-Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})

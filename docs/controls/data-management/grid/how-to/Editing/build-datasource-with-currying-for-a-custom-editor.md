@@ -1,18 +1,18 @@
 ---
 title: Build Custom dataSource for Custom Editor
-page_title: Build Custom dataSource for Custom Editor | Kendo UI Grid
-description: "Learn how to build custom dataSource with currying for a custom editor in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | dataSource for Custom Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to build custom dataSource with currying for a custom editor in the widget."
 slug: howto_build_custom_datasourcefor_custom_editor_grid
 ---
 
 # Build Custom dataSource for Custom Editor
 
-The example below demonstrates how to create a custom dataSource based on the data in a custom editor.
+The following example demonstrates how to create a custom data source based on the data in a custom editor.
 
 ###### Example
 
-```html
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+```dojo
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
         <div id="grid"></div>
       <script>
@@ -61,7 +61,7 @@ The example below demonstrates how to create a custom dataSource based on the da
           return new kendo.data.DataSource({
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             },
             change: function() {
               alert(id);
@@ -74,9 +74,7 @@ The example below demonstrates how to create a custom dataSource based on the da
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
 * [How to Delete Multiple Rows Selected with Checkboxes]({% slug howto_delete_rows_selectedwith_checkboxes_grid %})
@@ -92,4 +90,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

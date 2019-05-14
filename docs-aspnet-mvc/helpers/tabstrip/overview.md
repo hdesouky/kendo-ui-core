@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TabStrip HtmlHelper
+page_title: TabStrip | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TabStip widget for ASP.NET MVC."
 slug: overview_tabstrip_aspnetmvc
 position: 1
@@ -24,34 +24,30 @@ There are a few ways to bind a Kendo UI TabStrip for ASP.NET MVC:
 
 Below are listed the steps for you to follow when defining the items of a Kendo UI TabStrip.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Add a TabStrip.
+1. Add a TabStrip.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Item 1"); //Add an item with the text "Item1".
-                    items.Add().Text("Item 2"); //Add an item with the text "Item2".
-                })
+            .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add an item with the text "Item1".
+                items.Add().Text("Item 2"); //Add an item with the text "Item2".
+            })
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().TabStrip()
             .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
@@ -60,29 +56,29 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                 items.Add().Text("Item 2"); //Add item with text "Item2")
             })
         )
-```
+    ```
 
 ### Sitemap Binding
 
 Below are listed the steps for you to follow when binding a Kendo UI TabStrip to a sitemap.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
+1. Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
 
-###### Example
+    ###### Example
 
         <?xml version="1.0" encoding="utf-8" ?>
         <siteMap>
-          <siteMapNode title="Home" controller="Home" action="Overview">
-          <siteMapNode controller="grid" action="index" title="Grid" />
-          <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
-          </siteMapNode>
+            <siteMapNode title="Home" controller="Home" action="Overview">
+            <siteMapNode controller="grid" action="index" title="Grid" />
+            <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
+            </siteMapNode>
         </siteMap>
 
-**Step 3** Load the sitemap using `SiteMapManager`.
+1. Load the sitemap using `SiteMapManager`.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
@@ -93,34 +89,30 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
             return View();
         }
 
-**Step 4** Add a TabStrip.
+1. Add a TabStrip.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo("sample") //Bind to the sitemap with the name "sample".
+            .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //Bind to the sitemap with the name "sample".
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().TabStrip()
             .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
             .BindTo("sample") //Bind to the sitemap with the name "sample".
         )
-```
+    ```
 
 ### Model Binding
 
 Below are listed the steps for you to follow when binding a Kendo UI TabStrip to a model.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the **Categories** table as the model.
+1. Create a new action method and pass the **Categories** table as the model.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
@@ -129,26 +121,19 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
             return View(northwind.Categories);
         }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @model IEnumerable<MvcApplication1.Models.Category>
-```
+    ```
 
-**Step 4** Add a TabStrip.
+1. Add a TabStrip.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().TabStrip()
             .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
             .BindTo(Model,(item,category)  =>
@@ -156,9 +141,8 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
                 item.Text = category.CategoryName;
             })
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().TabStrip()
             .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
             .BindTo(Model,(item,category)  =>
@@ -166,7 +150,7 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
                 item.Text = category.CategoryName;
             })
         )
-```
+    ```
 
 ### Security Trimming
 
@@ -185,107 +169,98 @@ If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a TabStrip
 
 ###### Example
 
-        @{Html.Kendo().TabStrip()
-            .Name("TabStrip1")
-            .Items(tabstrip =>
-            {
-                tabstrip.Add().Text("Tab 1")
-                    .Content(@<text>
-                        @using (Ajax.BeginForm("...", "..."))
-                        {
-                            ...
-                        }
-                    </text>);
-            }).Render();
-        }
+    @{Html.Kendo().TabStrip()
+        .Name("TabStrip1")
+        .Items(tabstrip =>
+        {
+            tabstrip.Add().Text("Tab 1")
+                .Content(@<text>
+                    @using (Ajax.BeginForm("...", "..."))
+                    {
+                        ...
+                    }
+                </text>);
+        }).Render();
+    }
 
 The above implementation is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
 
 ## Event Handling
 
-You can subscribe to all TabStrip [events](../../../kendo-ui/api/javascript/ui/tabstrip#events).
+You can subscribe to all TabStrip [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip#events).
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-      <%: Html.Kendo().TabStrip()
-              .Name("tabstrip")
-              .Events(e => e
-                  .Select("tabstrip_select")
-              )
-      %>
-      <script>
-      function tabstrip_select() {
-          //Handle the Select event.
-      }
-      </script>
-``
-```tab-Razor
-
-      @(Html.Kendo().TabStrip()
+```ASPX
+    <%: Html.Kendo().TabStrip()
             .Name("tabstrip")
             .Events(e => e
-                  .Select("tabstrip_select")
+                .Select("tabstrip_select")
             )
-      )
-      <script>
-      function tabstrip_select() {
-          //Handle the Select event.
-      }
-      </script>
+    %>
+    <script>
+        function tabstrip_select() {
+            //Handle the Select event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Events(e => e
+                .Select("tabstrip_select")
+        )
+    )
+    <script>
+        function tabstrip_select() {
+            //Handle the Select event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().TabStrip()
-            .Name("tabstrip")
-            .Events(e => e
-                .Select(@<text>
-                  function() {
-                      //Handle the Select event inline.
-                  }
-                </text>)
-            )
-      )
-```
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Events(e => e
+            .Select(@<text>
+                function() {
+                    //Handle the Select event inline.
+                }
+            </text>)
+        )
+    )
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TabStrip instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](../../../kendo-ui/api/javascript/ui/tabstrip#methods) to control its behavior.
+To reference an existing Kendo UI TabStrip instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TabStrip API](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip#methods) to control its behavior.
 
 ###### Example
 
-      //Put this after your Kendo UI TabStrip for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          //Notice that the Name() of the TabStrip is used to get its client-side instance.
-          var tabstrip = $("#tabstrip").data("kendoTabStrip");
-      });
-      </script>
+    //Put this after your Kendo UI TabStrip for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the TabStrip is used to get its client-side instance.
+            var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        });
+    </script>
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the TabStrip:
-
-* [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: TabStripBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI TabStrip Widget](http://docs.telerik.com/kendo-ui/controls/navigation/tabstrip/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

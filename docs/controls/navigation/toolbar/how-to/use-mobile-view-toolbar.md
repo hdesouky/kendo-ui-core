@@ -1,23 +1,23 @@
 ---
-title: Use Mobile View of ToolBar
-page_title: Use Mobile View | Kendo UI ToolBar
+title: Use the Mobile View of the Toolbar
+page_title: Use the Mobile View of the Toolbar | Kendo UI ToolBar
 description: "Learn how to use the mobile view of the Kendo UI ToolBar widget."
 slug: howto_usemobileview_toolbar
 ---
 
-# Use FontAwesome Icons
+# Use the Mobile View of the Toolbar
 
-The example below demonstrates how to enable the mobile view of the ToolBar widget:
+To enable the mobile view of the ToolBar widget:
 
-1. Add the mobile styles;
-2. Use the `aligh` option to configure where tools to be rendered (`left` or `right`);
+1. Add the mobile styles.
+2. To configure the position of the tools to be rendered&mdash;`left` or `right`&mdash;use the `align` option.
 3. Initialize `kendo.mobile.Application()`.
 
->tip: Open in Dojo
+The example below demonstrates how to use the mobile view of the Toolbar. It is recommended that you open it in Dojo.
 
 ###### Example
 
-```html
+```dojo
 <div id="toolbar"></div>
 <script>
   $("#toolbar").kendoToolBar({
@@ -34,8 +34,6 @@ The example below demonstrates how to enable the mobile view of the ToolBar widg
 ```
 
 ## See Also
-
-Other articles on the Kendo UI ToolBar:
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

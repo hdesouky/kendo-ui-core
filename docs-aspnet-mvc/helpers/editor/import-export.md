@@ -1,12 +1,12 @@
 ---
-title: Import and Export Documents
-page_title: Import and Export Documents | Kendo UI Editor HtmlHelper
+title: Documentation Import and Export
+page_title: Documentation Import and Export | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_importexportdpl_aspnetmvc
-position: 2
+position: 3
 ---
 
-# Import and Export Documents
+# Documentation Import and Export
 
 This article provides basic information on the import and export functionality of the Kendo UI Editor widget for ASP.NET MVC.
 
@@ -37,47 +37,29 @@ To start using the import and export functionality:
 
 Below are listed the steps for you to follow when enabling the export capabilities of the Editor.
 
-**Step 1** Add the `ExportAs` tool.
+1. Add the `ExportAs` tool.
 
-###### Example
-
-```tab-Razor
-@(Html.Kendo().Editor()
-    .Name("Editor")
-    .Tools(tools => tools
-        .ExportAs()
-    )
-)
-```
-```tab-ASPX
-<%: Html.Kendo().Editor()
+    ```Razor
+    @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
             .ExportAs()
         )
-%>
-```
-
-Alternatively, you can refine the options by configuring the `ExportAs` tool.
-
-###### Example
-
-```tab-Razor
-@(Html.Kendo().Editor()
-    .Name("Editor")
-    .Tools(tools => tools
-        .ExportAs(export => export
-            .Add("DOCX", "docx")
-            .Add("RTF", "rtf")
-            .Add("PDF", "pdf")
-            .Add("HTML", "html")
-            .Add("TXT", "txt")
-        )
     )
-)
-```
-```tab-ASPX
-<%: Html.Kendo().Editor()
+    ```
+    ```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs()
+        )
+    %>
+    ```
+
+    Alternatively, you can refine the options by configuring the `ExportAs` tool.
+
+    ```Razor
+    @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
             .ExportAs(export => export
@@ -88,27 +70,27 @@ Alternatively, you can refine the options by configuring the `ExportAs` tool.
                 .Add("TXT", "txt")
             )
         )
-%>
-```
-
-**Step 2** To enable the tool to contact the server and export a file, configure the `Proxy` method and, optionally, set up the name of the exported file through the `FileName` method.
-
-###### Example
-
-```tab-Razor
-@(Html.Kendo().Editor()
-    .Name("Editor")
-    .Tools(tools => tools
-        .ExportAs()
     )
-    .ExportAs(exportAs => exportAs
-        .FileName("Export")
-        .Proxy("Export", "Editor")
-    )
-)
-```
-```tab-ASPX
-<%: Html.Kendo().Editor()
+    ```
+    ```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs(export => export
+                .Add("DOCX", "docx")
+                .Add("RTF", "rtf")
+                .Add("PDF", "pdf")
+                .Add("HTML", "html")
+                .Add("TXT", "txt")
+            )
+        )
+    %>
+    ```
+
+1. To enable the tool to contact the server and export a file, configure the `Proxy` method and, optionally, set up the name of the exported file through the `FileName` method.
+
+    ```Razor
+    @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
             .ExportAs()
@@ -117,126 +99,131 @@ Alternatively, you can refine the options by configuring the `ExportAs` tool.
             .FileName("Export")
             .Proxy("Export", "Editor")
         )
-%>
-```
+    )
+    ```
+    ```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs()
+        )
+        .ExportAs(exportAs => exportAs
+            .FileName("Export")
+            .Proxy("Export", "Editor")
+        )
+    %>
+    ```
 
-**Step 3** Implement the action method in the corresponding controller.
+1. Implement the action method in the corresponding controller.
 
-###### Example
+    ###### Example
 
-```
-using Kendo.Mvc.Export;
-...
-    [HttpPost]
-    public ActionResult Export(EditorExportData data)
-    {
-        return EditorExport.Export(data);
-    }
-...
-```
+    ```
+    using Kendo.Mvc.Export;
+    ...
+        [HttpPost]
+        public ActionResult Export(EditorExportData data)
+        {
+            return EditorExport.Export(data);
+        }
+    ...
+    ```
 
 ### Importing Content from Files
 
 Similar to exporting, below are listed the steps for you to follow when enabling the `Import` tool to update the content of the Editor from a file.
 
-**Step 1** Add the `Import` tool.
+1. Add the `Import` tool.
 
-###### Example
-
-```tab-Razor
-@(Html.Kendo().Editor()
-    .Name("Editor")
-    .Tools(tools => tools
-        .Import()
-    )
-)
-```
-```tab-ASPX
-<%: Html.Kendo().Editor()
+    ```Razor
+    @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
             .Import()
         )
-%>
-```
-
-**Step 2** Configure the `Import` by using the `Proxy` and `AllowedExtensions` methods.
-
-###### Example
-
-```tab-Razor
-@(Html.Kendo().Editor()
-    .Name("Editor")
-    .Tools(tools => tools
-        .Import()
     )
-    .Import(import => import
-        .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
-        .Proxy("Import","Editor")
-    )
-)
-```
-```tab-ASPX
-<%: Html.Kendo().Editor()
+    ```
+    ```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("Editor")
+        .Tools(tools => tools
+            .Import()
+        )
+    %>
+    ```
+
+1. Configure the `Import` by using the `Proxy` and `AllowedExtensions` methods.
+
+    ```Razor
+    @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
             .Import()
         )
         .Import(import => import
-            .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
+            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
             .Proxy("Import","Editor")
         )
-%>
-```
+    )
+    ```
+    ```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("Editor")
+        .Tools(tools => tools
+            .Import()
+        )
+        .Import(import => import
+            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
+            .Proxy("Import","Editor")
+        )
+    %>
+    ```
 
-> **Important**
->
-> The `Import` tool integrates the [Kendo UI Upload HtmlHelper]({%slug overview_uploadhelper_aspnetmvc%}) to send a file to the server. You can configure it through the following exposed helper methods:
->
-> * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-AllowedExtensions%28System.String%5B%5D%29)
-> * [`MaxFileSize()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-MaxFileSize%28System.Nullable<System.Double>%29)
-> * [`Complete()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Complete%28System.String%29)
-> * [`Progress()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Progress%28System.String%29)
-> * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Select%28System.String%29)
-> * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Success%28System.String%29)
+    > **Important**
+    >
+    > The `Import` tool integrates the [Kendo UI Upload HtmlHelper]({%slug overview_uploadhelper_aspnetmvc%}) to send a file to the server. You can configure it through the following exposed helper methods:
+    >
+    > * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-AllowedExtensions%28System.String%5B%5D%29)
+    > * [`MaxFileSize()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-MaxFileSize%28System.Nullable<System.Double>%29)
+    > * [`Complete()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Complete%28System.String%29)
+    > * [`Progress()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Progress%28System.String%29)
+    > * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Select%28System.String%29)
+    > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Success%28System.String%29)
 
-**Step 3** Implement the action method in the corresponding controller.
+1. Implement the action method in the corresponding controller.
 
-###### Example
+    ###### Example
 
-```
-using Kendo.Mvc.Export;
-...
-    public ActionResult Import(HttpPostedFileBase file)
-    {
-        var settings = new EditorImportSettings();
-        string htmlResult;
-        switch (Path.GetExtension(file.FileName))
+    ```
+    using Kendo.Mvc.Export;
+    ...
+        public ActionResult Import(HttpPostedFileBase file)
         {
-            case ".docx":
-                htmlResult = EditorImport.ToDocxImportResult(file, settings);
-                break;
-            case ".rtf":
-                htmlResult = EditorImport.ToRtfImportResult(file, settings);
-                break;
-            case ".pdf":
-                htmlResult = EditorImport.ToPdfImportResult(file, settings);
-                break;
-            default:
-                htmlResult = EditorImport.GetTextContent(file);
-                break;
-        }
+            var settings = new EditorImportSettings();
+            string htmlResult;
+            switch (Path.GetExtension(file.FileName))
+            {
+                case ".docx":
+                    htmlResult = EditorImport.ToDocxImportResult(file, settings);
+                    break;
+                case ".rtf":
+                    htmlResult = EditorImport.ToRtfImportResult(file, settings);
+                    break;
+                default:
+                    htmlResult = EditorImport.GetTextContent(file);
+                    break;
+            }
 
-        return Json(new { html = htmlResult });
-    }
-...
-```
+            return Json(new { html = htmlResult });
+        }
+    ...
+    ```
 
 ## Changing Import and Export Settings
 
 The **Document Processing Library** provides settings for the import and export. This enables you to fine-tune the way the content is handled in the supported document types.
 
-The example below demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so you can process HTML images before they are exported to `RadFlowDocument`.
+The following example demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so you can process HTML images before they are exported to `RadFlowDocument`.
 
 ###### Example
 
@@ -273,7 +260,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
 ```
 
-The example below demonstrates hoe to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag.
+The following example demonstrates hoe to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag.
 
 ###### Example
 
@@ -296,16 +283,14 @@ For more information on each setting supported by `EditorImportSettings`, refer 
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Editor:
-
-* [ASP.NET MVC API Reference: EditorBuilder](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
-For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).
+For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

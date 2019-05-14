@@ -1,6 +1,6 @@
 ---
 title: Resources
-page_title: Resources | Kendo UI Scheduler HtmlHelper
+page_title: Resources | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Add Resources to the Scheduler HtmlHelper extension for the Kendo UI Scheduler widget in ASP.NET MVC applications."
 slug: resourcesscheduler_aspnetmvc
 position: 4
@@ -14,7 +14,7 @@ The Scheduler HtmlHelper extension supports assigning Scheduler events to a set 
 
 ### Single Resources
 
-The example below demonstrates how to add a Scheduler resource and bind it to local data.
+The following example demonstrates how to add a Scheduler resource and bind it to local data.
 
 ###### Example
 
@@ -99,8 +99,6 @@ The Scheduler HtmlHelper extension supports unlimited resource types. For exampl
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
-
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
@@ -109,7 +107,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Chart HtmlHelper
+page_title: Ajax Binding | Kendo UI Chart HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Chart for ASP.NET MVC for Ajax binding."
 slug: ajaxbinding_charthelper_aspnetmvc
 position: 2
@@ -43,7 +43,7 @@ In the view, configure the Chart to use the action method created in the previou
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
         <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
                 .Name("internetUsersChart")
@@ -59,7 +59,7 @@ In the view, configure the Chart to use the action method created in the previou
                 )
         %>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
               .Name("internetUsersChart")
@@ -78,8 +78,6 @@ In the view, configure the Chart to use the action method created in the previou
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Chart:
-
 * [Overview of the Kendo UI Chart for ASP.NET MVC]({% slug overview_charthelper_aspnetmvc %})
 * [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
 * [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})
@@ -88,7 +86,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Chart:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

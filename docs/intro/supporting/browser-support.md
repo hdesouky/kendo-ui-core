@@ -9,9 +9,11 @@ position: 1
 
 # Web Browser and Operating System Support
 
+The Kendo UI components are designed to support all major browsers and operating systems.
+
 ## Web Browser Support
 
-The [Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of a cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
+The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can seamlessly operate without concerns for cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
 
 ### General
 
@@ -20,7 +22,7 @@ Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) and [Responsive panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) require IE9 or later
+| Internet Explorer | 9 or later                    |
 | Chrome            | Current and previous          |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
@@ -37,9 +39,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Charts, Gauges, Barcodes, Diagrams, and Maps
+### Data Visualizing Widgets
 
-[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
+[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}), such as Charts, Gauges, Barcodes, Diagrams, and Maps, might require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
 **Fully supported browsers**
 
@@ -58,9 +60,6 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
 | :---------------- | :---------------------------- | :-----------                              |
-| Internet Explorer | 8                             | PDF and image export is not supported     |
-|                   |                               | Text rotation is not supported by the 64-bit versions |
-|                   |                               | Gradients in pie and donut charts are not supported |
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 | Android           | 2.3                           | The Canvas rendering mode is only supported
@@ -72,11 +71,14 @@ The Kendo UI PDF generator is tested and supported in the following _desktop_ br
 * Internet Explorer 9 and later.
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
 
+> **Important**
+>
+> Internet Explorer 9 and Safari do not support the option for saving files. To achieve this, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
+
 Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is _not_ supported in:
 
-* Internet Explorer 8 and older
-* Mobile browsers
-* Hybrid mobile applications
+* Mobile browsers.
+* Hybrid mobile applications.
 
 ### Best Performance
 
@@ -88,13 +90,16 @@ To ensure the best performance of your project, make sure that you:
 
 ### Notes on Web Browser Support
 
+* As of the Kendo UI 2017 R1 release, Internet Explorer 8 is no longer supported.
 * As of the Kendo UI 2015 Q3 release, Internet Explorer 7 is no longer supported.
 * Since Internet Explorer 11 was released in October 2013, look up the Kendo UI 2013 Q3 SP2 (2013.3.1324) release or a more recent Kendo UI version if you need support for it.
 * Browsers in beta stage are not supported.
-* Exporting a zoomed in or zoomed out page to PDF is not supported.
+* Zoomed-in pages are not supported.
+* Zoomed-out pages are not supported. Different browsers handle sub-pixel calculations differently and zooming out the page may lead to unexpected behavior&mdash;for example, missing borders.
+* Exporting a zoomed-in or zoomed-out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
-    > **Important**  
+    > **Important**
     >
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
@@ -119,6 +124,8 @@ To ensure the best performance of your project, make sure that you:
 
 ## Operating System Support
 
+The following table lists the operating systems and their versions that are compatible with Kendo UI.
+
 | PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
 | Windows           | XP or later           |
@@ -127,7 +134,6 @@ To ensure the best performance of your project, make sure that you:
 | Android           | 2.3 or later          |
 | iOS               | 6.0 or later          |
 | Windows Phone     | 8.0 or later          |
-| Chrome for Mobile | Any version           |
 
 ### Notes on Operating System Support
 
@@ -135,8 +141,6 @@ To ensure the best performance of your project, make sure that you:
 * JavaScript should be enabled on all browsers so that they can be allowed to run scripts
 
 ## See Also
-
-Other articles on getting started with Kendo UI:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})

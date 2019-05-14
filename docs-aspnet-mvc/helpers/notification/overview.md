@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Notification HtmlHelper
+page_title: Notification | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Notification widget for ASP.NET MVC."
 slug: overview_notificatiomhelper_aspnetmvc
 position: 1
@@ -23,23 +23,23 @@ If the Notification element is used to contain static (non-popup) notifications,
 
 ### Initialization
 
-The example below demonstrates how to initialize the Notification.
+The following example demonstrates how to initialize the Notification.
 
 ###### Example
 
-      @(Html.Kendo().Notification()
-            .Name("notification")
-        )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+    )
 
-    	<script>
-    	$(function(){
+    <script>
+        $(function(){
             // get the widget object
             var notificationWidget = $("#notification").data("kendoNotification");
 
             // display a "foo" message
             notificationWidget.show("foo");
-    	});
-    	</script>
+        });
+    </script>
 
 ## Configuration
 
@@ -53,16 +53,16 @@ The Notification provides several built-in notification types&mdash;`"info"`, `"
 
 For further details, refer to the [section on templates]({% slug overview_notificatiomhelper_aspnetmvc %}#templates).
 
-The example below demonstrates the built-in Notification types.
+The following example demonstrates the built-in Notification types.
 
 ###### Example
 
-      @(Html.Kendo().Notification()
-            .Name("notification")
-      )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+    )
 
-    	<script>
-    	$(function(){
+    <script>
+        $(function(){
             var notificationWidget = $("#notification").data("kendoNotification");
 
             // display a "foo" warning message
@@ -76,8 +76,8 @@ The example below demonstrates the built-in Notification types.
             notificationWidget.show("bar");
             // and also to
             notificationWidget.info("bar");
-    	});
-    	</script>
+        });
+    </script>
 
 ### Notification Hiding
 
@@ -85,21 +85,21 @@ By default, the notifications remain visible for 5 seconds and then disappear. C
 
 If needed, automatic hiding by clicking anywhere on the notifications can be disabled. In this case the notifications can be dismissed only with the button, if present. In addition, manually hiding a notification can be postponed. The benefit of this feature is to prevent accidental hiding of notifications, which have just appeared. By default, postponing is disabled.
 
-The example below demonstrates how to manage the hide settings of the Notification.
+The following example demonstrates how to manage the hide settings of the Notification.
 
 ###### Example
 
-      @(Html.Kendo().Notification()
-          .Name("notification")
-          //Hide automatically after 7 seconds.
-          .AutoHideAfter(7000)
-          //Prevent accidental hiding for 1 second.
-          .AllowHideAfter(1000)
-          // show a hide button
-          .Button(true)
-          //Prevent hiding by clicking on the notification content.
-          .HideOnClick(false)
-      )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+        //Hide automatically after 7 seconds.
+        .AutoHideAfter(7000)
+        //Prevent accidental hiding for 1 second.
+        .AllowHideAfter(1000)
+        // show a hide button
+        .Button(true)
+        //Prevent hiding by clicking on the notification content.
+        .HideOnClick(false)
+    )
 
 ### Positioning and Stacking
 
@@ -111,42 +111,42 @@ By default, popups are pinned&mdash;when the page is scrolled, they do not move.
 
 If the popup content varies and stacking is likely to occur, explicitly define dimensions, so that the popups are aligned and look better when stacked next to one another.
 
-The example below demonstrates how to manage the position, stacking, and size of the Notification.
+The following example demonstrates how to manage the position, stacking, and size of the Notification.
 
 ###### Example
 
-      @(Html.Kendo().Notification()
-          .Name("notification")
-          .Position(p =>
-          {
-              //Notification popup will scroll together with the other content.
-              p.Pinned(false);
-              //The first notification popup will appear 30px from the viewport's top and right edge.
-              p.Top(30);
-              p.Right(30);
-          })
-          //New notifications will appear below old ones.
-          .Stacking(NotificationStackingSettings.Down)
-          //Set the appropriate size.
-          .Width(300)
-          .Height(50)
-      )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+        .Position(p =>
+        {
+            //Notification popup will scroll together with the other content.
+            p.Pinned(false);
+            //The first notification popup will appear 30px from the viewport's top and right edge.
+            p.Top(30);
+            p.Right(30);
+        })
+        //New notifications will appear below old ones.
+        .Stacking(NotificationStackingSettings.Down)
+        //Set the appropriate size.
+        .Width(300)
+        .Height(50)
+    )
 
 There may be cases when the popup notifications appear too quickly or are too many on the screen, so that the available space gets very little. In such a case, the subsequent popups appear outside of the visible viewport area and are inaccessible, if pinned. If such scenarios are likely to occur, it is recommended to consider using shorter hide delay or static notifications (see below), for better usability.
 
 Notifications can also display static messages, which do not overlay other elements, but instead take part in the normal flow of the page content. In this case, positioning settings do not make sense and are ignored. Stacking can be downwards (by default) or upwards. Static notifications are displayed if a target container is specified. A single widget instance can display either popup or static notifications, not both at the same time.
 
-The example below demonstrates how to enable static notifications.
+The following example demonstrates how to enable static notifications.
 
 ###### Example
 
-      @(Html.Kendo().Notification()
-          .Name("notification")
-          //Insert all notifications to the widget's originating element.
-          .AppendTo("#notification")
-          //New notifications will appear above old ones.
-          .Stacking(NotificationStackingSettings.Up)
-      )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+        //Insert all notifications to the widget's originating element.
+        .AppendTo("#notification")
+        //New notifications will appear above old ones.
+        .Stacking(NotificationStackingSettings.Up)
+    )
 
 ### Templates
 
@@ -154,56 +154,54 @@ Before reading on, make sure you are familiar with the concept of the [Kendo UI 
 
 Notifications allow configuring multiple templates. Each template is used together with its corresponding [notification type](#notification-types)&mdash;either build-in or custom. If you define a custom template for a built-in notification type, you are no longer able to use the corresponding built-in template, but you are still able to use the shorthand show methods, as demonstrated below.
 
-The example below demonstrates how to use templates.
+The following example demonstrates how to use templates.
 
 ###### Example
 
-      <script id="myAlertTemplate" type="text/x-kendo-template">
-          <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>
-      </script>
+    <script id="myAlertTemplate" type="text/x-kendo-template">
+        <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>
+    </script>
 
-      @(Html.Kendo().Notification()
-          .Name("notification")
-          .Templates(t =>
-          {
-              //Define a custom template for the built-in "warning" Notification type.
-              t.Add().Type("warning").ClientTemplate("<div class='myWarning'>Warning: #= myMessage #</div>");
-              //Define a template for the custom "timeAlert" Notification type.
-              t.Add().Type("timeAlert").ClientTemplate("<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>");
-              //The template content can also be defined separately. The above line can be replaced with:
-              t.Add().Type("timeAlert").ClientTemplateID("myAlertTemplate");
-          })
-      )
+    @(Html.Kendo().Notification()
+        .Name("notification")
+        .Templates(t =>
+        {
+            //Define a custom template for the built-in "warning" Notification type.
+            t.Add().Type("warning").ClientTemplate("<div class='myWarning'>Warning: #= myMessage #</div>");
+            //Define a template for the custom "timeAlert" Notification type.
+            t.Add().Type("timeAlert").ClientTemplate("<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>");
+            //The template content can also be defined separately. The above line can be replaced with:
+            t.Add().Type("timeAlert").ClientTemplateID("myAlertTemplate");
+        })
+    )
 
-  	<script>
-  	$(function(){
-          var n = $("#notification").data("kendoNotification");
+    <script>
+        $(function(){
+            var n = $("#notification").data("kendoNotification");
 
-          //Show a warning message using the built-in shorthand method.
-          n.warning({
-              myMessage: "some warning message here"
-          });
+            //Show a warning message using the built-in shorthand method.
+            n.warning({
+                myMessage: "some warning message here"
+            });
 
-          //Show a "timeAlert" message using the default show() method.
-          n.show({
-              time: new Date().toLocaleTimeString(),
-              myMessage: "Server will be restarted."
-          }, "timeAlert");
-  	});
-  	</script>
+            //Show a "timeAlert" message using the default show() method.
+            n.show({
+                time: new Date().toLocaleTimeString(),
+                myMessage: "Server will be restarted."
+            }, "timeAlert");
+        });
+    </script>
 
-For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](/kendo-ui/api/javascript/ui/notification).
+For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](http://docs.telerik.com/kendo-ui/api/javascript/ui/notification).
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Notification:
-
-* [ASP.NET MVC API Reference: NotificationBuilder](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: NotificationBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Notification Widget](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

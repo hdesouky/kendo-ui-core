@@ -10,7 +10,7 @@ position: 3
 
 **Figure 1. An overview of the Kendo UI Music Store Sales page**
 
-![dashboard-overview](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/dashboard-overview.png)
+![dashboard-overview](images/dashboard-overview.png)
 
 The main page constitutes of the Dashboard landing page, and the navigation strip, an overview of recent sales for various periods of time, top singles and albums, and a series of gauges showing hourly data. For this view, the sample project uses a declarative approach similar to the Kendo UI Music Store itself, also using the `data-` attributes, and the [Kendo UI MVVM framework](http://demos.telerik.com/kendo-ui/web/mvvm/index.html).
 
@@ -62,7 +62,7 @@ This data is bound to an external `DataSource`, which is pulled and bound to the
                   lastMonth: kendo.toString(response.LastMonth, "c")
               };
               return [item];
-          }  
+          }
         },
         change: function (data) {
             console.log(data.items[0]);
@@ -85,7 +85,7 @@ Therefore, the binding of the sales totals passes back through to the view. `ken
 
 These lists are created through the combination between HTML markup, templating, and MVVM bindings, with the data provided by a remote DataSource.
 
-The example below starts with the markup.
+The following example starts with the markup.
 
 ###### Example
 
@@ -171,8 +171,6 @@ Look at the CSS for this page in `home-view.css`. The background image is define
 	}
 
 ## See Also
-
-Other articles on the Kendo UI Music Store Dashboard sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Dashboard Project]({% slug projectsetup_muscistoredashboard_aspnetmvc %})

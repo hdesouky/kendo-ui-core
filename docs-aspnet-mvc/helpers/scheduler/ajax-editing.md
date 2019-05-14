@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Scheduler HtmlHelper
+page_title: Ajax Binding | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Populate the Scheduler with nodes in ASP.NET MVC applications by using Ajax requests."
 slug: ajaxbinding_schedulerhelper_aspnetmvc
 position: 2
@@ -22,7 +22,7 @@ Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI fo
 
 **Figure 1. The new entity model**
 
-![New entity data model](/helpers/scheduler/images/entity-data-model.png)
+![New entity data model](images/entity-data-model.png)
 
 ### Configure the Connection
 
@@ -30,7 +30,7 @@ Pick the **Generate from database** option and click **Next**. Configure a conne
 
 **Figure 2. Choose the connection**
 
-![Choose the connection](/helpers/scheduler/images/entity-data-model.png)
+![Choose the connection](images/entity-data-model.png)
 
 ### Choose the Database Object
 
@@ -38,7 +38,7 @@ Choose the **Tasks** table from the `Which database objects do you want to inclu
 
 **Figure 3. Choose the Tasks table**
 
-![Choose the Tasks table](/helpers/scheduler/images/database-objects.png)
+![Choose the Tasks table](images/database-objects.png)
 
 ### Include the New Class
 
@@ -46,50 +46,50 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
 
 ###### Example
 
-        public class TaskViewModel : ISchedulerEvent
+    public class TaskViewModel : ISchedulerEvent
+    {
+        public int TaskID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+
+        private DateTime start;
+        public DateTime Start
         {
-            public int TaskID { get; set; }
-            public string Title { get; set; }
-            public string Description { get; set; }
-
-            private DateTime start;
-            public DateTime Start
+            get
             {
-                get
-                {
-                    return start;
-                }
-                set
-                {
-                    start = value.ToUniversalTime();
-                }
+                return start;
             }
-
-            private DateTime end;
-            public DateTime End
+            set
             {
-                get
-                {
-                    return end;
-                }
-                set
-                {
-                    end = value.ToUniversalTime();
-                }
+                start = value.ToUniversalTime();
             }
-
-            public string RecurrenceRule { get; set; }
-            public int? RecurrenceID { get; set; }
-            public string RecurrenceException { get; set; }
-            public bool IsAllDay { get; set; }
-            public int? OwnerID { get; set; }
         }
+
+        private DateTime end;
+        public DateTime End
+        {
+            get
+            {
+                return end;
+            }
+            set
+            {
+                end = value.ToUniversalTime();
+            }
+        }
+
+        public string RecurrenceRule { get; set; }
+        public int? RecurrenceID { get; set; }
+        public string RecurrenceException { get; set; }
+        public bool IsAllDay { get; set; }
+        public int? OwnerID { get; set; }
+    }
 
 ### Add the Action Methods
 
-**Step 1** Open `HomeController.cs` and add a new action method which will return the `Tasks` as JSON. The Scheduler will make Ajax requests to this action.
+1. Open `HomeController.cs` and add a new action method which will return the `Tasks` as JSON. The Scheduler will make Ajax requests to this action.
 
-###### Example
+    ###### Example
 
         public ActionResult Tasks_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -114,9 +114,9 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             }
         }
 
-**Step 2** Add a new action method to `HomeController.cs`. It will be responsible for saving new data items. Name the method `Tasks_Create`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving new data items. Name the method `Tasks_Create`.
 
-###### Example
+    ###### Example
 
         public ActionResult Tasks_Create([DataSourceRequest]DataSourceRequest request, TaskViewModel task)
         {
@@ -152,9 +152,9 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 3** Add a new action method to `HomeController.cs`. It will be responsible for saving updated data items. Name the method `Tasks_Update`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving updated data items. Name the method `Tasks_Update`.
 
-###### Example
+    ###### Example
 
         public ActionResult Tasks_Update([DataSourceRequest]DataSourceRequest request, TaskViewModel task)
         {
@@ -190,9 +190,9 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 4** Add a new action method to `HomeController.cs`. It will be responsible for saving deleted data items. Name the method `Tasks_Destroy`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving deleted data items. Name the method `Tasks_Destroy`.
 
-###### Example
+    ###### Example
 
         public ActionResult Tasks_Destroy([DataSourceRequest]DataSourceRequest request, TaskViewModel task)
         {
@@ -228,12 +228,9 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 5** In the view, configure the Scheduler to use the action methods created in the previous steps.
+1. In the view, configure the Scheduler to use the action methods created in the previous steps.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
             .Name("scheduler")
             .Date(new DateTime(2013, 6, 13))
@@ -260,9 +257,8 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Update("Tasks_Update", "Home")
             )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
             .Name("scheduler")
             .Date(new DateTime(2013, 6, 13))
@@ -289,17 +285,15 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Update("Tasks_Update", "Home")
             )
         )
-```
+    ```
 
-**Step 6** Build and run the application.
+1. Build and run the application.
 
-**Figure 4. The final result**
+    **Figure 4. The final result**
 
-![Final result](/helpers/scheduler/images/scheduler.png)
+    ![Final result](images/scheduler.png)
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
@@ -309,7 +303,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

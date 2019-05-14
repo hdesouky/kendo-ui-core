@@ -1,6 +1,7 @@
 ---
 title: date
 page_title: API reference for Kendo UI Date
+res_type: api
 ---
 
 # kendo.date
@@ -72,6 +73,33 @@ One (`1`) indicates the day after the current one (default value). Minus one (`-
 		console.log(kendo.date.dayOfWeek(targetDate, 1, -1)); // Mon Oct 31 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
+### weekInYear
+
+Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday.
+The first week of the year is the week that contains that year's first Thursday (='First 4-day week').
+The method allows defining diffent start day by using the second parameter.
+
+#### Parameters
+
+##### date `Date`
+
+The given date.
+
+##### weekStart `Number` *(optional)*
+
+The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week is considered as a starting point. This parameter is optional because by default Monday (1) is considered as a first day of the week.
+
+#### Returns
+
+`Number` A number resenting the week number of a given date.
+
+#### Example
+    <script>
+        //no weekStart is passed so Monday will be considered as starting point for week
+        console.log(kendo.date.weekInYear(new Date(2017, 0, 9))); // 2
+        //Sunday is passed as week start
+        console.log(kendo.date.weekInYear(new Date(2017, 0, 9), new Date(2017, 0, 8))); // 3
+    </script>
 
 ### getDate
 
@@ -321,6 +349,10 @@ Add days to a date object.
 
 The date object to add days to.
 
+##### numberOfDaysToAdd `Number`
+
+The number of days to be added to the target date.
+
 #### Returns
 
 `Date` Returns a new date object with added days.
@@ -426,7 +458,7 @@ The date object to get the milliseconds of.
 
 #### Returns
 
-`Date` Returns the milliseconds of a date object.
+`Number` Returns the milliseconds of a date object.
 
 #### Example
 

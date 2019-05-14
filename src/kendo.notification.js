@@ -38,11 +38,11 @@ var __meta__ = { // jshint ignore:line
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div class="k-widget k-notification"></div>',
+        WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#=typeIcon#">#=typeIcon#</span>' +
+                '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
                 '#=content#' +
-                '<span class="k-icon k-i-close">Hide</span>' +
+                '<span class="k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -179,15 +179,6 @@ var __meta__ = { // jshint ignore:line
                 });
             }
 
-            if (popup.options.anchor !== document.body && popup.options.origin.indexOf(RIGHT) > 0) {
-                popup.bind("open", function () {
-                    var shadows = kendo.getShadows(popup.element);
-                    setTimeout(function () {
-                        popup.wrapper.css("left", parseFloat(popup.wrapper.css("left")) + shadows.left + shadows.right);
-                    });
-                });
-            }
-
             if (options.hideOnClick) {
                 popup.bind("activate", function() {
                     if (attachDelay) {
@@ -239,6 +230,8 @@ var __meta__ = { // jshint ignore:line
 
             that._attachPopupEvents(options, popup);
 
+            wrapper.removeClass("k-group k-reset");
+
             if (openPopup[0]) {
                 popup.open();
             } else {
@@ -253,7 +246,7 @@ var __meta__ = { // jshint ignore:line
                 popup.open(x, y);
             }
 
-            popup.wrapper.addClass(that._guid).css(extend({margin:0}, that._popupPaddings));
+            popup.wrapper.addClass(that._guid).css(extend({margin:0,zIndex:10050}, that._popupPaddings));
 
             if (options.position.pinned) {
                 popup.wrapper.css("position", "fixed");
@@ -318,21 +311,26 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 animation = options.animation,
-                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo";
+                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo",
+                initializedNotifications;
 
             wrapper
+                .removeClass("k-popup")
                 .addClass(that._guid)
                 [insertionMethod](options.appendTo)
                 .hide()
                 .kendoAnimate(animation.open || false);
 
-            that._attachStaticEvents(options, wrapper);
+            initializedNotifications = that.getNotifications();
+            initializedNotifications.each(function(idx, element) {
+                that._attachStaticEvents(options, $(element));
 
-            if (autoHideAfter > 0) {
-                setTimeout(function(){
-                    that._hideStatic(wrapper);
-                }, autoHideAfter);
-            }
+                if (autoHideAfter > 0) {
+                    setTimeout(function(){
+                        that._hideStatic($(element));
+                    }, autoHideAfter);
+                }
+            });
         },
 
         _hideStatic: function(wrapper) {

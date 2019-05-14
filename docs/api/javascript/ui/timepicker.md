@@ -2,6 +2,8 @@
 title: TimePicker
 page_title: Configuration, methods and events of Kendo UI TimePicker
 description: What type of animations you can use in TimePicker UI widget, find supported methods and see which events are triggered once the value is changed.
+res_type: api
+component: date-time-pickers
 ---
 
 # kendo.ui.TimePicker
@@ -122,6 +124,19 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the TimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
  Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.
@@ -142,6 +157,8 @@ The duration of the open animation in milliseconds.
 ### format `String`*(default: "h:mm tt")*
 
  Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
+
+ For more information on date and time formats please refer to [Date Formatting](/framework/globalization/dateformatting).
 
 #### Example - specify a custom time format
 
@@ -474,9 +491,9 @@ The time value to set for a TimePicker, expressed as a Date object or as a strin
 
 `Date` The time value of a TimePicker.
 
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/timepicker/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="timepicker" />
     <script>

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core" ], f);
+    define([ "./kendo.data" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "PanelBar",
     category: "web",
     description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
-    depends: [ "core" ]
+    depends: [ "core", "data", "data.odata" ]
 };
 
 (function($, undefined) {
@@ -122,6 +122,10 @@ var __meta__ = { // jshint ignore:line
             result += " k-header";
         }
 
+        if (item.selected) {
+            result += " " + SELECTEDCLASS;
+        }
+
         return result;
     },
     textAttributes: function(url) {
@@ -130,7 +134,7 @@ var __meta__ = { // jshint ignore:line
     arrowClass: function(item) {
         var result = "k-icon";
 
-        result += item.expanded ? " k-i-arrow-60-up k-panelbar-collapse" : " k-i-arrow-60-down k-panelbar-expand";
+        result += item.expanded ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down";
 
         return result;
     },
@@ -139,6 +143,9 @@ var __meta__ = { // jshint ignore:line
     },
     groupAttributes: function(group) {
         return group.expanded !== true ? " style='display:none'" : "";
+    },
+    ariaHidden: function(group){
+        return group.expanded !== true;
     },
     groupCssClass: function() {
         return "k-group k-panel";
@@ -214,7 +221,7 @@ var __meta__ = { // jshint ignore:line
             that._templates();
 
             that._initData(hasDataSource);
-   
+
             that._updateClasses();
 
             that._animations(options);
@@ -244,7 +251,7 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
-            if (!$.isPlainObject(options.dataSource)) {
+            if (!options.dataSource) {
                 that._angularCompile();
             }
 
@@ -256,6 +263,7 @@ var __meta__ = { // jshint ignore:line
             COLLAPSE,
             SELECT,
             ACTIVATE,
+            CHANGE,
             ERROR,
             DATABOUND,
             CONTENTLOAD
@@ -280,6 +288,7 @@ var __meta__ = { // jshint ignore:line
             autoBind: true,
             loadOnDemand: true,
             expandMode: "multiple",
+            template: "",
             dataTextField: null
         },
 
@@ -289,6 +298,18 @@ var __meta__ = { // jshint ignore:line
                 return {
                     elements: that.element.children("li"),
                     data: [{ dataItem: that.options.$angular}]
+                };
+            });
+        },
+
+        _angularCompileElements: function(html, items) {
+            var that = this;
+            that.angular("compile", function(){
+                return {
+                    elements: html,
+                    data: $.map(items, function(item) {
+                        return [{ dataItem: item }];
+                    })
                 };
             });
         },
@@ -319,7 +340,7 @@ var __meta__ = { // jshint ignore:line
                  if (that.options.autoBind) {
                     that._progress(true);
 
-                    that.dataSource.fetch(); 
+                    that.dataSource.fetch();
                  }
             }
         },
@@ -347,7 +368,7 @@ var __meta__ = { // jshint ignore:line
                     "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
                 ),
                 group: template(
-                    "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                    "<ul role='group' aria-hidden='#= ariaHidden(group) #' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
@@ -357,7 +378,7 @@ var __meta__ = { // jshint ignore:line
                      "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
                      "# var contentUrl = contentUrl(item); #" +
                      "# var tag = url||contentUrl ? 'a' : 'span'; #" +
-                   
+
                     "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(url) #>" +
                         "# if (imageUrl) { #" +
                               "<img class='k-image' alt='' src='#= imageUrl #' />" +
@@ -366,7 +387,7 @@ var __meta__ = { // jshint ignore:line
                         "# if (spriteCssClass) { #" +
                             "<span class='k-sprite #= spriteCssClass #'></span>" +
                         "# } #" +
-                      "#= data.panelBar.options.template(data) #" + 
+                      "#= data.panelBar.options.template(data) #" +
                       "#= arrow(data) #" +
                     "</#= tag #>"
                 ),
@@ -375,14 +396,14 @@ var __meta__ = { // jshint ignore:line
                     "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
                          kendo.attr("uid") + "='#= item.uid #'>" +
                         "#= itemWrapper(data) #" +
-                        "# if (item.items) { #" +
+                        "# if (item.items && item.items.length > 0) { #" +
                         "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
                         "# } else if (item.content || item.contentUrl) { #" +
                         "#= renderContent(data) #" +
                         "# } #" +
                     "</li>"
                 ),
-                loading: template("<div class='k-icon k-i-loading' /> #: data.messages.loading #"),
+                loading: template("<div class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</div>"),
                 retry: template(
                     "#: data.messages.requestFailed # " +
                     "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
@@ -426,7 +447,13 @@ var __meta__ = { // jshint ignore:line
 
             element.each(function (index, item) {
                 item = $(item);
-                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+                var wrapper = element.children(".k-group,.k-content");
+
+                if (!wrapper.length) {
+                    wrapper =  that._addGroupElement(element);
+                }
+
+                 var groups = wrapper.add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.length > 0) {
 
@@ -494,7 +521,7 @@ var __meta__ = { // jshint ignore:line
 
                 items = $(items);
                 items.children(LINKSELECTOR).children(".k-panelbar-collapse, .k-panelbar-expand").remove();
-           
+
                 items
                     .filter(function() {
                         var dataItem = that.dataItem(this);
@@ -502,16 +529,16 @@ var __meta__ = { // jshint ignore:line
                         if (!dataItem) {
                             return $(this).find(".k-panel").length > 0 ||
                                 $(this).find(".k-content").length > 0;
-                }
+                        }
 
-                        return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;                     
+                        return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;
                     })
                     .children(".k-link:not(:has([class*=k-i-arrow]))")
                     .each(function () {
                         var item = $(this),
                             parent = item.parent();
 
-                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? "k-i-arrow-60-up k-panelbar-collapse" : "k-i-arrow-60-down k-panelbar-expand") + "'/>");
+                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down") + "'/>");
                     });
          },
 
@@ -555,7 +582,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
             else {
-                 itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
+                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
             }
         },
 
@@ -583,8 +610,16 @@ var __meta__ = { // jshint ignore:line
             });
 
             this.element.append(rootItemsHtml);
-            this._angularCompile();
-        }, 
+            var elements = this.element.children(".k-item");
+            for (var i = 0; i < items.length; i++) {
+                this.trigger("itemChange", {
+                    item: elements.eq(i).find(".k-link").first(),
+                    data: items[i],
+                    ns: ui
+                });
+            }
+            this._angularCompileElements(rootItemsHtml, items);
+        },
 
         _refreshChildren: function(item, parentNode) {
             var i, children, child;
@@ -593,20 +628,24 @@ var __meta__ = { // jshint ignore:line
             var items = item.children.data();
             if (!items.length) {
                 updateItemHtml(parentNode);
+                children = parentNode.children(".k-group").children("li");
+                this._angularCompileElements(children, items);
             } else {
                 this.append(item.children, parentNode);
 
+                if(this.options.loadOnDemand){
+                    this._toggleGroup(parentNode.children(".k-group"), false);
+                }
                 children = parentNode.children(".k-group").children("li");
 
                 for (i = 0; i < children.length; i++) {
                     child = children.eq(i);
                     this.trigger("itemChange", {
-                        item: child,
+                        item: child.find(".k-link").first(),
                         data: this.dataItem(child),
                         ns: ui
                     });
                 }
-                this._angularCompile();
             }
         },
 
@@ -630,7 +669,7 @@ var __meta__ = { // jshint ignore:line
             var node = e.node;
             var action = e.action;
             var items = e.items;
-            var parentNode = this.wrapper;        
+            var parentNode = this.wrapper;
             var loadOnDemand = options.loadOnDemand;
 
             if (e.field) {
@@ -640,7 +679,7 @@ var __meta__ = { // jshint ignore:line
 
                 return this._updateItems(items, e.field);
             }
-        
+
             if (node) {
                 parentNode = this.findByUid(node.uid);
                 this._progress(parentNode, false);
@@ -659,11 +698,11 @@ var __meta__ = { // jshint ignore:line
 
             if (action != "remove") {
                 for (var k = 0; k < items.length; k++) {
-                
+
                     if (!loadOnDemand || items[k].expanded) {
                         var tempItem = items[k];
-                        if (tempItem.hasChildren  && tempItem.items && tempItem.items.length === 0) {
-                                tempItem.load();                           
+                        if (this._hasChildItems(tempItem)) {
+                                tempItem.load();
                         }
                     }
                 }
@@ -777,7 +816,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _appendItems: function(index, items, parentNode) {
-            var that = this, children, wrapper, group;
+            var that = this, children, wrapper;
 
               if (parentNode.hasClass("k-panelbar")) {
                   children = parentNode.children("li");
@@ -785,10 +824,8 @@ var __meta__ = { // jshint ignore:line
               } else {
                   wrapper = parentNode.children(".k-group");
                   if (!wrapper.length) {
-                      group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
-                      parentNode.append(group);
-                      wrapper = group;
-                  }                
+                      wrapper =  that._addGroupElement(parentNode);
+                  }
 
                   children = wrapper.children("li");
               }
@@ -821,7 +858,8 @@ var __meta__ = { // jshint ignore:line
                        itemsHtml[i].insertAfter(children[index - 1]);
                   }
                }
-        
+
+            that._angularCompileElements(itemsHtml, items);
               if (that.dataItem(parentNode)) {
                   that.dataItem(parentNode).hasChildren = true;
                   that.updateArrow(parentNode);
@@ -839,11 +877,11 @@ var __meta__ = { // jshint ignore:line
                     var currentNode = that.findByUid(items[0].uid);
 
                     if (!currentNode.hasClass(DISABLEDCLASS)) {
-                        that.select(currentNode);
+                        that.select(currentNode, true);
                     }
                 }else{
                     that.clearSelection();
-                }               
+                }
             } else {
                 var elements = $.map(items, function(item) {
                     return that.findByUid(item.uid);
@@ -885,7 +923,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (nodeWrapper.length) {
-                        this.trigger("itemChange", { item: nodeWrapper, data: item, ns: ui });
+                        this.trigger("itemChange", { item: nodeWrapper.find(".k-link").first(), data: item, ns: ui });
                     }
                 }
 
@@ -917,8 +955,8 @@ var __meta__ = { // jshint ignore:line
             return dataSource && dataSource.getByUid(uid);
        },
 
-        select: function (element) {
-            var that = this;
+       select: function (element, skipChange) {
+           var that = this;
 
             if (element === undefined) {
                 return that.element.find(selectableItems).parent();
@@ -938,9 +976,7 @@ var __meta__ = { // jshint ignore:line
                             return that;
                         }
 
-                        if (!that._triggerEvent(SELECT, item)) {
-                            that._updateSelected(link);
-                        }
+                        that._updateSelected(link, skipChange);
                     });
             }
 
@@ -1218,8 +1254,14 @@ var __meta__ = { // jshint ignore:line
                     var dataItem = that.dataItem(referenceItem);
                     if (dataItem) {
                         dataItem.hasChildren = true;
+                        referenceItem
+                            .attr(ARIA_EXPANDED, dataItem.expanded)
+                            .not("." + ACTIVECLASS)
+                            .children("ul")
+                            .attr(ARIA_HIDDEN, !dataItem.expanded);
+                    }else{
+                        referenceItem.attr(ARIA_EXPANDED, false);
                     }
-                    referenceItem.attr(ARIA_EXPANDED, false);
                 }
             } else {
                 if (typeof item == "string" && item.charAt(0) != "<") {
@@ -1230,6 +1272,11 @@ var __meta__ = { // jshint ignore:line
                 that._updateItemsClasses(items);
             }
 
+            if (!item.length){
+                item = [item];
+            }
+
+            that._angularCompileElements(items, item);
             return { items: items, group: parent };
         },
 
@@ -1243,7 +1290,7 @@ var __meta__ = { // jshint ignore:line
 
         _updateClasses: function() {
             var that = this,
-                panels, items;
+                panels, items, expanded, panelsParent, dataItem;
 
             panels = that.element
                          .find("li > ul")
@@ -1251,11 +1298,15 @@ var __meta__ = { // jshint ignore:line
                          .addClass("k-group k-panel")
                          .attr("role", "group");
 
+            panelsParent = panels.parent();
+            dataItem = that.dataItem(panelsParent);
+            expanded = (dataItem && dataItem.expanded) || false;
+
             panels.parent()
-                  .attr(ARIA_EXPANDED, false)
+                  .attr(ARIA_EXPANDED, expanded)
                   .not("." + ACTIVECLASS)
                   .children("ul")
-                  .attr(ARIA_HIDDEN, true)
+                  .attr(ARIA_HIDDEN, !expanded)
                   .hide();
 
             items = that.element.add(panels).children();
@@ -1371,6 +1422,14 @@ var __meta__ = { // jshint ignore:line
 
             that._updateSelected(link);
 
+            var wrapper = item.children(".k-group,.k-content");
+            var dataItem = this.dataItem(item);
+
+            if (!wrapper.length && ((that.options.loadOnDemand && dataItem && dataItem.hasChildren) ||
+             this._hasChildItems(item) || item.content || item.contentUrl)) {
+                wrapper =  that._addGroupElement(item);
+            }
+
             contents = item.find(GROUPS).add(item.find(CONTENTS));
             href = link.attr(HREF);
             isAnchor = href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1);
@@ -1404,6 +1463,9 @@ var __meta__ = { // jshint ignore:line
 
             return prevent;
         },
+        _hasChildItems: function (item) {
+            return (item.items && item.items.length > 0) || item.hasChildren;
+        },
 
         _toggleItem: function (element, isVisible, expanded) {
             var that = this,
@@ -1411,30 +1473,31 @@ var __meta__ = { // jshint ignore:line
                 link = element.find(LINKSELECTOR),
                 url = link.attr(HREF),
                 prevent, content,
-                dataItem = that.dataItem(element);
-        
+                dataItem = that.dataItem(element),
+                notVisible = !isVisible;
+
             var loaded = dataItem && dataItem.loaded();
 
-            if (dataItem && !expanded) {
-                dataItem.set("expanded", !isVisible);
-                prevent = dataItem.hasChildren;
+            if (dataItem && !expanded && dataItem.expanded !== notVisible) {
+                dataItem.set("expanded", notVisible);
+                prevent = dataItem.hasChildren || !!dataItem.content || !!dataItem.contentUrl;
                 return prevent;
             }
 
-             if (dataItem && (!expanded || expanded === "true") &&  !loaded) {
+            if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content && !dataItem.contentUrl) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
-                 this._toggleGroup(childGroup, isVisible);
-                 element.children(".k-group,.k-content").remove();    
-                 prevent = dataItem.hasChildren;          
+
+                 element.children(".k-group,.k-content").remove();
+                 prevent = dataItem.hasChildren;
 
                  dataItem.load();
              } else {
                    if (childGroup.length) {
                         this._toggleGroup(childGroup, isVisible);
                         prevent = true;
-                    } else {
+                   } else {
                         content = element.children("."  + CONTENT);
 
                         if (content.length) {
@@ -1448,7 +1511,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
              }
-      
+
             return prevent;
         },
 
@@ -1456,27 +1519,30 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 animationSettings = that.options.animation,
                 animation = animationSettings.expand,
-                collapse = extend({}, animationSettings.collapse),
-                hasCollapseAnimation = collapse && "effects" in collapse;
+                hasCollapseAnimation = animationSettings.collapse && "effects" in animationSettings.collapse,
+                collapse = extend({}, animationSettings.expand, animationSettings.collapse);
+
+            if (!hasCollapseAnimation) {
+                collapse = extend(collapse, {reverse: true});
+            }
 
             if (element.is(VISIBLE) != visibility) {
                 that._animating = false;
                 return;
             }
 
+            element.attr(ARIA_HIDDEN, !!visibility);
+
             element.parent()
                 .attr(ARIA_EXPANDED, !visibility)
-                .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
-                .find("> .k-link > .k-icon")
+                .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
                     .toggleClass("k-i-arrow-60-up", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
                     .toggleClass("k-i-arrow-60-down", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
-
             if (visibility) {
-                animation = extend( hasCollapseAnimation ? collapse
-                    : extend({ reverse: true }, animation), { hide: true });
+                animation = extend(collapse, { hide: true });
 
                 animation.complete = function() {
                     that._animationCallback();
@@ -1497,6 +1563,13 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             that.trigger("complete");
             that._animating = false;
+        },
+
+        _addGroupElement: function(element) {
+            var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+
+            element.append(group);
+            return group;
         },
 
         _collapseAllExpanded: function (item) {
@@ -1520,6 +1593,18 @@ var __meta__ = { // jshint ignore:line
                                 that._toggleGroup(content, true);
                             }
                         });
+
+                 that.one("complete", function() {
+                    setTimeout(function() {
+                        children.each(function (index, child) {
+                            var dataItem = that.dataItem(child);
+
+                            if(dataItem){
+                                dataItem.set("expanded", false);
+                            }
+                        });
+                    });
+                });
             }
 
             return stopExpand;
@@ -1585,11 +1670,12 @@ var __meta__ = { // jshint ignore:line
             return that.trigger(eventName, { item: element[0] });
         },
 
-        _updateSelected: function(link) {
+        _updateSelected: function(link, skipChange) {
             var that = this,
                 element = that.element,
                 item = link.parent(ITEM),
-                selected = that._selected;
+                selected = that._selected,
+                dataItem = that.dataItem(item);
 
             if (selected) {
                 selected.removeAttr(ARIA_SELECTED);
@@ -1603,6 +1689,13 @@ var __meta__ = { // jshint ignore:line
             link.addClass(SELECTEDCLASS);
             link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
             that._current(item[0] ? item : null);
+            if(dataItem){
+                 dataItem.set("selected", true);
+            }
+
+            if(!skipChange){
+                that.trigger(CHANGE);
+            }
         },
 
         _animations: function(options) {
@@ -1614,14 +1707,14 @@ var __meta__ = { // jshint ignore:line
         renderItem: function (options) {
             var that = this;
                 options = extend({ panelBar: that, group: {} }, options);
-        
+
             var empty = that.templates.empty,
                 item = options.item;
 
             return that.templates.item(extend(options, {
                 itemWrapper: that.templates.itemWrapper,
                 renderContent: that.renderContent,
-                arrow: (item.items && item.items.length > 0) || item.hasChildren || item.content || item.contentUrl ? that.templates.arrow : empty,
+                arrow: that._hasChildItems(item) || item.content || item.contentUrl ? that.templates.arrow : empty,
                 subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
             }, rendering));
         },

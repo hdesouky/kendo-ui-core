@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeView HtmlHelper
+page_title: TreeView | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TreeView widget for ASP.NET MVC."
 slug: overview_treeviewhelper_aspnetmvc
 position: 1
@@ -16,43 +16,39 @@ The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI Tre
 
 Below are listed the steps for you to follow when configuring the Kendo UI TreeView.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Add a TtreeView.
+1. Add a TtreeView.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().TreeView()
-                .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Item 1"); //Add item with text "Item1")
-                    items.Add().Text("Item 2"); //Add item with text "Item2")
-                })
+            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().TreeView()
-              .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
-              .Items(items =>
-              {
-                  items.Add().Text("Item 1"); //Add item with text "Item1")
-                  items.Add().Text("Item 2"); //Add item with text "Item2")
-              })
+            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
         )
-```
+    ```
 
 ### Security Trimming
 
@@ -67,24 +63,21 @@ To use a custom `AuthorizeAttribute`, refer to [this link](https://github.com/te
 
 ## Event Handling
 
-You can subscribe to all TreeView [events](../../../kendo-ui/api/javascript/ui/treeview#events).
+You can subscribe to all TreeView [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview#events).
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().TreeView()
-                .Name("treeview")
-                .Events(e => e
-                    .Expand("treeview_expand")
-                    .Collapse("treeview_collapse")
-                )
-        %>
-        <script>
+```ASPX
+    <%: Html.Kendo().TreeView()
+            .Name("treeview")
+            .Events(e => e
+                .Expand("treeview_expand")
+                .Collapse("treeview_collapse")
+            )
+    %>
+    <script>
         function treeview_collapse() {
             //Handle the collapse event
         }
@@ -92,18 +85,17 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function treeview_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().TreeView()
-              .Name("treeview")
-              .Events(e => e
-                    .Expand("treeview_expand")
-                    .Collapse("treeview_collapse")
-              )
-        )
-        <script>
+```Razor
+    @(Html.Kendo().TreeView()
+            .Name("treeview")
+            .Events(e => e
+                .Expand("treeview_expand")
+                .Collapse("treeview_collapse")
+            )
+    )
+    <script>
         function treeview_collapse() {
             //Handle the collapse event
         }
@@ -111,55 +103,50 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function treeview_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().TreeView()
-              .Name("treeview")
-              .Events(e => e
-                  .Expand(@<text>
-                    function() {
-                        //Handle the expand event inline
-                    }
-                  </text>)
-                  .Collapse(@<text>
-                    function() {
-                        //Handle the collapse event inline
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().TreeView()
+        .Name("treeview")
+        .Events(e => e
+            .Expand(@<text>
+            function() {
+                //Handle the expand event inline
+            }
+            </text>)
+            .Collapse(@<text>
+            function() {
+                //Handle the collapse event inline
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TreeView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](../../../kendo-ui/api/javascript/ui/treeview#methods) to control its behavior.
+To reference an existing Kendo UI TreeView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeView API](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview#methods) to control its behavior.
 
 ###### Example
 
-        //Put this after your Kendo TreeView for ASP.NET MVC declaration
-        <script>
+    //Put this after your Kendo TreeView for ASP.NET MVC declaration
+    <script>
         $(function() {
             // Notice that the Name() of the treeview is used to get its client-side instance
             var treeview = $("#treeview").data("kendoTreeView");
         });
-        </script>
+    </script>
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
-
-* [ASP.NET MVC API Reference: TreeViewBuilder](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: TreeViewBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
 * [Ajax Binding of the TreeView HtmlHelper]({% slug ajaxbinding_treeviewhelper_aspnetmvc %})
 * [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
 * [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
@@ -168,7 +155,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

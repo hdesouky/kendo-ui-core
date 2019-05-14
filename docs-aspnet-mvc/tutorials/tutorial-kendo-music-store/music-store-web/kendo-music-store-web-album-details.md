@@ -12,7 +12,7 @@ When an album is clicked from any page, the album details are shown in a popup w
 
 **Figure 1. A snapshot of the Kendo UI Music Store Album Details window**
 
-![kendo-album-details-window](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-album-details-window.png)
+![kendo-album-details-window](images/kendo-album-details-window.png)
 
 ## Configuration
 
@@ -151,7 +151,7 @@ At this point the window element can be appended to the end of the page.
 
 Now the element and its contents are part of the DOM, but they are still plain HTML.
 
-The example below demonstrates how to turn the element into a Kendo UI Window widget.
+The following example demonstrates how to turn the element into a Kendo UI Window widget.
 
 ###### Example
 
@@ -195,8 +195,6 @@ The example specifies a `min` and `max` value, the number of decimal places, and
 Since the `total` function previously used the `.get("quantity")` MVVM method, view elements that are bound to `total` are notified that they need to update. This displays the `total` to users to update.
 
 ## See Also
-
-Other articles on the Kendo UI Music Store Web Application sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Web App]({% slug projectsetup_muscistorewebapp_aspnetmvc %})

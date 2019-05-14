@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MediaPlayer HtmlHelper
+page_title: MediaPlayer | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI MediaPlayer widget for ASP.NET MVC."
 slug: overview_mediaplayerhelper_aspnetmvc
 position: 1
@@ -12,7 +12,7 @@ The MediaPlayer HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/index) plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
 
-The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.  
+The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.
 
 To respond to cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
@@ -42,9 +42,7 @@ When using local sources, consider the video formats supported by the different 
 
 Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will render a `div` element as its wrapper container.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -55,7 +53,7 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -81,9 +79,7 @@ The MediaPlayer provides properties, methods, and events to match your specific 
 
 When you add multiple sources for the video, an **HD** button is automatically displayed in the bottom right corner, right next to the **FullScreen** one. This enables you to select your preferred quality.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -97,7 +93,7 @@ When you add multiple sources for the video, an **HD** button is automatically d
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -118,17 +114,15 @@ Players usually feature a different video based on user action. For a basic exam
 
 ### Prevent Seeking Forward
 
-Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/kendo-ui/api/javascript/ui/mediaplayer#configuration-forwardSeek) configuration, which helps to achieve this requirement.
+Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#configuration-forwardSeek) configuration, which helps to achieve this requirement.
 
 ### Access Existing Instances
 
 To access an existing MediaPlayer instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element.
 
-The example below demonstrates how to access an existing MediaPlayer instance.
+The following example demonstrates how to access an existing MediaPlayer instance.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -139,7 +133,7 @@ The example below demonstrates how to access an existing MediaPlayer instance.
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -166,15 +160,13 @@ To implement your own **Playlist** structures, change the source of the MediaPla
 
 ## Event Handling
 
-You can subscribe to all [MediaPlayer events](/kendo-ui/api/javascript/ui/mediaplayer#events).
+You can subscribe to all [MediaPlayer events](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#events).
 
 ### By Handler Name
 
 The examples below demonstrates how to subscribe to events using a handler name.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -190,7 +182,7 @@ The examples below demonstrates how to subscribe to events using a handler name.
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -219,37 +211,35 @@ The examples below demonstrates how to subscribe to events using a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events using a template delegate.
+The following example demonstrates how to subscribe to events using a template delegate.
 
 ###### Example
 
-```tab-Razor
-@(Html.Kendo().MediaPlayer()
-    .Name("mediaplayer1")
-    .AutoPlay(true)
-    .HtmlAttributes(new { style = "height:360px; width:640px" })
-    .Events(e =>
-        e.Pause(@<text>
-            function(e) {
-            //Handle the pause event inline.
-            }
-        </text>)
-       .VolumeChange(@<text>
-            function(e) {
-            //Handle the volumeChange event inline.
-            }
-        </text>)
-     )
-     .Media(m => m
-         .Title("Our Company Culture - Lesson 1")
-         .Source("Video/video1.mp4")
-     )
-)
-```
+    @(Html.Kendo().MediaPlayer()
+        .Name("mediaplayer1")
+        .AutoPlay(true)
+        .HtmlAttributes(new { style = "height:360px; width:640px" })
+        .Events(e =>
+            e.Pause(@<text>
+                function(e) {
+                //Handle the pause event inline.
+                }
+            </text>)
+        .VolumeChange(@<text>
+                function(e) {
+                //Handle the volumeChange event inline.
+                }
+            </text>)
+        )
+        .Media(m => m
+            .Title("Our Company Culture - Lesson 1")
+            .Source("Video/video1.mp4")
+        )
+    )
 
 ## Keyboard Navigation
 
-The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/kendo-ui/api/javascript/ui/mediaplayer#configuration-navigatable) property.
+The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#configuration-navigatable) property.
 
 The following list provides the built-in keyboard commands of the MediaPlayer:
 
@@ -262,9 +252,7 @@ The following list provides the built-in keyboard commands of the MediaPlayer:
 
 To localize the tooltip texts from the interface, use the configuration options of the MediaPlayer.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -280,7 +268,7 @@ To localize the tooltip texts from the interface, use the configuration options 
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -297,7 +285,7 @@ To localize the tooltip texts from the interface, use the configuration options 
 %>
 ```
 
-For a complete list of [localizable messages](/kendo-ui/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/kendo-ui/api/javascript/ui/mediaplayer).
+For a complete list of [localizable messages](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer).
 
 All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization](http://docs.telerik.com/kendo-ui/framework/localization/overview) for your application.
 
@@ -305,10 +293,10 @@ All Kendo UI widgets, including the MediaPlayer, also allow you to add script fi
 
 * [MediaPlayer Live Sample](http://demos.telerik.com/aspnet-mvc/mediaplayer/index)
 * [Overview of the Kendo UI MediaPlayer Widget](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview)
-* [MediaPlayer JavaScript API Reference](/kendo-ui/api/javascript/ui/mediaplayer)
+* [MediaPlayer JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

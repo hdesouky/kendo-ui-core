@@ -1,7 +1,8 @@
 ---
 title: Common Issues
-page_title: Common Issues | Upload HtmlHelper Troubleshooting
+page_title: Common Troubleshooting Issues | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Learn about the solutions of common issues that may occur while working with Kendo UI Upload for ASP.NET MVC."
+previous_url: /aspnet-mvc/helpers/upload/troubleshooting
 slug: troubleshoot_uploadhelper_aspnetmvc
 position: 1
 ---
@@ -30,26 +31,26 @@ By default, ASP.NET limits the size of the maximum upload to 4MB. Additionally, 
 
 Override these settings in the `web.config` file. Below are listed the steps for you to follow when doing this.
 
-**Step 1** Increase the allowed request size and execution timeout in the `httpRuntime` section.
+1. Increase the allowed request size and execution timeout in the `httpRuntime` section.
 
-###### Example
+    ###### Example
 
         <system.web>
             <!-- The request length is in kilobytes, execution timeout is in seconds  -->
             <httpRuntime maxRequestLength="10240" executionTimeout="120" />
         </system.web>
 
-**Step 2** Increase the allowed request size for IIS 7 in the `requestFiltering` section.
+1. Increase the allowed request size for IIS 7 in the `requestFiltering` section.
 
-###### Example
+    ###### Example
 
         <system.webServer>
-                <security>
-                    <requestFiltering>
-                        <!-- The content length is in bytes  -->
-                        <requestLimits maxAllowedContentLength="10485760"/>
-                    </requestFiltering>
-                </security>
+            <security>
+                <requestFiltering>
+                    <!-- The content length is in bytes  -->
+                    <requestLimits maxAllowedContentLength="10485760"/>
+                </requestFiltering>
+            </security>
         </system.webServer>
 
 ### The Upload Never Ends in Safari on iOS and OSX
@@ -72,13 +73,11 @@ The solution solely depends on a dedicated decision by Apple about whether and w
 
 Below are listed the steps for you to follow when doing this.
 
-**Step 1** Change the controller [Session State Behavior](http://msdn.microsoft.com/en-us/library/system.web.sessionstate.sessionstatebehavior.aspx) to `ReadOnly` or `Disabled`.
+1. Change the controller [Session State Behavior](http://msdn.microsoft.com/en-us/library/system.web.sessionstate.sessionstatebehavior.aspx) to `ReadOnly` or `Disabled`. For more information on this topic, refer to the [article on concurrent requests in ASP.NET MVC](http://weblogs.asp.net/imranbaloch/archive/2010/07/10/concurrent-requests-in-asp-net-mvc.aspx)
 
-For more information on this topic, refer to the [article on concurrent requests in ASP.NET MVC](http://weblogs.asp.net/imranbaloch/archive/2010/07/10/concurrent-requests-in-asp-net-mvc.aspx)
+1. Enable request batching to reduce the number of concurrent requests.
 
-**Step 2** Enable request batching to reduce the number of concurrent requests.
-
-###### Example
+    ###### Example
 
         .Async(async => async
             .Save("Save", "Home")
@@ -86,8 +85,6 @@ For more information on this topic, refer to the [article on concurrent requests
         )
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
@@ -98,13 +95,10 @@ Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})

@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Menu 
 
 ## Event Handling
 
-You can subscribe to all Editor [events](/api/javascript/ui/menu#events).
+You can subscribe to all Menu [events](/api/javascript/ui/menu#events).
 
 ### Specify Function Names
 
@@ -90,13 +90,31 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
         echo $menu->render();
         ?>
-
 <!--*-->
+
+### Attach to select Events of Single Menu Items
+
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
+
+###### Example
+
+        <?php
+        $menu = new \Kendo\UI\Menu('menu');
+
+        $item1 = new \Kendo\UI\MenuItem('item 1');
+                $item1->select("alert('select');");
+
+        $menu->addItem($item1);
+
+        echo $menu->render();
+        ?>
+
+
 ## Reference
 
 ### Client-Side Instances
 
-You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/editor#methods) to control its behavior.
+You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
 
 ###### Example
         <?php
@@ -111,8 +129,6 @@ You are able to reference an existing Menu instance via the [`jQuery.data()`](ht
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and on the Menu:
 
 * [Overview of the Kendo UI Menu Widget]({% slug overview_kendoui_menu_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

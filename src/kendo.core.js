@@ -34,7 +34,81 @@ var __meta__ = { // jshint ignore:line
         UNDEFINED = "undefined",
         getterCache = {},
         setterCache = {},
-        slice = [].slice;
+        slice = [].slice,
+        // avoid extending the depricated properties in latest verions of jQuery
+        noDepricateExtend = function() {
+            var src, copyIsArray, copy, name, options, clone,
+                target = arguments[ 0 ] || {},
+                i = 1,
+                length = arguments.length,
+                deep = false;
+
+            // Handle a deep copy situation
+            if ( typeof target === "boolean" ) {
+                deep = target;
+
+                // skip the boolean and the target
+                target = arguments[ i ] || {};
+                i++;
+            }
+
+            // Handle case when target is a string or something (possible in deep copy)
+            if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
+                target = {};
+            }
+
+            // extend jQuery itself if only one argument is passed
+            if ( i === length ) {
+                target = this;
+                i--;
+            }
+
+            for ( ; i < length; i++ ) {
+
+                // Only deal with non-null/undefined values
+                if ( ( options = arguments[ i ] ) != null ) {
+
+                    // Extend the base object
+                    for ( name in options ) {
+                        // filters, concat and : properties are depricated in the jQuery 3.3.0
+                        // accessing these properties throw a warning when jQuery migrate is included
+                        if (name == "filters" || name == "concat" || name == ":") {
+                            continue;
+                        }
+                        src = target[ name ];
+                        copy = options[ name ];
+
+                        // Prevent never-ending loop
+                        if ( target === copy ) {
+                            continue;
+                        }
+
+                        // Recurse if we're merging plain objects or arrays
+                        if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
+                            ( copyIsArray = jQuery.isArray( copy ) ) ) ) {
+
+                            if ( copyIsArray ) {
+                                copyIsArray = false;
+                                clone = src && jQuery.isArray( src ) ? src : [];
+
+                            } else {
+                                clone = src && jQuery.isPlainObject( src ) ? src : {};
+                            }
+
+                            // Never move original objects, clone them
+                            target[ name ] = noDepricateExtend( deep, clone, copy );
+
+                        // Don't bring in undefined values
+                        } else if ( copy !== undefined ) {
+                            target[ name ] = copy;
+                        }
+                    }
+                }
+            }
+
+            // Return the modified object
+            return target;
+        };
 
     kendo.version = "$KENDO_VERSION".replace(/^\s+|\s+$/g, '');
 
@@ -732,7 +806,9 @@ function pad(number, digits, end) {
 
             //return number in exponential format
             if (format === "e") {
-                return customPrecision ? number.toExponential(precision) : number.toExponential(); // toExponential() and toExponential(undefined) differ in FF #653438.
+                var exp = customPrecision ? number.toExponential(precision) : number.toExponential(); // toExponential() and toExponential(undefined) differ in FF #653438.
+
+                return exp.replace(POINT, numberFormat[POINT]);
             }
 
             // multiply if format is percent
@@ -783,11 +859,6 @@ function pad(number, digits, end) {
         //
         //separate format by sections.
 
-        //make number positive
-        if (negative) {
-            number = -number;
-        }
-
         if (format.indexOf("'") > -1 || format.indexOf("\"") > -1 || format.indexOf("\\") > -1) {
             format = format.replace(literalRegExp, function (match) {
                 var quoteChar = match.charAt(0).replace("\\", ""),
@@ -804,9 +875,9 @@ function pad(number, digits, end) {
             //get negative format
             format = format[1];
             hasNegativeFormat = true;
-        } else if (number === 0) {
+        } else if (number === 0 && format[2]) {
             //format for zeros
-            format = format[2] || format[0];
+            format = format[2];
             if (format.indexOf(SHARP) == -1 && format.indexOf(ZERO) == -1) {
                 //return format if it is string constant.
                 return format;
@@ -866,22 +937,28 @@ function pad(number, digits, end) {
                 length = format.length;
                 decimalIndex = -1;
                 idx = 0;
-            } if (hasZero && zeroIndex > sharpIndex) {
+            }
+
+            if (hasZero && zeroIndex > sharpIndex) {
                 idx = zeroIndex;
             } else if (sharpIndex > zeroIndex) {
                 if (hasSharp && idx > sharpIndex) {
+                    var rounded = round(number, sharpIndex, negative);
+
+                    while (rounded.charAt(rounded.length - 1) === ZERO && sharpIndex > 0 && sharpIndex > zeroIndex) {
+                        sharpIndex--;
+
+                        rounded = round(number, sharpIndex, negative);
+                    }
+
                     idx = sharpIndex;
                 } else if (hasZero && idx < zeroIndex) {
                     idx = zeroIndex;
                 }
             }
-
-            if (idx > -1) {
-                number = round(number, idx);
-            }
-        } else {
-            number = round(number);
         }
+
+        number = round(number, idx, negative);
 
         sharpIndex = format.indexOf(SHARP);
         startZeroIndex = zeroIndex = format.indexOf(ZERO);
@@ -963,7 +1040,7 @@ function pad(number, digits, end) {
             }
 
             if (hasGroup) {
-                number = groupInteger(number, start + (negative ? 1 : 0), Math.max(end, (integerLength + start)), numberFormat);
+                number = groupInteger(number, start + (negative && !hasNegativeFormat ? 1 : 0), Math.max(end, (integerLength + start)), numberFormat);
             }
 
             if (end >= start) {
@@ -1019,7 +1096,9 @@ function pad(number, digits, end) {
                 groupSize = newGroupSize !== undefined ? newGroupSize : groupSize;
 
                 if (groupSize === 0) {
-                    parts.push(integer.substring(0, idx));
+                    if (idx > 0) {
+                        parts.push(integer.substring(0, idx));
+                    }
                     break;
                 }
             }
@@ -1031,11 +1110,15 @@ function pad(number, digits, end) {
         return number;
     };
 
-    var round = function(value, precision) {
+    var round = function(value, precision, negative) {
         precision = precision || 0;
 
         value = value.toString().split('e');
         value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + precision) : precision)));
+
+        if (negative) {
+            value = -value;
+        }
 
         value = value.toString().split('e');
         value = +(value[0] + 'e' + (value[1] ? (+value[1] - precision) : -precision));
@@ -1168,7 +1251,7 @@ function pad(number, digits, end) {
         return newLocalInfo;
     }
 
-    function parseExact(value, format, culture) {
+    function parseExact(value, format, culture, strict) {
         if (!value) {
             return null;
         }
@@ -1411,8 +1494,9 @@ function pad(number, digits, end) {
                     }
 
                     if (count > 2) {
+                        minutesOffset = matches[0][0] + minutesOffset;
                         minutesOffset = parseInt(minutesOffset, 10);
-                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, 0, 59)) {
+                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, -59, 59)) {
                             return null;
                         }
                     }
@@ -1423,6 +1507,12 @@ function pad(number, digits, end) {
                     return null;
                 }
             }
+        }
+
+        // if more characters follow, assume wrong format
+        // https://github.com/telerik/kendo-ui-core/issues/3476
+        if (strict && !/^\s*$/.test(value.substr(valueIdx))) {
+            return null;
         }
 
         hasTime = hours !== null || minutes !== null || seconds || null;
@@ -1482,7 +1572,8 @@ function pad(number, digits, end) {
 
     function getDefaultFormats(culture) {
         var length = math.max(FORMATS_SEQUENCE.length, STANDARD_FORMATS.length);
-        var patterns = culture.calendar.patterns;
+        var calendar = culture.calendar || culture.calendars.standard;
+        var patterns = calendar.patterns;
         var cultureFormats, formatIdx, idx;
         var formats = [];
 
@@ -1497,7 +1588,7 @@ function pad(number, digits, end) {
         return formats;
     }
 
-    kendo.parseDate = function(value, formats, culture) {
+    function internalParseDate(value, formats, culture, strict) {
         if (objectToString.call(value) === "[object Date]") {
             return value;
         }
@@ -1535,13 +1626,21 @@ function pad(number, digits, end) {
         length = formats.length;
 
         for (; idx < length; idx++) {
-            date = parseExact(value, formats[idx], culture);
+            date = parseExact(value, formats[idx], culture, strict);
             if (date) {
                 return date;
             }
         }
 
         return date;
+    }
+
+    kendo.parseDate = function(value, formats, culture) {
+        return internalParseDate(value, formats, culture, false);
+    };
+
+    kendo.parseExactDate = function(value, formats, culture) {
+        return internalParseDate(value, formats, culture, true);
     };
 
     kendo.parseInt = function(value, culture) {
@@ -1638,18 +1737,23 @@ function pad(number, digits, end) {
         var browser = support.browser,
             percentage,
             outerWidth = kendo._outerWidth,
-            outerHeight = kendo._outerHeight;
+            outerHeight = kendo._outerHeight,
+            parent = element.parent(),
+            windowOuterWidth = outerWidth(window);
 
-        if (!element.parent().hasClass("k-animation-container")) {
+        parent.removeClass("k-animation-container-sm");
+
+        if (!parent.hasClass("k-animation-container")) {
             var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
-                percentHeight = percentRegExp.test(height);
+                percentHeight = percentRegExp.test(height),
+                forceWidth = element.hasClass("k-tooltip") || element.is(".k-menu-horizontal.k-context-menu");
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width))) { width = outerWidth(element); }
-            if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
+            if (!percentWidth && (!autosize || (autosize && width) || forceWidth)) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
+            if (!percentHeight && (!autosize || (autosize && height)) || element.is(".k-menu-horizontal.k-context-menu")) { height = outerHeight(element); }
 
             element.wrap(
                          $("<div/>")
@@ -1658,6 +1762,7 @@ function pad(number, digits, end) {
                              width: width,
                              height: height
                          }));
+            parent = element.parent();
 
             if (percentage) {
                 element.css({
@@ -1669,24 +1774,13 @@ function pad(number, digits, end) {
                 });
             }
         } else {
-            var wrapper = element.parent(".k-animation-container"),
-                wrapperStyle = wrapper[0].style;
+            wrapResize(element, autosize);
+        }
 
-            if (wrapper.is(":hidden")) {
-                wrapper.show();
-            }
+        if(windowOuterWidth < outerWidth(parent)){
+            parent.addClass("k-animation-container-sm");
 
-            percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
-
-            if (!percentage) {
-                wrapper.css({
-                    width: outerWidth(element),
-                    height: outerHeight(element),
-                    boxSizing: "content-box",
-                    mozBoxSizing: "content-box",
-                    webkitBoxSizing: "content-box"
-                });
-            }
+            wrapResize(element, autosize);
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
@@ -1694,7 +1788,34 @@ function pad(number, digits, end) {
             element.children(".k-menu").width(element.width());
         }
 
-        return element.parent();
+        return parent;
+    }
+
+    function wrapResize(element, autosize) {
+        var percentage,
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight,
+            wrapper = element.parent(".k-animation-container"),
+            wrapperStyle = wrapper[0].style;
+
+        if (wrapper.is(":hidden")) {
+            wrapper.css({
+                display: "",
+                position: ""
+            });
+        }
+
+        percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
+
+        if (!percentage) {
+            wrapper.css({
+                width: autosize ? outerWidth(element) + 1 : outerWidth(element),
+                height: outerHeight(element),
+                boxSizing: "content-box",
+                mozBoxSizing: "content-box",
+                webkitBoxSizing: "content-box"
+            });
+        }
     }
 
     function deepExtend(destination) {
@@ -1731,7 +1852,7 @@ function pad(number, digits, end) {
 
             if (propInit &&
                 propInit !== Array && propInit !== ObservableArray && propInit !== LazyObservableArray &&
-                propInit !== DataSource && propInit !== HierarchicalDataSource) {
+                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp) {
 
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
@@ -1879,8 +2000,6 @@ function pad(number, digits, end) {
         }
 
         support.touch = "ontouchstart" in window;
-        support.msPointers = window.MSPointerEvent;
-        support.pointers = window.PointerEvent;
 
         var docStyle = document.documentElement.style;
         var transitions = support.transitions = false,
@@ -1934,7 +2053,7 @@ function pad(number, digits, end) {
                 agentRxs = {
                     wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
                     fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
-                    android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.(\d+(\.\d+)?)/,
+                    android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.?(\d+(\.\d+)?)?/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
@@ -1981,7 +2100,7 @@ function pad(number, digits, end) {
                         os.name = testRx(agent, osRxs);
                         os[os.name] = true;
                         os.majorVersion = match[2];
-                        os.minorVersion = match[3].replace("_", ".");
+                        os.minorVersion = (match[3] || "0").replace("_", ".");
                         minorVersion = os.minorVersion.replace(".", "").substr(0, 2);
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.cordova = typeof window.PhoneGap !== UNDEFINED || typeof window.cordova !== UNDEFINED; // Use file protocol to detect appModes.
@@ -2001,7 +2120,6 @@ function pad(number, digits, end) {
         var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
         support.wpDevicePixelRatio = mobileOS.wp ? screen.width / 320 : 0;
-        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
 
         support.hasNativeScrolling = false;
 
@@ -2044,7 +2162,7 @@ function pad(number, digits, end) {
             var browser = false, match = [],
                 browserRxs = {
                     edge: /(edge)[ \/]([\w.]+)/i,
-                    webkit: /(chrome)[ \/]([\w.]+)/i,
+                    webkit: /(chrome|crios)[ \/]([\w.]+)/i,
                     safari: /(webkit)[ \/]([\w.]+)/i,
                     opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
                     msie: /(msie\s|trident.*? rv:)([\w.]+)/i,
@@ -2216,6 +2334,8 @@ function pad(number, digits, end) {
               return false;
           };
 
+        support.matchMedia = "matchMedia" in window;
+
         support.pushState = window.history && window.history.pushState;
 
         var documentMode = document.documentMode;
@@ -2223,6 +2343,12 @@ function pad(number, digits, end) {
         support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
 
         support.customElements = ("registerElement" in window.document);
+
+        var chrome = support.browser.chrome,
+            mozilla = support.browser.mozilla;
+        support.msPointers = !chrome && window.MSPointerEvent;
+        support.pointers = !chrome && !mozilla && window.PointerEvent;
+        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
 
@@ -2254,7 +2380,8 @@ function pad(number, digits, end) {
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
             var sign = support.isRtl(element) ? 1 : -1;
-            result.top -= (window.pageYOffset + (sign * document.documentElement.scrollTop));
+
+            result.top -= (window.pageYOffset - (document.documentElement.scrollTop));
             result.left -= (window.pageXOffset + (sign * document.documentElement.scrollLeft));
         }
 
@@ -2559,7 +2686,6 @@ function pad(number, digits, end) {
         wrap: wrap,
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
-        webComponents: kendo.webComponents || [],
         isScrollable: isScrollable,
         scrollLeft: scrollLeft,
         size: size,
@@ -2832,7 +2958,7 @@ function pad(number, digits, end) {
 
     var templateRegExp = /template$/i,
         jsonRegExp = /^\s*(?:\{(?:.|\r\n|\n)*\}|\[(?:.|\r\n|\n)*\])\s*$/,
-        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}|^\[[A-Za-z_]*\]$/,
+        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}|^\[[A-Za-z_]+\]$/,
         dashRegExp = /([A-Z])/g;
 
     function parseOption(element, option) {
@@ -2854,7 +2980,7 @@ function pad(number, digits, end) {
             value = true;
         } else if (value === "false") {
             value = false;
-        } else if (numberRegExp.test(value)) {
+        } else if (numberRegExp.test(value) && option != "mask") {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
             value = new Function("return (" + value + ")")();
@@ -2863,19 +2989,24 @@ function pad(number, digits, end) {
         return value;
     }
 
-    function parseOptions(element, options) {
+    function parseOptions(element, options, source) {
         var result = {},
             option,
-            value;
+            value,
+            role = element.getAttribute("data-" + kendo.ns + "role");
 
         for (option in options) {
             value = parseOption(element, option);
 
             if (value !== undefined) {
 
-                if (templateRegExp.test(option)) {
+                if (templateRegExp.test(option) && role != "drawer") {
                     if(typeof value === "string") {
-                        value = kendo.template($("#" + value).html());
+                        if($("#" + value).length){
+                            value = kendo.template($("#" + value).html());
+                        }else if (source){
+                            value = kendo.template(source[value]);
+                        }
                     } else {
                         value = element.getAttribute(option);
                     }
@@ -3053,11 +3184,20 @@ function pad(number, digits, end) {
         Widget: Widget,
         DataBoundWidget: DataBoundWidget,
         roles: {},
-        progress: function(container, toggle) {
+        progress: function(container, toggle, options) {
             var mask = container.find(".k-loading-mask"),
                 support = kendo.support,
                 browser = support.browser,
-                isRtl, leftRight, webkitCorrection, containerScrollLeft;
+                isRtl, leftRight, webkitCorrection, containerScrollLeft, cssClass;
+
+                options = $.extend({}, {
+                    width: "100%",
+                    height: "100%",
+                    top: container.scrollTop(),
+                    opacity: false
+                }, options);
+
+                cssClass = options.opacity ? 'k-loading-mask k-opaque' : 'k-loading-mask';
 
             if (toggle) {
                 if (!mask.length) {
@@ -3066,9 +3206,9 @@ function pad(number, digits, end) {
                     containerScrollLeft = container.scrollLeft();
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $("<div class='k-loading-mask'><span class='k-loading-text'>" + kendo.ui.progress.messages.loading + "</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
-                        .width("100%").height("100%")
-                        .css("top", container.scrollTop())
+                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'/><div class='k-loading-color'/></div>", cssClass, kendo.ui.progress.messages.loading))
+                        .width(options.width).height(options.height)
+                        .css("top", options.top)
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
                         .prependTo(container);
                 }
@@ -3251,6 +3391,20 @@ function pad(number, digits, end) {
                 role = "scroller";
             }
 
+            // kendoEditorToolbar is not a public plugin, thus it does not exist in kendo.ui.roles.
+            // Therefore, this is needed in order to be resized when placed in Kendo Window.
+            if (role === "editortoolbar") {
+                var editorToolbar = element.data("kendoEditorToolbar");
+                if (editorToolbar) {
+                    return editorToolbar;
+                }
+            }
+
+            // kendo.View is not a ui plugin
+            if (role === "view") {
+                return element.data("kendoView");
+            }
+
             if (suites) {
                 if (suites[0]) {
                     for (i = 0, length = suites.length; i < length; i ++) {
@@ -3321,13 +3475,13 @@ function pad(number, digits, end) {
     }
 
     function visible(element) {
-        return $.expr.filters.visible(element) &&
+        return $.expr.pseudos.visible(element) &&
             !$(element).parents().addBack().filter(function() {
                 return $.css(this,"visibility") === "hidden";
             }).length;
     }
 
-    $.extend($.expr[ ":" ], {
+    $.extend($.expr.pseudos, {
         kendoFocusable: function(element) {
             var idx = $.attr(element, "tabindex");
             return focusable(element, !isNaN(idx) && idx > -1);
@@ -3466,7 +3620,7 @@ function pad(number, digits, end) {
         return new kendoJQuery.fn.init(selector, context);
     }
 
-    extend(true, kendoJQuery, $);
+    noDepricateExtend(true, kendoJQuery, $);
 
     kendoJQuery.fn = kendoJQuery.prototype = new $();
 
@@ -3718,6 +3872,9 @@ function pad(number, digits, end) {
         }
 
         function convert(date, fromOffset, toOffset) {
+            var tempToOffset = toOffset;
+            var diff;
+
             if (typeof fromOffset == STRING) {
                 fromOffset = this.offset(date, fromOffset);
             }
@@ -3732,7 +3889,13 @@ function pad(number, digits, end) {
 
             var toLocalOffset = date.getTimezoneOffset();
 
-            return new Date(date.getTime() + (toLocalOffset - fromLocalOffset) * 60000);
+            if (typeof tempToOffset == STRING) {
+                tempToOffset = this.offset(date, tempToOffset);
+            }
+
+            diff = (toLocalOffset - fromLocalOffset) + (toOffset - tempToOffset);
+
+            return new Date(date.getTime() + diff * 60000);
         }
 
         function apply(date, timezone) {
@@ -3808,6 +3971,47 @@ function pad(number, digits, end) {
             return last;
         }
 
+        function moveDateToWeekStart(date, weekStartDay) {
+            if (weekStartDay !== 1) {
+                return addDays(dayOfWeek(date, weekStartDay, -1), 4);
+            }
+
+            return addDays(date, (4 - (date.getDay() || 7)));
+        }
+
+        function calcWeekInYear(date, weekStartDay) {
+            var firstWeekInYear = new Date(date.getFullYear(), 0, 1, -6);
+
+            var newDate = moveDateToWeekStart(date, weekStartDay);
+
+            var diffInMS = newDate.getTime() - firstWeekInYear.getTime();
+
+            var days = Math.floor(diffInMS / MS_PER_DAY);
+
+            return 1 + Math.floor(days / 7);
+        }
+
+        function weekInYear(date, weekStartDay) {
+            if(weekStartDay === undefined) {
+                weekStartDay = kendo.culture().calendar.firstDay;
+            }
+
+            var prevWeekDate = addDays(date, -7);
+            var nextWeekDate = addDays(date, 7);
+
+            var weekNumber = calcWeekInYear(date, weekStartDay);
+
+            if (weekNumber === 0) {
+                return calcWeekInYear(prevWeekDate, weekStartDay) + 1;
+            }
+
+            if (weekNumber === 53 && calcWeekInYear(nextWeekDate, weekStartDay) > 1) {
+                return 1;
+            }
+
+            return weekNumber;
+        }
+
         function getDate(date) {
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             adjustDST(date, 0);
@@ -3821,7 +4025,7 @@ function pad(number, digits, end) {
         }
 
         function getMilliseconds(date) {
-            return date.getTime() - getDate(date);
+            return toInvariantTime(date).getTime() - getDate(toInvariantTime(date));
         }
 
         function isInTimeRange(value, min, max) {
@@ -3934,6 +4138,7 @@ function pad(number, digits, end) {
             toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
+            weekInYear: weekInYear,
             getMilliseconds: getMilliseconds
         };
     })();
@@ -4097,7 +4302,13 @@ function pad(number, digits, end) {
             if (element.selectionStart !== undefined) {
                 if (isPosition) {
                     element.focus();
-                    element.setSelectionRange(start, end);
+                    var mobile = support.mobileOS;
+                    if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
+                        setTimeout(function() { element.setSelectionRange(start, end); }, 0);
+                    }
+                    else {
+                        element.setSelectionRange(start, end);
+                    }
                 } else {
                     start = [element.selectionStart, element.selectionEnd];
                 }
@@ -4192,6 +4403,46 @@ function pad(number, digits, end) {
             focus(lastElement);
           }
         });
+    };
+
+    kendo.focusElement = function(element) {
+        var scrollTopPositions = [];
+        var scrollableParents = element.parentsUntil("body")
+                .filter(function(index, element) {
+                    var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
+                    return computedStyle.overflow !== "visible";
+                })
+                .add(window);
+
+        scrollableParents.each(function(index, parent) {
+            scrollTopPositions[index] = $(parent).scrollTop();
+        });
+
+        try {
+            //The setActive method does not cause the document to scroll to the active object in the current page
+            element[0].setActive();
+        } catch (e) {
+            element[0].focus();
+        }
+
+        scrollableParents.each(function(index, parent) {
+            $(parent).scrollTop(scrollTopPositions[index]);
+        });
+    };
+
+    kendo.matchesMedia = function(mediaQuery) {
+        var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
+        return support.matchMedia && window.matchMedia(media).matches;
+    };
+
+    kendo._bootstrapToMedia = function(bootstrapMedia) {
+        return {
+            "xs": "(max-width: 576px)",
+            "sm": "(min-width: 576px)",
+            "md": "(min-width: 768px)",
+            "lg": "(min-width: 992px)",
+            "xl": "(min-width: 1200px)"
+        }[bootstrapMedia];
     };
 
     // kendo.saveAs -----------------------------------------------

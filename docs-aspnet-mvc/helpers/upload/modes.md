@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Kendo UI Upload HtmlHelper
+page_title: Modes of Operation | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Get started with the synchronous and asynchronous operation modes of Telerik UI for ASP.NET MVC wrappers for the Kendo UI Upload widget."
 slug: modesoperation_uploadhelper_aspnetmvc
 position: 2
@@ -20,57 +20,44 @@ In the synchronous mode, the upload is executed synchronously, as part of the fo
 
 Below are listed the steps for you to follow when configuring the synchronous mode of operation for the Kendo UI Upload.
 
-**Step 1** Add a `form` declaration and set a `controller` action.
+1. Add a `form` declaration and set a `controller` action.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <% using (Html.BeginForm("ProcessSubmit", "Home",
-                                 FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
-
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
         <% } %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @using (Html.BeginForm("ProcessSubmit", "Home",
-                                 FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
-
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
         }
-```
+    ```
 
-**Step 2** Add the Upload inside the form. The only required setting is `name`.
+1. Add the Upload inside the form. The only required setting is `name`.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Upload()
-                .Name("attachments")
+            .Name("attachments")
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
-                .Name("attachments")
+            .Name("attachments")
         )
-```
+    ```
 
-**Step 3** Add **Submit** and **Reset** buttons to the form.
+1. Add **Submit** and **Reset** buttons to the form.
 
-###### Example
+    ###### Example
 
         <input type="submit" value="Send" class="t-button" />
         <input type="reset" value="Reset" class="t-button" />
 
-**Step 4** The form should look like the one demonstrated in the example below.
+1. The form should look like the one demonstrated in The following example.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <% using (Html.BeginForm("ProcessSubmit", "Home",
-                                 FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
 
             <%= Html.Kendo().Upload()
                     .Name("attachments")
@@ -79,24 +66,23 @@ Below are listed the steps for you to follow when configuring the synchronous mo
             <input type="submit" value="Send" class="t-button" />
             <input type="reset" value="Reset" class="t-button" />
         <% } %>
-```
-```tab-Razor
+    ```
+    ```Razor
+            @using (Html.BeginForm("ProcessSubmit", "Home",
+                FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
 
-        @using (Html.BeginForm("ProcessSubmit", "Home",
-                                 FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
+                @(Html.Kendo().Upload()
+                        .Name("attachments")
+                )
 
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-            )
+                <input type="submit" value="Send" class="t-button" />
+                <input type="reset" value="Reset" class="t-button" />
+            }
+    ```
 
-            <input type="submit" value="Send" class="t-button" />
-            <input type="reset" value="Reset" class="t-button" />
-        }
-```
+1. Process the files in the action. It requires no special server handling as compared to a regular input.
 
-**Step 5** Process the files in the action. It requires no special server handling as compared to a regular input.
-
-###### Example
+    ###### Example
 
         [HttpPost]
         public ActionResult ProcessSubmit(IEnumerable<HttpPostedFileBase> attachments)
@@ -126,34 +112,30 @@ In this mode the files are uploaded to a controller action without interrupting 
 
 Below are listed the steps for you to follow when configuring the saving of the handler in the asynchronous mode of operation of the Kendo UI Upload.
 
-**Step 1** Add the Upload to the view.
+1. Add the Upload to the view.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+            )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+            )
         )
-```
+    ```
 
-The `name` attribute is required and must be unique. It is used as a form field name in the requests to the server.
+    The `name` attribute is required and must be unique. It is used as a form field name in the requests to the server.
 
-**Step 2** Implement the `Save` controller action.
+1. Implement the `Save` controller action.
 
-###### Example
+    ###### Example
 
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
@@ -171,7 +153,7 @@ The `name` attribute is required and must be unique. It is used as a form field 
             return Content("");
         }
 
-**Step 3** Build and run the application. The uploaded files appear in the `App_Data` folder.
+1. Build and run the application. The uploaded files appear in the `App_Data` folder.
 
 ### Remove Handlers
 
@@ -179,34 +161,30 @@ Users can remove files after they are uploaded asynchronously. To enable this fe
 
 Below are listed the steps for you to follow when configuring the removing of the handler in the asynchronous mode of operation of the Kendo UI Upload.
 
-**Step 1** Specify a `Remove` action.
+1. Specify a `Remove` action.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .Remove("Remove", "Home")
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+                .Remove("Remove", "Home")
+            )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .Remove("Remove", "Home")
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+                .Remove("Remove", "Home")
+            )
         )
-```
+    ```
 
-**Step 2** Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
+1. Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
 
-###### Example
+    ###### Example
 
         public ActionResult Remove(string[] fileNames)
         {
@@ -235,42 +213,37 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
 
-###### Example
-
-```tab-ASPX
-
-        <%= Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .AutoUpload(false)
-                )
-        %>
-```
-```tab-Razor
-
-        @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .AutoUpload(false)
-                )
+```ASPX
+    <%= Html.Kendo().Upload()
+        .Name("attachments")
+        .Async(async => async
+            .Save("Save", "Home")
+            .AutoUpload(false)
         )
+    %>
+```
+```Razor
+    @(Html.Kendo().Upload()
+        .Name("attachments")
+        .Async(async => async
+            .Save("Save", "Home")
+            .AutoUpload(false)
+        )
+    )
 ```
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Upload:
-
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
+* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
 * [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

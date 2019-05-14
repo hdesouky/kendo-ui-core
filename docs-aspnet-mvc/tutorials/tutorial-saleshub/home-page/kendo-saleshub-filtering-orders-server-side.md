@@ -9,7 +9,7 @@ position: 3
 
 # Filter Orders on the Server
 
-![kendo-saleshub-customer-TreeView-and-grid-screenshot](/tutorials/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
+![kendo-saleshub-customer-TreeView-and-grid-screenshot](images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
 
 Since **SalesHub** contains a lot of orders for various customers, it would not be very efficient for **all**
 of the orders to be returned when the orders grid renders. To reduce wait times and cut back on the amount of bandwidth
@@ -22,7 +22,7 @@ that the orders grid uses has been configured to do server-side operations.
 
 To support filtering on the server side in the **Orders** Grid, enable `ServerOperation` for the Grid on the DataSource declaration.
 
-The example below is an excerpt from the declaration of the **Orders** Grid&mdash;which can be found in **Views/Home/Index.cshtml**&mdash;which shows the configuration of the DataSource.
+The following example is an excerpt from the declaration of the **Orders** Grid&mdash;which can be found in **Views/Home/Index.cshtml**&mdash;which shows the configuration of the DataSource.
 
 ###### Example
 
@@ -33,7 +33,7 @@ The example below is an excerpt from the declaration of the **Orders** Grid&mdas
         .ServerOperation(true)
         .PageSize(20)
 
-The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](../../../../kendo-ui/api/javascript/data/datasource#methods-filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
+The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
 
 For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cshtml**.
 
@@ -41,7 +41,7 @@ For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cs
 
 To make the supporting server-side filtering easier, the Kendo UI MVC extensions expose a few classes and functions which handle this approach. The extensions provide `DataSourceRequest`, `DataSourceResponse`, and `ToDataSourceResult` to help with the server-side filtering.
 
-The example below demonstrates part of the code in `Api/CustomerOrdersController.cs` that supports this behavior.
+The following example demonstrates part of the code in `Api/CustomerOrdersController.cs` that supports this behavior.
 
 ###### Example
 
@@ -88,7 +88,7 @@ The implementation for the `CustomerOrdersController` is short, because the Kend
 
 **Breakdown of Code**
 
-The example below demonstrates the first chunk of code.
+The following example demonstrates the first chunk of code.
 
 ###### Example
 
@@ -156,7 +156,7 @@ The following code snippets are located in **Scripts/home.js**.
         }
     };
 
-During its [setup](kendo-saleshub-customer-TreeView), a `select` event handler is configured for the customer TreeeView and the `window.SalesHub.CustomerTreeView_Select` event handler is stated.
+During its [setup](kendo-saleshub-customer-treeview), a `select` event handler is configured for the customer TreeeView and the `window.SalesHub.CustomerTreeView_Select` event handler is stated.
 
 ###### Example
 
@@ -190,7 +190,7 @@ After the `dataItem` and the jQuery object for the node are present, you need to
 
 Now you need to call the `updateGridCustomerFilter` function, which takes a `customerId` as a parameter. Because the `data-customer-id` attribute was added to all of the customer nodes when the TreeView was generated on the server side, you need to retrieve that value from the jQuery object by calling the `data` function on it.
 
-The example below demonstrates the function which commands the update of the filters on the Grid.
+The following example demonstrates the function which commands the update of the filters on the Grid.
 
 ###### Example
 
@@ -210,8 +210,6 @@ After you got the `kendoGrid` object, access the DataSource for it through the `
 The filter you add to the DataSource indicates that the DataSource has to contain only items, which have a `CustomerId` equal to the `customerId` that you got as a parameter to the function. By adding this filter, the DataSource sends a request to the server asking only for Orders that belong to the specified customer.
 
 ## See Also
-
-Other articles on the Kendo UI Sales Hub project and its **Home** and **Order** pages:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_saleshubtutorial_aspnetmvc %})
 * [Create the Customer TreeView]({% slug createcustomtreeview_saleshubtutorial_aspnetmvc %})

@@ -1,7 +1,7 @@
 ---
 title: Known Issues
 page_title: Known Issues | Telerik UI for ASP.NET Core
-description: "Read about known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+description: "Read about known issues when using Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 6
@@ -9,11 +9,10 @@ position: 6
 
 # Known Issues
 
-This articles summarizes all known issues related to Telerik UI for ASP.NET MVC, version 6.
+This articles summarizes all known issues related to Telerik UI for ASP.NET Core.
 
 ## ASP.NET Core Framework
 
-- Data Tables are not supported. For more information on this limitation, refer to [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039).
 - Localization resources are not supported. For more information on this limitation, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007).
 
 ## HtmlHelpers
@@ -62,6 +61,7 @@ Server-side rendering is not supported. The Toolbar template, Column Header temp
 | `ChartPolarLineStyle`     | `ChartSeriesLineStyle`  |
 | `ChartRadarAreaStyle`     | `ChartSeriesLineStyle`  |
 | `ChartRadarLineStyle`     | `ChartSeriesLineStyle`  |
+| `ChartRangeAreaLabelsPosition`     | `ChartSeriesLabelsPosition`  |
 | `ChartScatterLineMissingValues` | `ChartSeriesMissingValues`|
 | `ChartScatterLineStyle`   | `ChartSeriesStyle`      |
 
@@ -75,9 +75,7 @@ The `TagMode` enum is now by `MultiSelectTagMode`.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
-
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

@@ -1,24 +1,22 @@
 ---
 title: Bind Map to View Model
-page_title: Bind Map to View Model | Kendo UI Grid HtmlHelper
+page_title: Bind Map to View Model | Kendo UI Map HtmlHelper for ASP.NET MVC
 description: "Binding a Map to Model in ASP.NET MVC applications."
 slug: howto_bindtomodel_map
 ---
 
 # Bind Map to View Model
 
-MVC enables you to natively bind parts of the page to the Model passed from the controller. Using this techiques you can also bind **Map** helper methods to the Model. 
+MVC enables you to natively bind parts of the page to the Model passed from the controller. Using this techiques you can also bind **Map** helper methods to the Model.
 
 Also, populate the **Markers** collection to a collection defined in the Model.
 
-###### Example
-
 Models:
 
-```
+```Map
 public class Map
 {
-    // Map properties 
+    // Map properties
     public string Name { get; set; }
     public double CenterLatitude { get; set; }
     public double CenterLongitude { get; set; }
@@ -33,8 +31,7 @@ public class Map
     public IEnumerable<Marker> Markers { get; set; }
 }
 ```
-
-```
+```Marker
 public class Marker
 {
     public Marker(double latitude, double longitude, string sname)
@@ -100,10 +97,7 @@ View:
 )
 ```
 
-
-
-
 ## See Also
 
 * [Overview of the Map HtmlHelper]({% slug overview_maphelper_aspnetmvc %})
-* [Map API Reference](/api/Kendo.Mvc.UI.Fluent/MapBuilder)
+* [Map API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MapBuilder)

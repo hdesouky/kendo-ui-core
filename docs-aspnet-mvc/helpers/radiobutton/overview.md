@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RadioButton HtmlHelper
+page_title: RadioButton | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI RadioButton for ASP.NET MVC."
 slug: overview_radiobuttonhelper_aspnetmvc
 position: 1
@@ -20,23 +20,19 @@ The Kendo UI RadioButton widget is rendered as an `input type='radio'` element t
 
 ### Initialization
 
-The example below demonstrates how to initialize the RadioButton.
+The following example demonstrates how to initialize the RadioButton.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true) %>
 ```
 
 ## Features
@@ -45,59 +41,51 @@ The example below demonstrates how to initialize the RadioButton.
 
 The RadioButton can be configured to be initially checked through its `.Checked()` setting. The widget can also be checked or unchecked at any time by using jQuery.
 
-The example below demonstrates how to use the `.Checked()` configuration option.
+The following example demonstrates how to use the `.Checked()` configuration option.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true) %>
 ```
 
 ### Enable and Disable Buttons
 
 The business logic of an application often requires a certain radio button to be temporarily enabled or disabled. The RadioButton can be configured to be initially disabled through its `.Enable()` setting. The widget can also be enabled or disabled at any time by using jQuery.
 
-The example below demonstrates how to use the `.Enable()` configuration option.
+The following example demonstrates how to use the `.Enable()` configuration option.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("disabledRadioButton")
-                .Enable(false)
-                .Label("Disabled radio button")
-                .Checked(false))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("disabledRadioButton")
+        .Enable(false)
+        .Label("Disabled radio button")
+        .Checked(false))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("disabledRadioButton")
-                .Enable(false)
-                .Label("Disabled radio button")
-                .Checked(false) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("disabledRadioButton")
+        .Enable(false)
+        .Label("Disabled radio button")
+        .Checked(false) %>
 ```
 
 ### Bind to Model
 
 Below are listed the steps for you to follow when binding a Kendo UI RadioButton to a model.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the instance of the model to the View.
+1. Create a new action method and pass the instance of the model to the View.
 
-###### Example
+  ###### Example
 
     public class RadioButtonModel
     {
@@ -113,43 +101,32 @@ Below are listed the steps for you to follow when binding a Kendo UI RadioButton
         }
     }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<Kendo.Mvc.Examples.Controllers.RadioButtonModel>" %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @model Kendo.Mvc.Examples.Controllers.RadioButtonModel
-```
+    ```
 
-**Step 4** Add two RadioButtons and set the Boolean values for the checked state through the `.Value` setting. The matched Boolean value from model will define the initial checked state.
+1. Add two RadioButtons and set the Boolean values for the checked state through the `.Value` setting. The matched Boolean value from model will define the initial checked state.
 
-The example below demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
+    The following example demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
 
-###### Example
-
-```tab-Razor
-
+    ```Razor
         @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true))
         @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false))
-```
-```tab-ASPX
-
+    ```
+    ```ASPX
         <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true) %>
         <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false) %>
-```
-
+    ```
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the RadioButton:
-
-* [ASP.NET MVC API Reference: RadioButtonBuilder](/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: RadioButtonBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

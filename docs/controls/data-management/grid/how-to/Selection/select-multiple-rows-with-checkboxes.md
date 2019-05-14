@@ -1,17 +1,17 @@
 ---
 title: Select Multiple Rows with Checkboxes
-page_title:  Select Multiple Rows with Checkboxes | Kendo UI Grid
-description: "Learn how to select multiple rows with checkboxes in the Kendo UI Grid widget."
+page_title:  jQuery Grid Documentation | Multiple Rows with Checkboxes | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to select multiple rows with checkboxes."
 slug: howto_select_multiple_rowswith_checkboxes_grid
 ---
 
 # Select Multiple Rows with Checkboxes
 
-The example below demonstrates how to select multiple rows using the checkbox template in the Kendo UI Grid widget.
+The following example demonstrates how to select multiple rows by using the checkbox template in the Grid.
 
 ###### Example
 
-```html
+```dojo
    <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
@@ -41,22 +41,34 @@ The example below demonstrates how to select multiple rows using the checkbox te
           { field: "foo" },
           { field: "bar" }
         ],
-        dataBound: function () {
-          $(".checkbox").bind("change", function (e) {
+        dataBound: function (e) {
+          $(".checkbox").bind("click", function (e) {
+            e.stopPropagation();
             $(e.target).closest("tr").toggleClass("k-state-selected");
           });
+          
+          var rows = e.sender.element.find("tr");
+          rows.each(function(e){
+            $(this).children().first().on("click", onFirstTDClick);
+          })
         }
-      })
+      });
+      
+      function onFirstTDClick(e){
+        e.stopPropagation();
+        var tr = $(e.target).closest("tr");
+
+        tr.find('[type=checkbox]').prop('checked', !tr.hasClass("k-state-selected"));
+        tr.toggleClass("k-state-selected");
+      }
     </script>
 ```
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples on the selection functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
 * [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
 * [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

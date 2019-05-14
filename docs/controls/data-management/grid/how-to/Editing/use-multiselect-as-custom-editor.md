@@ -1,17 +1,17 @@
 ---
 title: Use MultiSelect as Custom Editor in Grid
-page_title: Use MultiSelect as Custom Editor in Grid | Kendo UI Grid
-description: "Learn how to use the Kendo UI MultiSelect as a custom editor in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Use MultiSelect as CSV Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use MultiSelect as an editor for comma-separated string fields."
 slug: howto_usemultiselectascustomeditor_grid
 ---
 
 # Use MultiSelect as Custom Editor in Grid
 
-The example below demonstrates how to use the Kendo UI MultiSelect as a custom editor in the Kendo UI Grid widget.
+The following example demonstrates how to use the MultiSelect as a custom editor in the Grid.
 
 ###### Example
 
-```html
+```dojo
     <div id="main">
       <div id="grid" data-bind="source: dataSource"></div>
     </div>
@@ -53,7 +53,7 @@ The example below demonstrates how to use the Kendo UI MultiSelect as a custom e
 
           change: function() {
             var widget = this.widget;
-            var value = widget.options.valuePritive ? widget.value() : widget.dataItems();
+            var value = widget.options.valuePrimitive ? widget.value() : widget.dataItems();
 
             this._initChange = true;
             this.bindings.multiValue.set(value);
@@ -99,9 +99,6 @@ The example below demonstrates how to use the Kendo UI MultiSelect as a custom e
       var vm = kendo.observable({
           countries: ['Canada', 'Mexico', 'United States'],
           dataSource: new kendo.data.DataSource({
-            change: function(e){
-              console.log(1)
-            },
               data: [{
                   id: 1,
                   product: 'X002',
@@ -174,9 +171,7 @@ The example below demonstrates how to use the Kendo UI MultiSelect as a custom e
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -192,4 +187,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

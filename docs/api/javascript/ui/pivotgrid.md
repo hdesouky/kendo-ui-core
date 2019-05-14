@@ -2,6 +2,8 @@
 title: PivotGrid
 page_title: Configuration, methods and events of Kendo UI PivotGrid
 description: Code examples for PivotGrid UI widget configuration, learn how to use methods and which events to set once the grid UI widget detail is initialized and expanded.
+res_type: api
+component: pivotgrid
 ---
 
 # kendo.ui.PivotGrid
@@ -36,7 +38,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -64,7 +66,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                 cube: "Adventure Works"
             },
             read: {
-                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                url: "https://demos.telerik.com/olap/msmdpump.dll",
                 dataType: "text",
                 contentType: "text/xml",
                 type: "POST"
@@ -83,7 +85,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -106,7 +108,7 @@ data source is fired. By default the widget will bind to the data source specifi
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -143,7 +145,7 @@ If set to `false` the user will not be able to add/close/reorder current fields 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -184,7 +186,7 @@ Specifies the file name of the exported Excel file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -221,7 +223,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -235,13 +237,12 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally.
 Such browsers are IE version 9 and lower and Safari.
 
 The developer is responsible for implementing the server-side proxy.
@@ -275,7 +276,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -317,7 +318,7 @@ The author of the PDF document.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -361,7 +362,7 @@ The creator of the PDF document.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -398,7 +399,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -435,7 +436,7 @@ Specifies the file name of the exported PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -449,7 +450,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -475,7 +476,7 @@ Specifies the keywords of the exported PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -512,7 +513,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -555,7 +556,7 @@ units are "mm", "cm", "in" and "pt" (default).
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -618,7 +619,7 @@ Supported values:
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -635,7 +636,7 @@ Supported values:
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari. PDF export is not supported in Internet Explorer 8 and below.
+A proxy will be used when the browser is not capable of saving files locally, for example, Internet Explorer 9 and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
@@ -668,7 +669,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -710,7 +711,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -747,7 +748,7 @@ Sets the subject of the PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -784,7 +785,7 @@ Sets the title of the PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -819,7 +820,7 @@ If set to `true` the user will be able to filter by using the field menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -856,7 +857,7 @@ Can be set to a JavaScript object which represents the sorting configuration.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -893,7 +894,7 @@ If set to `true` the user can get the pivotgrid in unsorted state by clicking th
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -929,7 +930,7 @@ The width of the table columns. Value is treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -963,7 +964,7 @@ The height of the PivotGrid. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -993,7 +994,7 @@ The height of the PivotGrid. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1008,14 +1009,14 @@ The height of the PivotGrid. Numeric values are treated as pixels.
 
 ### columnHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding column header cell
 * tuple - the tuple of the corresponding column header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 
 #### Example - emphasize the title of a specific member
 
@@ -1042,7 +1043,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1057,7 +1058,7 @@ For information about the tuple structure check this [link](/api/javascript/data
 
 ### dataCellTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
 
 The fields which can be used in the template are:
 
@@ -1066,8 +1067,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - emphasize the values in *2005*
 
@@ -1094,7 +1095,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1109,7 +1110,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### kpiStatusTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
 
 The fields which can be used in the template are:
 
@@ -1118,8 +1119,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - specify a custom template for the KPI Status measure
 
@@ -1146,7 +1147,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1161,7 +1162,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### kpiTrendTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
 
 The fields which can be used in the template are:
 
@@ -1170,8 +1171,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - specify a custom template for the KPI Trend measure
 
@@ -1198,7 +1199,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1213,14 +1214,14 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### rowHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding row header cell
 * tuple - the tuple of the corresponding row header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 
 #### Example - emphasize the title of a specific member
 
@@ -1247,7 +1248,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1286,7 +1287,7 @@ The text messages displayed in the fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1323,7 +1324,7 @@ The text messages displayed in the measure fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1360,7 +1361,7 @@ The text messages displayed in the column fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1397,7 +1398,7 @@ The text messages displayed in the row fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1446,7 +1447,7 @@ The text messages displayed in the field menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1486,7 +1487,7 @@ The text messages displayed in fields filter.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1526,7 +1527,7 @@ The text message displayed for the menu item which performs ascending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1566,7 +1567,7 @@ The text message displayed for the menu item which performs descending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1606,7 +1607,7 @@ The text messages of the fields filter menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1646,7 +1647,7 @@ The text messages of the filter button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1686,7 +1687,7 @@ The text messages of the include menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1726,7 +1727,7 @@ The title of the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1766,7 +1767,7 @@ The text of the clear filter expressions button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1806,7 +1807,7 @@ The text of the OK button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1846,7 +1847,7 @@ The text of the cancel button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1893,7 +1894,7 @@ The text of the filter operators displayed in the filter menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1935,7 +1936,7 @@ The text of the "contains" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1977,7 +1978,7 @@ The text of the "Does not contain" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2019,7 +2020,7 @@ The text of the "Starts with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2061,7 +2062,7 @@ The text of the "Ends with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2103,7 +2104,7 @@ The text of the "equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2145,7 +2146,7 @@ The text of the "not equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2162,11 +2163,11 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotgrid/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotgrid/methods/setdatasource) method instead.
 
 #### Example - get reference to the widget data source
 
@@ -2185,7 +2186,7 @@ The [data source](/api/javascript/data/pivotdatasource) of the widget. Configure
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2247,7 +2248,7 @@ The fields of the result object:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "http://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -2309,7 +2310,7 @@ The fields of the result object:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "http://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -2352,7 +2353,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2388,7 +2389,7 @@ Renders all content using the current data items.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2430,7 +2431,7 @@ The data source to which the widget should be bound.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2452,7 +2453,7 @@ The data source to which the widget should be bound.
                 cube: "Adventure Works"
             },
             read: {
-                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                url: "https://demos.telerik.com/olap/msmdpump.dll",
                 dataType: "text",
                 contentType: "text/xml",
                 type: "POST"
@@ -2468,7 +2469,7 @@ The data source to which the widget should be bound.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/pivotgrid/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -2490,7 +2491,7 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2510,12 +2511,12 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -2535,7 +2536,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2591,7 +2592,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2625,7 +2626,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2672,7 +2673,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2706,7 +2707,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2765,7 +2766,7 @@ The path to the field that will be expanded.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2799,7 +2800,7 @@ The path to the field that will be expanded.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2858,7 +2859,7 @@ The path to the field that will be collapsed.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2892,7 +2893,7 @@ The path to the field that will be collapsed.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2909,7 +2910,7 @@ The path to the field that will be collapsed.
 
 ### excelExport
 
-Fired when [`saveAsExcel`](#methods-saveAsExcel) method is called.
+Fired when [`saveAsExcel`](/api/javascript/ui/pivotgrid/methods/saveasexcel) method is called.
 
 #### Event Data
 
@@ -2968,7 +2969,7 @@ If invoked the grid will not save the generated file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3001,7 +3002,7 @@ If invoked the grid will not save the generated file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3057,7 +3058,7 @@ A promise that will be resolved when the export completes.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3089,7 +3090,7 @@ A promise that will be resolved when the export completes.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"

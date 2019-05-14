@@ -1,17 +1,17 @@
 ---
 title: Use Dates inside Row Template
-page_title:  Use Dates inside Row Template | Kendo UI Grid
-description: "Learn how to use dates inside a Kendo UI Grid row template."
+page_title:  jQuery Grid Documentation | Dates Inside a Row Template | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use dates inside a row template."
 slug: howto_use_dates_inside_row_template_grid
 ---
 
 # Use Dates inside Row Template
 
-The example below demonstrates how to use dates inside a Kendo UI Grid row template.
+The following example demonstrates how to use dates inside a Grid row template.
 
 ###### Example
 
-```html
+```dojo
      <div id="example">
       <table id="grid">
         <colgroup>
@@ -91,7 +91,7 @@ The example below demonstrates how to use dates inside a Kendo UI Grid row templ
               type: "odata",
               transport: {
                 read: {
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
                 }
               }
             },
@@ -152,11 +152,9 @@ The example below demonstrates how to use dates inside a Kendo UI Grid row templ
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to the usage of templates:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
 * [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
 * [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

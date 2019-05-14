@@ -1,6 +1,6 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing | Kendo UI Grid HtmlHelper
+page_title: Ajax Editing | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing."
 previous_url: /helpers/grid/ajax-editing
 slug: ajaxediting_grid_aspnetmvc
@@ -11,35 +11,33 @@ position: 2
 
 This article demonstrates how to define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to do Ajax editing to the Northwind database, the **Products** table.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridAjaxEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridAjaxEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-**Figure 1. A new entity data model**
+    **Figure 1. A new entity data model**
 
-![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
+    ![New entity data model](../images/grid-entity-data-model.png)
 
-**Step 3** Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+1. Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-**Figure 2. Choose the connection**
+    **Figure 2. Choose the connection**
 
-![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
+    ![Choose the connection](../images/grid-entity-data-model.png)
 
-**Step 4** Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
+1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-**Figure 3. Choose the Products table**
+    **Figure 3. Choose the Products table**
 
-![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
+    ![Choose the Products table](../images/grid-database-objects.png)
 
-**Step 5** Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
+1. Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
-###### Example
+    ###### Example
 
         public class ProductViewModel
         {
@@ -52,9 +50,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             public short? UnitsInStock { get; set; }
         }
 
-**Step 6** Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
+1. Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
 
-###### Example
+    ###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -66,9 +64,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
         }
 
-**Step 7** Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
 
-###### Example
+    ###### Example
 
         public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -94,9 +92,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 8** Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
 
-###### Example
+    ###### Example
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -125,9 +123,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 9** Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
+1. Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
 
-###### Example
+    ###### Example
 
         public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -139,8 +137,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     var entity = new Product
                     {
                         ProductID = product.ProductID,
-                                  ProductName = product.ProductName,
-                                  UnitsInStock = product.UnitsInStock
+                                    ProductName = product.ProductName,
+                                    UnitsInStock = product.UnitsInStock
                     };
                     // Attach the entity.
                     northwind.Products.Attach(entity);
@@ -155,45 +153,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             // Return the removed product. Also return any validation errors.
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
-**Step 10** In the view, configure the Grid to use the action methods created in the previous steps.
 
-###### Example
+1. In the view, configure the Grid to use the action methods created in the previous steps.
 
-```tab-ASPX
-
-    <%: Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
-          .Name("grid")
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID).Width(100);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock).Width(250);
-              columns.Command(commands =>
-              {
-                  commands.Edit(); // The "edit" command will edit and update data items.
-                  commands.Destroy(); // The "destroy" command removes data items.
-              }).Title("Commands").Width(200);
-          })
-          .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
-          .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode.
-          .DataSource(dataSource =>
-              dataSource.Ajax()
-                .Model(model =>
-                {
-                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                })
-                .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item
-                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Гrid needs data.
-                .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
-                .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
-          )
-          .Pageable()
-    %>
-```
-```tab-Razor
-
-      @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+    ```ASPX
+        <%: Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
             .Name("grid")
             .Columns(columns =>
             {
@@ -210,37 +174,68 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode.
             .DataSource(dataSource =>
                 dataSource.Ajax()
-                  .Model(model =>
-                  {
-                      model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                      model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                  })
-                  .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
-                  .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
-                  .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
-                  .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+                .Model(model =>
+                {
+                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                })
+                .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item
+                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
+                .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
+                .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
             )
             .Pageable()
-      )
-```
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID).Width(100);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock).Width(250);
+                columns.Command(commands =>
+                {
+                    commands.Edit(); // The "edit" command will edit and update data items.
+                    commands.Destroy(); // The "destroy" command removes data items.
+                }).Title("Commands").Width(200);
+            })
+            .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
+            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode.
+            .DataSource(dataSource =>
+                dataSource.Ajax()
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                    })
+                    .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
+                    .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+            )
+            .Pageable()
+        )
+    ```
 
-**Step 11** Build and run the application.
+1. Build and run the application.
 
-**Figure 4. The final result**
+    **Figure 4. The final result**
 
-![Final result](/helpers/grid/images/grid-inline-grid.png)
+    ![Final result](../images/grid-inline-grid.png)
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
+    To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
 
 ### ModelState Errors
 
 Server validation is often needed when performing editing. The section below demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET MVC.
 
-**Step 1** Perform all steps from the previous section.
+1. Perform all steps from the previous section.
 
-**Step 2** Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
+1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
 
-###### Example
+    ###### Example
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -256,8 +251,8 @@ Server validation is often needed when performing editing. The section below dem
                     var entity = new Product
                     {
                         ProductID = product.ProductID,
-                                  ProductName = product.ProductName,
-                                  UnitsInStock = product.UnitsInStock
+                                    ProductName = product.ProductName,
+                                    UnitsInStock = product.UnitsInStock
                     };
 
                     // Attach the entity
@@ -276,13 +271,10 @@ Server validation is often needed when performing editing. The section below dem
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 3** Subscribe to the [`error`](../../../../kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](../../../../kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+1. Subscribe to the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
-###### Example
-
-```tab-ASPX
-
-      <%: Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+    ```ASPX
+        <%: Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
             .Name("grid")
             .Columns(columns =>
             {
@@ -299,43 +291,42 @@ Server validation is often needed when performing editing. The section below dem
             .Editable(editable => editable.Mode(GridEditMode.InLine))
             .DataSource(dataSource =>
                 dataSource.Ajax()
-                  .Events(events => events.Error("grid_error")) // Handle the "error" event.
-                  .Model(model =>
-                  {
-                      model.Id(product => product.ProductID);
-                      model.Field(product => product.ProductID).Editable(false);
-                  })
-                  .Create(create => create.Action("Products_Create", "Home"))
-                  .Read(read => read.Action("Products_Read", "Home"))
-                  .Update(update => update.Action("Products_Update", "Home"))
-                  .Destroy(destroy => destroy.Action("Products_Destroy", "Home"))
+                    .Events(events => events.Error("grid_error")) // Handle the "error" event.
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID);
+                        model.Field(product => product.ProductID).Editable(false);
+                    })
+                    .Create(create => create.Action("Products_Create", "Home"))
+                    .Read(read => read.Action("Products_Read", "Home"))
+                    .Update(update => update.Action("Products_Update", "Home"))
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home"))
             )
             .Pageable()
-      %>
-      <script>
-      function grid_error(e) {
-          if (e.errors) {
-              var message = "There are some errors:\n";
-              // Create a message containing all errors.
-              $.each(e.errors, function (key, value) {
-                  if ('errors' in value) {
-                      $.each(value.errors, function () {
-                          message += this + "\n";
-                      });
-                  }
-              });
-              // Display the message.
-              alert(message);
-              // Cancel the changes.
-              var grid = $("#grid").data("kendoGrid");
-              grid.cancelChanges();
-          }
-      }
-      </script>
-```
-```tab-Razor
-
-      @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+        %>
+        <script>
+        function grid_error(e) {
+            if (e.errors) {
+                var message = "There are some errors:\n";
+                // Create a message containing all errors.
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                // Display the message.
+                alert(message);
+                // Cancel the changes.
+                var grid = $("#grid").data("kendoGrid");
+                grid.cancelChanges();
+            }
+        }
+        </script>
+    ```
+    ```Razor
+        @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
             .Name("grid")
             .Columns(columns =>
             {
@@ -352,44 +343,42 @@ Server validation is often needed when performing editing. The section below dem
             .Editable(editable => editable.Mode(GridEditMode.InLine))
             .DataSource(dataSource =>
                 dataSource.Ajax()
-                  .Events(events => events.Error("grid_error")) // Handle the "error" event
-                  .Model(model =>
-                  {
-                      model.Id(product => product.ProductID);
-                      model.Field(product => product.ProductID).Editable(false);
-                  })
-                  .Create(create => create.Action("Products_Create", "Home"))
-                  .Read(read => read.Action("Products_Read", "Home"))
-                  .Update(update => update.Action("Products_Update", "Home"))
-                  .Destroy(destroy => destroy.Action("Products_Destroy", "Home"))
+                    .Events(events => events.Error("grid_error")) // Handle the "error" event
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID);
+                        model.Field(product => product.ProductID).Editable(false);
+                    })
+                    .Create(create => create.Action("Products_Create", "Home"))
+                    .Read(read => read.Action("Products_Read", "Home"))
+                    .Update(update => update.Action("Products_Update", "Home"))
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home"))
             )
             .Pageable()
-      )
-      <script>
-      function grid_error(e) {
-          if (e.errors) {
-              var message = "There are some errors:\n";
-              // Create a message containing all errors.
-              $.each(e.errors, function (key, value) {
-                  if ('errors' in value) {
-                      $.each(value.errors, function () {
-                          message += this + "\n";
-                      });
-                  }
-              });
-              // Display the message.
-              alert(message);
-              // Cancel the changes.
-              var grid = $("#grid").data("kendoGrid");
-              grid.cancelChanges();
-          }
-      }
-      </script>
-```
+        )
+        <script>
+            function grid_error(e) {
+                if (e.errors) {
+                    var message = "There are some errors:\n";
+                    // Create a message containing all errors.
+                    $.each(e.errors, function (key, value) {
+                        if ('errors' in value) {
+                            $.each(value.errors, function () {
+                                message += this + "\n";
+                            });
+                        }
+                    });
+                    // Display the message.
+                    alert(message);
+                    // Cancel the changes.
+                    var grid = $("#grid").data("kendoGrid");
+                    grid.cancelChanges();
+                }
+            }
+        </script>
+    ```
 
 ## See Also
-
-Other articles on the Kendo UI Grid for ASP.NET MVC:
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
@@ -399,15 +388,12 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-
-Articles on Telerik UI for ASP.NET MVC:
-
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Editors
 page_title: Script Files for Editors | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Editors"
@@ -30,6 +31,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| | kendo.button.js | |
 | | kendo.colorpicker.js | |
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) | jquery.js | |
 | | kendo.core.js | |
@@ -44,11 +46,24 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.combobox.js | |
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
+| [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
+| | kendo.calendar.js | |
+| | kendo.multiviewcalendar.js | |
+| | kendo.popup.js | |
+| | kendo.datepicker.js | |
+| | kendo.daterangepicker.js | |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
@@ -65,6 +80,12 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.dropdownlist.js | |
+| [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.treeview.js | |
+| | kendo.popup.js | |
+| | kendo.dropdowntree.js | |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -77,6 +98,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.window.js | |
 | | kendo.color.js | |
 | | kendo.slider.js | |
+| | kendo.button.js | |
 | | kendo.colorpicker.js | |
 | | kendo.selectable.js | Image Browser feature (optional) |
 | | kendo.listview.js | Image Browser feature (optional) |
@@ -84,15 +106,33 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.filebrowser.js | Image Browser feature (optional) |
 | | kendo.imagebrowser.js | Image Browser feature (optional) |
 | | kendo.resizable.js | Resize handle feature (optional) |
+| | kendo.tabstrip.js | Table wizard dialog feature (optional) |
+| | kendo.numerictextbox.js | Table wizard dialog feature (optional) |
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
-| | kendo.tabstrip.js | Table Wizard dialog feature (optional) |
-| | kendo.numerictextbox.js | Table Wizard dialog feature (optional) |
-| | kendo.button.js | Table Wizard dialog feature (optional) |
 | | kendo.editor.js | |
+| [ListBox](http://demos.telerik.com/kendo-ui/listbox/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
+| | kendo.data.js | |
+| | kendo.selectable.js | |
+| | kendo.listbox.js | |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.maskedtextbox.js | |
+| [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.popup.js | |
+| | kendo.list.js | |
+| | kendo.combobox.js | |
+| | kendo.fx.js | Mobile scroller feature (optional) |
+| | kendo.userevents.js | Mobile scroller feature (optional) |
+| | kendo.draganddrop.js | Mobile scroller feature (optional) |
+| | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
+| | kendo.virtuallist.js | VirtualList feature (optional) |
+| | kendo.multicolumncombobox.js | |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -113,6 +153,9 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| [Switch](http://demos.telerik.com/kendo-ui/switch/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.switch.js | |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
@@ -129,6 +172,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
@@ -138,5 +182,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
++ [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for PDF]({% slug script_filesfor_pdf %})

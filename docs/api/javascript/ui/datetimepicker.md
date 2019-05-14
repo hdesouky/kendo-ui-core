@@ -2,6 +2,7 @@
 title: DateTimePicker
 page_title: Configuration, methods and events of Kendo UI DateTimePicker
 description: Learn how to configure the UI DateTimePicker widget. Use methods to open, close, remove, enable, disable, set maximum or minimum values and more.
+res_type: api
 ---
 
 # kendo.ui.DateTimePicker
@@ -135,9 +136,22 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DateTimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.
+Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datetimepicker#configuration-month.content) of the DateView.
 All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
 
 #### Example - specify a list of dates
@@ -249,7 +263,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String`
 
- The [template](/api/javascript/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 
@@ -275,6 +289,8 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 ### format `String`*(default: "M/d/yyyy h:mm tt")*
 
  Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.
+
+For more information on date and time formats please refer to [Date Formatting](/framework/globalization/dateformatting).
 
 #### Example - specify a custom date format
 
@@ -347,6 +363,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
+### month.weekNumber `String`
+
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
+ The properties available in the data object are:
+
+ * currentDate - returns the first date of the current week.
+ * weekNumber - calculated week number.
+
+ These properties can be used in the template to make additional calculations.
+
+#### Example - specify week number template as a string
+
+    <style>
+      .italic{
+        font-style: italic;
+      }
+    </style>
+    <body>
+
+    <input id="datetimepicker1" />
+    <script id="week-template" type="text/x-kendo-template">
+       <a class="italic">#= data.weekNumber #</a>
+    </script>
+    <script>
+      $("#datetimepicker1").kendoDateTimePicker({
+        weekNumber: true,
+        month: {
+          weekNumber: $("#week-template").html()
+        }
+      });
+    </script>
+
 ### month.empty `String`
 
 The template used for rendering cells in the calendar "month" view, which are outside the min/max range.
@@ -371,6 +419,19 @@ The template used for rendering cells in the calendar "month" view, which are ou
            empty: '<span style="color:\\#ccc;padding:0 .45em 0 .1em;">#= data.value #</span>'
         }
     });
+    </script>
+
+### weekNumber `Boolean` *(default: false)*
+
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.
+
+#### Example - enable the week of the year option
+
+    <input id="datetimepicker1" />
+    <script>
+        $("#datetimepicker1").kendoDateTimePicker({
+            weekNumber: true
+        });
     </script>
 
 ### parseFormats `Array`
@@ -769,9 +830,9 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 `Date` The time value of a DateTimePicker.
 
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="datetimepicker" />
     <script>

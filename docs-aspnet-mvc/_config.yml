@@ -1,8 +1,13 @@
 # The public documentation URL, used for sitemap.xml
-url: "http://docs.telerik.com/aspnet-mvc"
+url: "https://docs.telerik.com/aspnet-mvc"
+
+all_pages_domain: "https://docs.telerik.com"
+
+capital_casing_redirects: true
 
 # Exclude files which should not be in the output
-exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb,SlugLog.log]
+exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
+exclude_navigation: [asp-net-mvc-3.html,asp-net-mvc-4.html,api/Kendo.Mvc/*,api/Kendo.Mvc.UI/*,api/Kendo.Mvc.UI.Fluent/*]
 navigation:
 ## List your directory names and order here, like this:
 
@@ -12,24 +17,29 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 3
-     "how-to":
-        title: "How To"
-        position: 4
      "helpers":
         title: "Widgets"
-        position: 5
+        position: 4
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 6
+        position: 5
      "migration":
         title: "Migration"
+        position: 6
+     "styles-and-layout":
+        title: "Styles and Appearance"
         position: 7
+     "how-to":
+        title: "How To"
+        position: 8
      "tutorials":
         title: "Tutorials"
-        position: 8
+        position: 9
      "troubleshoot":
         title: "Troubleshooting"
-        position: 9
+        position: 10
+
+
 
 ## List helpers directory names and order here, like this:
      "helpers/autocomplete":
@@ -42,14 +52,23 @@ navigation:
         title: "Calendar"
      "helpers/chart":
         title: "Chart"
+     "helpers/chat":
+        title: "Chat"
+        isNew: true
      "helpers/colorpalette":
         title: "ColorPalette"
      "helpers/colorpicker":
         title: "ColorPicker"
+     "helpers/multicolumncombobox":
+        title: "MultiColumnComboBox"
      "helpers/combobox":
         title: "ComboBox"
+     "helpers/dateinput":
+        title: "DateInput"
      "helpers/datepicker":
         title: "DatePicker"
+     "helpers/daterangepicker":
+        title: "DateRangePicker"		
      "helpers/datetimepicker":
         title: "DateTimePicker"
      "helpers/diagram":
@@ -58,6 +77,9 @@ navigation:
         title: "Dialog"
      "helpers/dropdownlist":
         title: "DropDownList"
+     "helpers/dropdowntree":
+        isNew: true
+        title: "DropDownTree"
      "helpers/editor":
         title: "Editor"
      "helpers/flatcolorpicker":
@@ -103,10 +125,42 @@ navigation:
         title: "How To"
      "helpers/hybrid":
         title: "Hybrid"
+     "*mobileactionsheet":
+        title: "ActionSheet"
+     "*mobileapplication":
+        title: "Application"
+     "*mobilebutton":
+        title: "Button"
+     "*mobilebuttongroup":
+        title: "ButtonGroup"
+     "*mobiledrawer":
+        title: "Drawer"
+     "*mobilelayout":
+        title: "Layout"
+     "*mobilelistview":
+        title: "ListView"
+     "*mobilemodalview":
+        title: "ModalView"
+     "*mobilenavbar":
+        title: "NavBar"
+     "*mobilepopover":
+        title: "PopOver"
+     "*mobilescrollview":
+        title: "ScrollView"
+     "*mobilesplitview":
+        title: "SplitView"
+     "*mobileswitch":
+        title: "Switch"
+     "*mobiletabstrip":
+        title: "TabStrip"
+     "*mobileview":
+        title: "View"
      "helpers/lineargauge":
         title: "LinearGauge"
      "helpers/listview":
         title: "ListView"
+     "helpers/listbox":
+        title: "ListBox"
      "helpers/map":
         title: "Map"
      "helpers/maskedtextbox":
@@ -117,6 +171,8 @@ navigation:
         title: "Menu"
      "helpers/multiselect":
         title: "MultiSelect"
+     "helpers/multiviewcalendar":
+        title: "MultiViewCalendar"
      "helpers/notification":
         title: "Notification"
      "helpers/numerictextbox":
@@ -129,12 +185,16 @@ navigation:
         title: "ProgressBar"
      "helpers/qrcode":
         title: "QRCode"
+     "*arcgauge":
+        title: "ArcGauge"
      "helpers/radialgauge":
         title: "RadialGauge"
      "helpers/radiobutton":
         title: "RadioButton"
      "helpers/scheduler":
         title: "Scheduler"
+     "helpers/scrollview":
+        title: "ScrollView"
      "helpers/slider":
         title: "Slider"
      "helpers/sortable":
@@ -145,6 +205,8 @@ navigation:
         title: "SpreadSheet"
      "helpers/stockchart":
         title: "StockChart"
+     "helpers/switch":
+        title: "Switch"
      "helpers/tabstrip":
         title: "TabStrip"
      "helpers/timepicker":
@@ -196,10 +258,16 @@ navigation:
 baseurl: /aspnet-mvc
 
 ## The Kendo UI version used
-cdnVersion: "2016.2.607"
+cdnVersion: "2019.1.115"
 
 ## The MVC Core version used
-mvcCoreVersion: "2016.2.616"
+mvcCoreVersion: "2019.1.115"
+
+ff-sheet-id: 17DDhsKyPUgO6GlvL8WEfCCN6tikyInp4qpRGCvvs794
+
+## Product
+product: "Telerik UI for ASP.NET MVC"
+platform: aspnet-mvc
 
 ## Assign layout and category per different paths
 defaults:
@@ -207,7 +275,7 @@ defaults:
     scope:
         path: ""
     values:
-        layout: "page"
+        layout: "documentation"
         category: "default"
         product: "aspnet-mvc"
         editable: true
@@ -216,6 +284,13 @@ defaults:
         path: "aspnet-mvc"
     values:
         product: "aspnet-mvc"
+
+    scope:
+        path: "api"
+    values:
+        editable: false
+        res_type: api
+        kind: api
 
 type_links:
     "kendo.Class": "/api/javascript/class"
@@ -236,7 +311,23 @@ type_links:
 
 # The google services configuration
 google_tag_manager: GTM-6X92
-google_custom_search: '001595215763381649090:eblhnfskwrk'
+gcs_engine: '001595215763381649090:rdwxfmavt8o'
+gcs_api_key: 'AIzaSyDnvT29LoZiLUcywskEgTTum7j5pkx6s8I'
+
+has_web_api_index: true
+skip_tabbed_code: true
+code_lang: true
+api_columns_count: 2
+edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet-mvc
+
+download: http://www.telerik.com/download/aspnet-mvc
+
+footer_social:
+    facebook: https://www.facebook.com/Telerik/
+    youtube: https://www.youtube.com/user/TelerikInc
+    linkedin: https://www.linkedin.com/showcase/telerik/
+    twitter: https://twitter.com/Telerik/
+
 
 # Assets pipeline configuration
 assets:

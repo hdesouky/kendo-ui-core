@@ -1,6 +1,6 @@
 ---
 title: Using Forms
-page_title: Using Forms | Kendo UI Window HtmlHelper
+page_title: Using Forms | Kendo UI Window HtmlHelper for ASP.NET MVC
 description: "Handle forms in when working with a Kendo UI Window in ASP.NET MVC applications."
 slug: using_formsinwindow_aspnetmvc
 position: 2
@@ -20,9 +20,7 @@ Though the Window allows the creation of popup forms, you need to consider the c
 
 To handle this behavior, render the content in an iframe.
 
-###### Example
-
-```tab-Index.cshtml
+```Index.cshtml
 @(Html.Kendo().Window()
     .Name("PopupForm")
     .Title("My Form")
@@ -39,14 +37,14 @@ To handle this behavior, render the content in an iframe.
     }
 </script>
 ```
-```tab-HomeController.cs
+```HomeController.cs
 public ActionResult GetForm()
 {
     // Return the view with the form
     return View("Form");
 }
 ```
-```tab-Form.cshtml
+```Form.cshtml
 @* As this is loaded in an iframe, the view should have a layout in order to load an entire HTML page. *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -67,7 +65,7 @@ public ActionResult GetForm()
     )
 }
 ```
-```tab-MyModel.cs
+```MyModel.cs
 public class MyModel
 {
     [Required]
@@ -78,7 +76,7 @@ public class MyModel
     public string Description { get; set; }
 }
 ```
-```tab-MyModelController.cs
+```MyModelController.cs
 [HttpPost]
 public ActionResult MyModel_Create(MyModel model)
 {
@@ -96,14 +94,12 @@ public ActionResult MyModel_Create(MyModel model)
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Window:
-
-* [ASP.NET MVC API Reference: WindowBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Custom Binding
-page_title: Custom Binding | Kendo UI Grid HtmlHelper
+page_title: Custom Binding | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Use and configure Kendo UI Grid for ASP.NET MVC for server custom binding."
 previous_url: /helpers/grid/custom-binding
 slug: custombinding_grid_aspnetmvc
@@ -17,32 +17,32 @@ The Kendo UI Grid for ASP.NET MVC enables you to bypass the built-in data proces
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom server binding.
 
-**Step 1** Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for the populating of the `DataSourceRequest` object.
+1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for the populating of the `DataSourceRequest` object.
 
-###### Example
+    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
             IQueryable<Order> orders = new NorthwindEntities().Orders;
         }
 
-**Step 2** Assign a default `pageSize`.
+1. Assign a default `pageSize`.
 
-###### Example
+    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
             if (request.PageSize == 0)
             {
-               request.PageSize = 10;
+            request.PageSize = 10;
             }
 
             IQueryable<Order> orders = new NorthwindEntities().Orders;
         }
 
-**Step 3** Handle the appropriate data operations.
+1. Handle the appropriate data operations.
 
-###### Example
+    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -95,9 +95,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             orders = orders.Take(request.PageSize);
         }
 
-**Step 4** Calculate the total number of records.
+1. Calculate the total number of records.
 
-###### Example
+    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -117,9 +117,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             ViewData["total"] = total;
         }
 
-**Step 5** Pass the processed data to the View.
+1. Pass the processed data to the View.
 
-###### Example
+    ###### Example
 
         public ActionResult Index([DataSourceRequest]DataSourceRequest request)
         {
@@ -132,9 +132,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             return View(orders);
         }
 
-**Step 6** Set `EnableCustomBinding(true)` through the Grid widget declaration.
+1. Set `EnableCustomBinding(true)` through the Grid widget declaration.
 
-###### Example
+    ###### Example
 
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
@@ -150,9 +150,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             .Scrollable()
         )
 
-**Step 7** If paging is enabled, assign the total number of records through the `DataSource`.
+1. If paging is enabled, assign the total number of records through the `DataSource`.
 
-###### Example
+    ###### Example
 
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
@@ -178,18 +178,18 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom Ajax binding.
 
-**Step 1** Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
+1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
-###### Example
+    ###### Example
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Order> orders = new NorthwindEntities().Orders;
         }
 
-**Step 2** Handle the appropriate data operations and calculate the total number of records.
+1. Handle the appropriate data operations and calculate the total number of records.
 
-###### Example
+    ###### Example
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -242,9 +242,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             orders = orders.Take(request.PageSize);
         }
 
-**Step 3** Create a new instance of `DataSourceResult`. Set the `Data` and `Total` properties to the processed data and to the total number of records.
+1. Create a new instance of `DataSourceResult`. Set the `Data` and `Total` properties to the processed data and to the total number of records.
 
-###### Example
+    ###### Example
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -263,9 +263,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             };
         }
 
-**Step 4** Return the `DataSourceResult` as JSON.
+1. Return the `DataSourceResult` as JSON.
 
-###### Example
+    ###### Example
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -288,9 +288,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             return Json(result);
         }
 
-**Step 5** Configure the Grid for custom Ajax binding.
+1. Configure the Grid for custom Ajax binding.
 
-###### Example
+    ###### Example
 
         @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
             .Name("Grid")
@@ -312,8 +312,6 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ## See Also
 
-Other articles on the Kendo UI Grid for ASP.NET MVC:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
@@ -322,15 +320,12 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-
-Articles on Telerik UI for ASP.NET MVC:
-
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

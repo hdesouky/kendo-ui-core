@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Window HtmlHelper
+page_title: Window | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Window widget for ASP.NET MVC."
 slug: overview_windowhelper_aspnetmvc
 position: 1
@@ -23,96 +23,88 @@ There are two ways to populate the content of the Kendo UI Window for ASP.NET MV
 
 Below are listed the steps for you to follow when configuring the Kendo UI Window.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Add a Window.
+1. Add a Window.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <% Html.Kendo().Window()
-               .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-               .Title("About Alvar Aalto") //Set the title of the Window.
-               .Content(() => //Define the content of the Window.
-               {
-                   %>
-                       Static content of the Window
-                   <%
-               })
-               .Draggable() //Enable the dragging of the Window.
-               .Resizable() //Enable the resizing of the Window.
-               .Width(600)  //Set the width of the Window.
-               .Render(); //Render the Window.
+            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") //Set the title of the Window.
+            .Content(() => //Define the content of the Window.
+            {
+                %>
+                    Static content of the Window
+                <%
+            })
+            .Draggable() //Enable the dragging of the Window.
+            .Resizable() //Enable the resizing of the Window.
+            .Width(600)  //Set the width of the Window.
+            .Render(); //Render the Window.
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Window()
-              .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-              .Title("About Alvar Aalto") //Set the title of the Window.
-              .Content(@<text> //Define the content of the Window.
-                      The static content of the Window.
-              </text>)
-              .Draggable() //Enable the dragging of the Window.
-              .Resizable() //Enable the resizing of the Window.
-              .Width(600)  //Set the width of the Window.
+            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") //Set the title of the Window.
+            .Content(@<text> //Define the content of the Window.
+                    The static content of the Window.
+            </text>)
+            .Draggable() //Enable the dragging of the Window.
+            .Resizable() //Enable the resizing of the Window.
+            .Width(600)  //Set the width of the Window.
         )
-```
+    ```
 
 ### Load-on-Demand Content
 
 Below are listed the steps for you to follow when configuring the Kendo UI Window with a load-on-demand content.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Create an action method which renders the content.
+1. Create an action method which renders the content.
 
-###### Example
+    ###### Example
 
         public ActionResult AjaxContent()
         {
             return View();
         }
 
-**Step 4** Add a Window.
+1. Add a Window.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <% Html.Kendo().Window()
-               .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-               .Title("About Alvar Aalto") //Set the title of the Window.
-               .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
+            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") //Set the title of the Window.
+            .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Window()
-              .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-              .Title("About Alvar Aalto") //Set the title of the Window.
-              .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
+            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") //Set the title of the Window.
+            .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         )
-```
+    ```
 
 ### Html.BeginForms inside Windows
 
@@ -120,33 +112,29 @@ When a complete form should be inserted inside a Window, end the Window declarat
 
 For more information on this topic, refer to the [article on using the Kendo UI Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
 
-The example below demonstrates how to insert a complete form inside the Window.
+The following example demonstrates how to insert a complete form inside the Window.
 
-###### Example
-
-```tab-ASPX  
-
-        <% Html.Kendo().Window()
-            .Content(() =>
-            {
-                using (Html.BeginForm(...)) { %>
-                    .........
-                <% }
-            })
-            .Render();
-        %>
+```ASPX
+    <% Html.Kendo().Window()
+        .Content(() =>
+        {
+            using (Html.BeginForm(...)) { %>
+                .........
+            <% }
+        })
+        .Render();
+    %>
 ```
-```tab-Razor
-
-        @{Html.Kendo().Window()
-            .Content(@<text>
-                @using (Html.BeginForm(...))
-                {
-                   .........
-                }
-            </text>)
-            .Render();
-        }
+```Razor
+    @{Html.Kendo().Window()
+        .Content(@<text>
+            @using (Html.BeginForm(...))
+            {
+                .........
+            }
+        </text>)
+        .Render();
+    }
 ```
 
 ## Event Handling
@@ -155,20 +143,35 @@ You can subscribe to all Window [events](http://docs.telerik.com/kendo-ui/api/ja
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().Window()
+            .Name("window")
+            .Events(e => e
+                .Open("window_open")
+            .Close("window_close")
+        )
+    %>
+    <script>
+        function window_open() {
+            //Handle the open event.
+        }
 
-```tab-ASPX
-
-        <%: Html.Kendo().Window()
-                .Name("window")
-                .Events(e => e
-                    .Open("window_open")
+        function window_close() {
+            //Handle the close event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().Window()
+            .Name("window")
+            .Events(e => e
+                .Open("window_open")
                 .Close("window_close")
             )
-        %>
-        <script>
+    )
+    <script>
         function window_open() {
             //Handle the open event.
         }
@@ -176,79 +179,55 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function window_close() {
             //Handle the close event.
         }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Window()
-              .Name("window")
-              .Events(e => e
-                    .Open("window_open")
-                    .Close("window_close")
-              )
-        )
-        <script>
-        function window_open() {
-            //Handle the open event.
-        }
-
-        function window_close() {
-            //Handle the close event.
-        }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Window()
-              .Name("window")
-              .Events(e => e
-                  .Open(@<text>
-                    function() {
-                        //Handle the open event inline.
-                    }
-                  </text>)
-                  .Close(@<text>
-                    function() {
-                        //Handle the close event inline.
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().Window()
+        .Name("window")
+        .Events(e => e
+            .Open(@<text>
+            function() {
+                //Handle the open event inline.
+            }
+            </text>)
+            .Close(@<text>
+            function() {
+                //Handle the close event inline.
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Window instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#methods) to control its behavior.
+To reference an existing Kendo UI Window instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Window API](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#methods) to control its behavior.
 
 ###### Example
 
-        //Put this after your Kendo UI Window for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Window for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Window is used to get its client-side instance.
             var window = $("#window").data("kendoWindow");
         });
-        </script>
+    </script>
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Window:
-
-* [ASP.NET MVC API Reference: WindowBuilder](/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

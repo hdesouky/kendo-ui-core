@@ -1,7 +1,7 @@
 ---
 title: Resize and Expand Grid to 100% Height
-page_title: Resize and Expand to 100% Height | Kendo UI Grid
-description: "Learn how to resize and expand a Kendo UI Grid widget to 100% height when the parent container or browser window is resized too."
+page_title: jQuery Grid Documentation | Resize and Expand to 100% Height | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to resize and expand it to 100% height when the parent container or browser window are resized too."
 slug: howto_resize_whenthe_windowis_resized_grid
 ---
 
@@ -19,7 +19,7 @@ The example below demonstrates how to resize the Kendo UI Grid together with the
 
 ###### Example
 
-```html
+```dojo
     <style>
       html,
       body,
@@ -56,7 +56,7 @@ The example below demonstrates how to resize the Kendo UI Grid together with the
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {
@@ -92,7 +92,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Win
 
 ###### Example
 
-```html
+```dojo
     <style>
       #grid
       {
@@ -127,7 +127,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Win
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {
@@ -163,7 +163,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
 
 ###### Example
 
-```html
+```dojo
     <style>
       html,
       body,
@@ -201,7 +201,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {
@@ -235,8 +235,6 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its layout:
-
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
@@ -246,4 +244,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

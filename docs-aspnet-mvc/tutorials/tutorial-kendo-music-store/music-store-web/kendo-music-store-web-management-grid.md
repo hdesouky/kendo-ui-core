@@ -10,7 +10,7 @@ position: 10
 
 **Figure 1. A screenshot of the Kendo UI Music Store management grid**
 
-![kendo-manage-grid-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-manage-grid-screenshot.png)
+![kendo-manage-grid-screenshot](images/kendo-manage-grid-screenshot.png)
 
 When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management grid which can be used to add, remove, or delete albums from the store. This page uses the [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/web/grid/index.html).
 
@@ -206,7 +206,7 @@ Most of the properties defined for each column are optional. The ones used here 
 * The `template` property defines a custom template for the data displayed in the column. The examples use a custom template for the **Album Art** column to add an image tag and show the art.
 * The `editor` property defines a function to be used as a custom editor, displayed when the cell enters `edit` mode. This is discussed in details below.
 * The `filterable`, `sortable`, and `groupable` properties override the properties set on the grid. This can be used to mark individual columns as filterable, sortable, and groupable.
-* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()` function](http:///api/framework/kendo#format).
+* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()`](http://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
 * The `values` property sets a collection of key-value pair objects that are used as a foreign key to look up cell values. This is discussed in details below.
 
 ## Customization
@@ -249,7 +249,7 @@ The Music Store uses the jQuery `$.Deferred()` functionality to asynchronously l
 
 In this example the `value` is the ID of the item, and `text` is its display name. These lists need to be loaded before populating the grid, but the `DataSource.read()` method used to read the data is asynchronous. That is why defers are used to load the data asynchronously and continue loading the grid when both genres and artists finish loading. Once these lists are loaded, use the `column.values` property to set it as the foreign key lookup for a column.
 
-The example below demonstrates how to define the Genre column.
+The following example demonstrates how to define the Genre column.
 
 ###### Example
 
@@ -295,8 +295,6 @@ If the album being edited has already an `AlbumArtUrl` set, then an `<img>` tag 
 Then an `<input>` element is appended and defined as a Kendo UI Upload widget. When this button is clicked, the user is presented with a file selection dialog where they can choose the art to upload. Because the `async.autoUpload` is set to `true`, the image will be uploaded as soon as it is selected. On the server, after the file is uploaded, a response is sent to the client that contains the `url` to the newly saved image. The Upload widget in the editor uses the `success` event to read the returned URL from the server and display the image.
 
 ## See Also
-
-Other articles on the Kendo UI Music Store Web Application sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Web App]({% slug projectsetup_muscistorewebapp_aspnetmvc %})

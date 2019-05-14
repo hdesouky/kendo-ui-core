@@ -1,96 +1,92 @@
 ---
-title: Welcome to Kendo UI!
-page_title: Introduction | Telerik Kendo UI by Progress
+title: Introduction
+page_title: Introduction | Progress Kendo UI
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
-position: 1
+position: 2
 ---
 
-# Welcome to Kendo UI!
+# Welcome to Kendo UI for jQuery!
 
-## Overview
-
-Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
-The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
+Progress<sup>®</sup> Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 
 [Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
 
-Kendo UI is distributed as part of several product units that you can choose from depending on your project requirements.
+### Overview
 
-### Kendo UI Professional
-
-Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI is a comprehensive framework which comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library. It provides AngularJS and Bootstrap integration and is also distributed as part of several product units that you can choose from depending on your project requirements. Kendo UI includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate Kendo UI Professional](http://www.telerik.com/download/kendo-ui)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
 
-### Kendo UI Complete
+#### Progress<sup>®</sup> Kendo UI Wrappers for Vue
 
-Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+[Kendo UI Wrappers for Vue](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction) are part of the Kendo UI suite. They provide an easy way to use and configure Kendo UI widgets in your Vue.js application.
 
-In addition, you receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Get a License](http://www.telerik.com/purchase/kendo-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
+* [Documentation](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction)
 
-#### UI for ASP.NET MVC
+#### Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC
 
-[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
+[Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI components as well as HtmlHelper extension methods (server-side wrappers) which allow you to configure the Kendo UI widgets by using C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for ASP.NET MVC](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
+* [Evaluate Telerik UI for ASP.NET MVC](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 * [Documentation](http://docs.telerik.com/aspnet-mvc/introduction)
 
-#### UI for ASP.NET Core
+#### Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-[Telerik<sup>®</sup> UI for ASP.NET Core by Progress](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
+[Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI widgets as well as the Kendo UI Tag Helpers which allow you to configure the Kendo UI widgets by using the new Tag Helpers feature in ASP.NET Core.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for ASP.NET Core](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
+* [Evaluate Telerik UI for ASP.NET Core](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 * [Documentation](http://docs.telerik.com/aspnet-core/introduction)
 
-#### UI for JSP
+#### Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP
 
-[Telerik<sup>®</sup> UI for JSP by Progress](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
+[Telerik UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes Java Server Pages (JSP) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
+* [Evaluate Telerik UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
 * [Documentation](/jsp/introduction)
 
-#### UI for PHP
+#### Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
 
-[Telerik<sup>®</sup> UI for PHP by Progress](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
+[Telerik UI for PHP](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
+* [Evaluate Telerik UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
 * [Documentation](/php/introduction)
 
 #### RadSpreadProcessing
 
-[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) is a .NET library that allows you to read, create and write Microsoft Excel (.XLSX) documents.
+[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) is a .NET library which allows you to read, create, and write Microsoft Excel (.xlsx) documents. It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
 
-It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
-
-* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing)
+* [Server-Side Processing with the Telerik UI for ASP.NET MVC Spreadsheet](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing)
 * [Server-Side Processing with the Kendo UI Spreadsheet]({% slug serverside_processing_spreadsheet_widget %})
 * [RadSpreadProcessing Overview](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)
 
-## Other Kendo UI Incorporating Products
+## Other Kendo UI-Incorporating Products
 
-Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License. It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core). Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
+Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License. It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core). Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as the Grid, Chart, and other, nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -115,5 +111,6 @@ Kendo UI is also incorporated into products such as [Telerik Platform](http://ww
 ## Learning Resources
 
 * [Kendo UI Dojo Interactive Learning Platform](http://dojo.telerik.com/)
-* [Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)
+* [Kendo UI for jQuery Virtual Classroom](https://progress.exceedlms.com/student/path/366724-kendo-ui-jquery)
 * [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
+* [Other Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)

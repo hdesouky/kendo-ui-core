@@ -1,17 +1,17 @@
 ---
 title: Resize the Grid by Dragging and Apply the New Size
-page_title: Resize the Grid by Dragging and Apply the New Size | Kendo UI Grid
-description: "Learn how to resize the Kendo UI Grid widget and to apply the new size."
+page_title: jQuery Grid Documentation | Resize via Drag Handle | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to resize the widget via drag handle and apply the new size."
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 ---
 
 # Resize the Grid by Dragging and Apply the New Size
 
-The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner.
+>The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner. The handler will be shown only at the bottom-right corner of the Grid after hover.
 
 ###### Example
 
-```html
+```dojo
     <style>
         html {
             font: 13px sans-serif;
@@ -35,7 +35,6 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
         height: 300px;
       }
     </style>
-    <p>Drag the handle at the bottom-right Grid corner to resize the widget and apply a new page size.</p>
     <div class="grid-wrap">
       <div id="grid1" class="kendogrid"></div>
     </div>
@@ -65,7 +64,7 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                     model: {
@@ -150,8 +149,6 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its layout:
-
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
@@ -161,4 +158,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -1,17 +1,17 @@
 ---
 title: Refresh Grid in Detail Template
-page_title: Refresh Grid in Detail Template | Kendo UI Grid
-description: "Learn how to refresh a child grid in a detail template by using an external button in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Refresh Grid in Detail Template | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to refresh a child grid in a detail template by using external button."
 slug: howto_refresh_gridin_detail_template_grid
 ---
 
 # Refresh Grid in Detail Template
 
-The example below demonstrates how to refresh a child grid in a detail template by using an external button in Kendo UI Grid.
+The following example demonstrates how to refresh a child Grid in a detail template by using an external button in the Grid.
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
 
@@ -19,7 +19,7 @@ The example below demonstrates how to refresh a child grid in a detail template 
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
           },
           pageSize: 6,
           serverPaging: true,
@@ -61,7 +61,7 @@ The example below demonstrates how to refresh a child grid in a detail template 
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
             },
             serverPaging: true,
             serverSorting: true,
@@ -86,11 +86,9 @@ The example below demonstrates how to refresh a child grid in a detail template 
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to the usage of templates:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
 * [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
 * [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

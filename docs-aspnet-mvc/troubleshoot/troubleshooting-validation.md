@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Validation | UI for ASP.NET MVC Troubleshooting
+page_title: Validation | Telerik UI for ASP.NET MVC Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Kendo UI Validator or jQuery client-side validation."
 slug: troubleshooting_validation_aspnetmvc
 position: 3
@@ -22,7 +22,7 @@ Customize the Tooltip position by using either of the following approaches:
 
 * Use the `ValidationMessage` or `ValidationMessageFor` helpers for the property.
 
-###### Example
+    ###### Example
 
         @Html.Kendo().NumericTextBoxFor(model => model.UnitPrice)
         @Html.ValidationMessageFor(model => model.UnitPrice)
@@ -91,8 +91,6 @@ In order for the values to be recognized as valid when using a non-default cultu
     });
 
 ## See Also
-
-Other articles on troubleshooting:
 
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})

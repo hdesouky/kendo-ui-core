@@ -1,17 +1,17 @@
 ---
 title: Add Row Numbers
-page_title: Add Row Numbers | Kendo UI Grid
-description: "Learn how to implement row numbers to a Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Add Row Numbers | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to implement row numbers to the widget."
 slug: howto_addrownumbers_grid
 ---
 
 # Add Row Numbers
 
-The example below demonstrates how to implement row numbers in a Kendo UI Grid widget by using the [`page()`](/api/javascript/data/datasource#methods-page) and [`pageSize()`](/api/javascript/data/datasource#methods-pageSize) methods of the Kendo UI Data Source.
+The following example demonstrates how to implement row numbers in a Grid by using the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 ###### Example
 
-```html
+```dojo
   <div id="grid"></div>
     <script>
       var record = 0;
@@ -51,9 +51,7 @@ The example below demonstrates how to implement row numbers in a Kendo UI Grid w
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
 * [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
 * [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
@@ -61,4 +59,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

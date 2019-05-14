@@ -1,9 +1,9 @@
 ---
 title: Handling of Metadata
-page_title: Handling of Metadata | Kendo UI Upload HtmlHelper
+page_title: Handling of Metadata | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Get started with the asynchronous uploading of metadata in Telerik UI for ASP.NET MVC helpers."
 slug: metadata_uploadhelper_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Handling of Metadata
@@ -18,9 +18,9 @@ The metadata known during the rendering can be forwarded to the `save` action as
 
 Below are listed the steps for you to follow when configuring the sending of metadata to the `save` action by using route values in the Kendo UI Upload.
 
-**Step 1** Generate an unique message ID and store it in the `ViewData`.
+1. Generate an unique message ID and store it in the `ViewData`.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
@@ -29,34 +29,30 @@ Below are listed the steps for you to follow when configuring the sending of met
             return View();
         }
 
-**Step 2** Add the message ID to the route values.
+1. Add the message ID to the route values.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home",
-                          new { messageId = ViewBag.MessageId })
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home",
+                        new { messageId = ViewBag.MessageId })
+            )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home",
-                          new { messageId = ViewBag.MessageId })
-                )
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home",
+                        new { messageId = ViewBag.MessageId })
+            )
         )
-```
+    ```
 
-**Step 3** Process the file using the message ID.
+1. Process the file using the message ID.
 
-###### Example
+    ###### Example
 
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments, string messageId)
@@ -83,15 +79,15 @@ You can also add metadata directly on the client, which is useful when the data 
 
 Below are listed the steps for you to follow to do that.
 
-**Step 1** Add an input field for description. We will send its value to the save handler.
+1. Add an input field for description. We will send its value to the save handler.
 
-###### Example
+    ###### Example
 
         <input type="text" id="fileDescription" />
 
-**Step 2** Declare a handler for the upload event and attach a data object to the passed event.
+1. Declare a handler for the upload event and attach a data object to the passed event.
 
-###### Example
+    ###### Example
 
         function onUpload(e) {
             e.data = {
@@ -99,12 +95,9 @@ Below are listed the steps for you to follow to do that.
             };
         }
 
-**Step 3** Attach the event handler.
+1. Attach the event handler.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Upload()
             .Name("attachments")
             .Async(async => async
@@ -114,9 +107,8 @@ Below are listed the steps for you to follow to do that.
                 .Upload("onUpload")
             )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
             .Name("attachments")
             .Async(async => async
@@ -126,11 +118,11 @@ Below are listed the steps for you to follow to do that.
                 .Upload("onUpload")
             )
         )
-```
+    ```
 
-**Step 4** Process the file and the associated description.
+1. Process the file and the associated description.
 
-###### Example
+    ###### Example
 
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments, string fileDescription)
@@ -156,9 +148,9 @@ The `save` handler can sometimes produce a result that needs to be routed back t
 
 Below are listed the steps for you to follow when configuring the receiving of metadata from the `save` action in the Kendo UI Upload.
 
-**Step 1** Build the response.
+1. Build the response.
 
-###### Example
+    ###### Example
 
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
@@ -169,20 +161,17 @@ Below are listed the steps for you to follow when configuring the receiving of m
             return Json(new { status = "OK" }, "text/plain");
         }
 
-**Step 2** Declare a handler for the [`success` event](../../../kendo-ui/api/javascript/ui/upload#success) and process the response.
+1. Declare a handler for the [`success` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#success) and process the response.
 
-###### Example
+    ###### Example
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);
         }
 
-**Step 3** Attach the event handler.
+1. Attach the event handler.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%= Html.Kendo().Upload()
             .Name("attachments")
             .Async(async => async
@@ -192,9 +181,8 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 .Success("onSuccess")
             )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Upload()
             .Name("attachments")
             .Async(async => async
@@ -204,23 +192,22 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 .Success("onSuccess")
             )
         )
-```
+    ```
 
 The same approach is applicable for the `remove` handler as well.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Upload:
-
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
+* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
 * [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

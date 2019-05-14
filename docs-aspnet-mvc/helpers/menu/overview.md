@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Menu HtmlHelper
+page_title: Menu | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Menu widget for ASP.NET MVC."
 slug: overview_menu_aspnetmvc
 position: 1
@@ -14,44 +14,40 @@ The Menu HtmlHelper extension is a server-side wrapper for the [Kendo UI Menu](h
 
 ### The Basics
 
-There are a few ways to bind a Kendo UI Menu for ASP.NET MVC:
+To bind a Kendo UI Menu for ASP.NET MVC, apply any of the following approaches:
 
-* Use items builder&mdash;Manually define the properties of each Menu item.
-* Sitemap binding&mdash;Uses a sitemap to create the items of the Menu.
-* Model binding&mdash;Use a collection of objects to create the items of the Menu.
+* Use an items builder&mdash;Manually define the properties of each Menu item.
+* Use a sitemap binding&mdash;Set a sitemap to create the items of the Menu.
+* Use a model binding&mdash;Set a collection of objects to create the items of the Menu.
 
 ### Items Builder
 
-Below are listed the steps for you to follow when defining the items of a Kendo UI Menu.
+To define the items of a Kendo UI Menu:
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-**Step 3** Add a simple Menu.
+1. Add a simple Menu.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Menu()
-                .Name("menu") //The name of the menu is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Item 1"); //Add an item with the text "Item1".)
-                    items.Add().Text("Item 2"); //Add an item with the text "Item2".)
-                })
+            .Name("menu") //The name of the menu is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add an item with the text "Item1".)
+                items.Add().Text("Item 2"); //Add an item with the text "Item2".)
+            })
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Menu()
             .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
@@ -60,35 +56,35 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                 items.Add().Text("Item 2"); //Add an item with the text "Item2".)
             })
         )
-```
+    ```
 
 ### Sitemap Binding
 
-Below are listed the steps for you to follow when binding a Kendo UI Menu to a sitemap.
+To bind a Kendo UI Menu to a sitemap:
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
+1. Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
 
-###### Example
+    ###### Example
 
         <?xml version="1.0" encoding="utf-8" ?>
         <siteMap>
-          <siteMapNode title="Home" controller="Home" action="Overview">
+            <siteMapNode title="Home" controller="Home" action="Overview">
             <siteMapNode title="Grid">
-              <siteMapNode controller="grid" action="index" title="First Look (Razor)" area="razor"/>
-              <siteMapNode controller="grid" action="index" title="First Look (ASPX)" area="aspx"/>
+                <siteMapNode controller="grid" action="index" title="First Look (Razor)" area="razor"/>
+                <siteMapNode controller="grid" action="index" title="First Look (ASPX)" area="aspx"/>
             </siteMapNode>
             <siteMapNode title="Menu">
-              <siteMapNode controller="menu" action="index" title="First Look (Razor)" area="razor"/>
-              <siteMapNode controller="menu" action="index" title="First Look (ASPX)" area="aspx"/>
+                <siteMapNode controller="menu" action="index" title="First Look (Razor)" area="razor"/>
+                <siteMapNode controller="menu" action="index" title="First Look (ASPX)" area="aspx"/>
             </siteMapNode>
-          </siteMapNode>
+            </siteMapNode>
         </siteMap>
 
-**Step 3** Load the sitemap using `SiteMapManager`.
+1. Load the sitemap using `SiteMapManager`.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
@@ -99,34 +95,30 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a s
             return View();
         }
 
-**Step 4** Add a Menu.
+1. Add a Menu.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Menu()
-                .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo("sample") //Bind to sitemap with name "sample".
+            .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //Bind to sitemap with name "sample".
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Menu()
-              .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
-              .BindTo("sample") //Bind to the sitemap with name "sample".
+            .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //Bind to the sitemap with name "sample".
         )
-```
+    ```
 
 ### Model Binding
 
-Below are listed the steps for you to follow when binding a Kendo UI Menu to a hierarchical model.
+To bind a Kendo UI Menu to a hierarchical model:
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the **Categories** table as the model. Note that the **Categories** must be associated to the **Products** table.
+1. Create a new action method and pass the **Categories** table as the model. Note that the **Categories** must be associated to the **Products** table.
 
-###### Example
+    ###### Example
 
         public ActionResult Index()
         {
@@ -135,64 +127,108 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a h
             return View(northwind.Categories);
         }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
-
-```tab-ASPX
-
+    ```ASPX
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @model IEnumerable<MvcApplication1.Models.Category>
-```
+    ```
 
-**Step 4** Add a Menu.
+1. Add a Menu.
+
+    ```ASPX
+        <%: Html.Kendo().Menu()
+            .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model, mappings =>
+            {
+                mappings.For<category>(binding => binding //Define the first level of the Menu.
+                    .ItemDataBound((item, category) => //Define the mapping between the Menu item properties and the model properties.
+                    {
+                        item.Text = category.CategoryName;
+                    })
+                    .Children(category => category.Products)); //Define which property of the model contains the children.
+                mappings.For<product>(binding => binding
+                    .ItemDataBound((item, product) =>
+                    {
+                        item.Text = product.ProductName;
+                    }));
+            })
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Menu()
+            .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model, mappings =>
+            {
+                mappings.For<category>(binding => binding //Define the first level of the Menu.
+                    .ItemDataBound((item, category) => //Define the mapping between the Menu item properties and the model properties.
+                        {
+                        item.Text = category.CategoryName;
+                        })
+                    .Children(category => category.Products)); //Define which property of the model contains the children.
+                mappings.For<product>(binding => binding
+                    .ItemDataBound((item, product) =>
+                    {
+                        item.Text = product.ProductName;
+                    }));
+            })
+        )
+    ```
+
+### Binding to Remote Data
+
+Remote data binding is available as of the R2 2019 release.
+
+This feature enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 
 ###### Example
 
-```tab-ASPX
+    ```
+    public JsonResult GetCategories()
+    {
+        SampleEntities northwind = new SampleEntities();
 
+        var result = northwind.Categories.Select((category) =>
+            new
+            {
+                Name = category.CategoryName,
+                Products = northwind.Products
+                    .Where((product) => product.CategoryID == category.CategoryID)
+                    .Select((product)=> new { Name = product.ProductName })
+            }
+        );
+
+        return Json(result, JsonRequestBehavior.AllowGet);
+    }
+    ```
+
+    ```ASPX
         <%: Html.Kendo().Menu()
-                .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo(Model, mappings =>
-                {
-                    mappings.For<category>(binding => binding //Define the first level of the Menu.
-                        .ItemDataBound((item, category) => //Define the mapping between the Menu item properties and the model properties.
-                        {
-                            item.Text = category.CategoryName;
-                        })
-                        .Children(category => category.Products)); //Define which property of the model contains the children.
-                    mappings.For<product>(binding => binding
-                        .ItemDataBound((item, product) =>
-                        {
-                            item.Text = product.ProductName;
-                        }));
-                })
+            .Name("menu")
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Model(model => model.Children("Products"))
+                .Read(read => read
+                    .Action("GetCategories", "Menu")
+                )
+            )
         %>
-```
-```tab-Razor
-
+    ```
+    ```Razor
         @(Html.Kendo().Menu()
-              .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
-              .BindTo(Model, mappings =>
-              {
-                  mappings.For<category>(binding => binding //Define the first level of the Menu.
-                      .ItemDataBound((item, category) => //Define the mapping between the Menu item properties and the model properties.
-                          {
-                          item.Text = category.CategoryName;
-                          })
-                      .Children(category => category.Products)); //Define which property of the model contains the children.
-                  mappings.For<product>(binding => binding
-                      .ItemDataBound((item, product) =>
-                      {
-                          item.Text = product.ProductName;
-                      }));
-            })
+            .Name("menu")
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Model(model => model.Children("Products"))
+                .Read(read => read
+                    .Action("GetCategories", "Menu")
+                )
+            )
         )
-```
+    ```
 
 ### Security Trimming
 
@@ -209,30 +245,27 @@ When the Menu items are removed because of lacking permissions, a parent item ma
 
 ###### Example
 
-        Html.Kendo().Menu()
-            .Name("MainMenu")
-            .SecurityTrimming(s => s.HideParent(true))
+    Html.Kendo().Menu()
+        .Name("MainMenu")
+        .SecurityTrimming(s => s.HideParent(true))
 
 ## Event Handling
 
-You can subscribe to all Menu [events](../../../kendo-ui/api/javascript/ui/menu#events).
+You can subscribe to all Menu [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#events).
 
-### By Handler Name
+### By Handler Names
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().Menu()
-                .Name("menu")
-                .Events(e => e
-                    .Open("menu_open")
-                    .Close("menu_close")
-                )
-        %>
-        <script>
+```ASPX
+    <%: Html.Kendo().Menu()
+            .Name("menu")
+            .Events(e => e
+                .Open("menu_open")
+                .Close("menu_close")
+            )
+    %>
+    <script>
         function menu_close() {
             //Handle the close event.
         }
@@ -240,18 +273,17 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function menu_open() {
             //Handle the open event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().Menu()
-              .Name("menu")
-              .Events(e => e
-                    .Open("menu_open")
-                    .Close("menu_close")
-              )
-        )
-        <script>
+```Razor
+    @(Html.Kendo().Menu()
+            .Name("menu")
+            .Events(e => e
+                .Open("menu_open")
+                .Close("menu_close")
+            )
+    )
+    <script>
         function menu_close() {
             //Handle the close event.
         }
@@ -259,56 +291,66 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function menu_open() {
             //Handle the open event.
         }
-        </script>
+    </script>
 ```
 
-### By Template Delegate
+### By Template Delegates
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-```tab-Razor
+    @(Html.Kendo().Menu()
+            .Name("menu")
+            .Events(e => e
+                .Open(@<text>
+                function() {
+                    //Handle the open event inline.
+                }
+                </text>)
+                .Close(@<text>
+                function() {
+                    //Handle the close event inline.
+                }
+                </text>)
+            )
+    )
 
-        @(Html.Kendo().Menu()
-              .Name("menu")
-              .Events(e => e
-                  .Open(@<text>
-                    function() {
-                        //Handle the open event inline.
-                    }
-                  </text>)
-                  .Close(@<text>
-                    function() {
-                        //Handle the close event inline.
-                    }
-                    </text>)
-              )
-        )
-```
+### By HTML Attributes
+
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
+
+###### Example
+
+    @(Html.Kendo().Menu()
+        .Name("menu")
+        .Items(items =>
+        {
+            items.Add().Text("First Item");
+            items.Add().Text("Second Item").HtmlAttributes(new { @onclick = "alert('select');" });
+        })
+    )
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](../../../kendo-ui/api/javascript/ui/menu#methods) to control its behavior.
+To reference an existing Kendo UI Menu instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. After you establish a reference, use the [Menu API](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#methods) to control the behavior of the widget.
 
 ###### Example
 
-        //Put this after your Kendo UI Menu for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Menu for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Menu is used to get its client-side instance.
             var menu = $("#menu").data("kendoMenu");
         });
-        </script>
+    </script>
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Menu:
-
-* [ASP.NET MVC API Reference: MenuBuilder](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
-* [ASP.NET MVC API Reference: MenuItemBuilder](/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: MenuBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: MenuItemBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

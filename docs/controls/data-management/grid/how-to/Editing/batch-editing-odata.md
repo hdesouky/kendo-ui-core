@@ -1,23 +1,23 @@
 ---
 title: Implement Batch Editing with OData
-page_title: Implement Batch Editing with OData | Kendo UI Grid
-description: "Learn how to implement batch editing with the Kendo UI Grid when binding to OData service."
+page_title: jQuery Grid Documentation | Batch Editing with OData | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to implement batch editing when binding to OData service."
 slug: howto_batch_editing_odata_grid
 ---
 
 # Implement Batch Editing with oData
 
-The Grid does not come with a built-in support for batch editing when binding to oData. Achieve this by using a third-party library.
+By default, the Grid does not support batch editing when binding to oData.
 
-To submit the actual request, the example below uses [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs). See also [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
+To achieve this behavior, use a third-party library. To submit the actual request, the following example uses [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs). For more information, refer to [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
 
 > **Important**
 >
-> An experimental `transport.submit` member of the Kendo UI DataSource is used. This is yet to be included as an officially supported API.
+> The scenario uses an experimental `transport.submit` Data Source option. It is not yet included as an officially supported API call.
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $(document).ready(function () {
@@ -25,7 +25,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
         function queueCreated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
               type: "POST",
               data: items[i]
             });
@@ -38,7 +38,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
         function queueUpdated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
               items[i].CustomerID,
               type: "PUT",
               data: items[i]
@@ -49,7 +49,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
         function queueDestroyed(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
               items[i].CustomerID,
               type: "DELETE"
             });
@@ -73,7 +73,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
                 // Check out the network tab on "Save Changes"
                 $.ajaxBatch({
                   // Not that this service doesn't actually support batching
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
                   data: requests
                 })
                   .done(function() {
@@ -88,7 +88,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
               read: function(e) {
                 var data = kendo.data.transports.odata.parameterMap(e.data, "read");
                 $.ajax({
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
                   dataType: "jsonp",
                   data: data,
                   jsonp: "$callback"
@@ -140,9 +140,7 @@ To submit the actual request, the example below uses [Batch.js by Pavel Volgarev
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -159,4 +157,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

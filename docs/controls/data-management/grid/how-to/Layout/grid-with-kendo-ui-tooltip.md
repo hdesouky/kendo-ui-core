@@ -1,7 +1,7 @@
 ---
 title: Show Tooltip for Column Records
-page_title: Show Tooltip for Column Records | Kendo UI Grid
-description: "Learn how to show Kendo UI Tooltip for Kendo UI Grid columns."
+page_title: jQuery Grid Documentation | Show Tooltip for Column Records | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to show Kendo UI Tooltip for Grid columns."
 previous_url: /controls/data-management/grid/how-to/add-tooltip-for-cell, /controls/data-management/grid/how-to/grid-with-kendo-ui-tooltip
 slug: howto_show_tooltipfor_column_records_grid
 ---
@@ -12,7 +12,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <style>
       #grid{
@@ -50,7 +50,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
               style: 'white-space: nowrap '
             }  }],
           editable: "incell"
-        }).data("kendoGrid");  
+        }).data("kendoGrid");
 
         $("#grid").kendoTooltip({
           filter: "td:nth-child(2)", //this filter selects the second column's cells
@@ -67,9 +67,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -82,4 +80,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

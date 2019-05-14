@@ -1,17 +1,17 @@
 ---
 title: Use TreeView as Custom Editor
-page_title: Use TreeView as Custom Editor | Kendo UI Grid
-description: "Learn how to use Kendo UI TreeView as an editor in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Use TreeView as Custom Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use TreeView as an editor in the widget."
 slug: howto_usethe_treeview_aseditor_grid
 ---
 
 # Use TreeView as Custom Editor
 
-The example below demonstrates how to use Kendo UI TreeView for batch editing in the Kendo UI Grid widget.
+The following example demonstrates how to use the TreeView for batch editing in the Grid.
 
 ###### Example
 
-```html
+```dojo
    <div id="example">
 		<div id="grid"></div>
 
@@ -63,10 +63,11 @@ The example below demonstrates how to use Kendo UI TreeView for batch editing in
 					edit: function (e) {
 						//checking if a cell from the Test column is opened for editing
 						var dummyInput = e.container.find("input[name='test']");
-						if (dummyInput) {
+						if (dummyInput.length > 0) {
 							var treeView = $(e.container).find(".treeViewEditor").data("kendoTreeView");
 							var originalItem = treeView.findByText(dummyInput.val());
 							if (originalItem != null) {
+								// Select the item based on the field value
 								treeView.select(originalItem);
 							}
 						}
@@ -131,9 +132,7 @@ The example below demonstrates how to use Kendo UI TreeView for batch editing in
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -149,4 +148,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use CRUD Operations When Grid Is Bound through MVVM]({% slug howto_use_crud_operationswith_mvvmbound_grid %})
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

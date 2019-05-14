@@ -1,5 +1,6 @@
 ---
 title: Connection
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Connection
@@ -35,7 +36,7 @@ The font weight of the connection content text.
 
 ### content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -240,7 +241,7 @@ Sets the intermediate points (in global coordinates) of the connection.
 
 #### Example - setting intermediate connection points
 
-![Intermediate connection points.](/api/dataviz/diagram/connection_points.png)
+![Intermediate connection points.](connection_points.png)
 
     <div id="diagram"></div>
     <script>
@@ -426,3 +427,49 @@ The new options for the connection. This object should follow the configuration 
         });
     </script>
 
+### visible
+
+Gets or sets the connection visible state.
+
+#### Parameters
+
+##### visible `Boolean` *optional*
+Indicates whether the connection should be visible in the Diagram. If skipped, the method will return the current visible state of the connection.
+
+#### Example
+
+    <button id="hideBtn">Hide Connection</button>
+    <div id="diagram"></div>
+    <script>
+      $("#hideBtn").on("click", function(e){
+        var diagram = $("#diagram").getKendoDiagram();
+        var connection = diagram.connections[0];
+        connection.visible(false);
+      });
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ]
+      });
+    </script>
