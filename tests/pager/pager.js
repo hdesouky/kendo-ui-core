@@ -135,9 +135,9 @@
         });
 
         it("change event is fired when clicking a page button", function() {
-            var index = 0,
+            var index,
                 changeHandler = function(e) {
-                    index = parseInt(e.index, 10);
+                    index = e.index;
                 },
                 ul = setup({}, { change: changeHandler });
 
@@ -145,6 +145,7 @@
 
             ul.find("a:eq(0)").click();
             assert.equal(index, 2);
+            assert.equal(typeof index, "number");
         });
 
         it("clicking on the current page does not trigger change event", function() {
@@ -698,16 +699,8 @@
                 pageSizes: [10, 20]
             });
 
-            assert.isOk(container.find("select").data("kendoDropDownList")
+            assert.isOk(container.find(".k-pager-sizes select").data("kendoDropDownList")
                 .wrapper.css("display") !== "none");
-        });
-
-        it("kendoPager list is hidden when a click outside is performed", function() {
-            var ul = setup();
-            ul.find(".k-current-page").click();
-            assert.isOk(pager.list.hasClass("k-state-expanded"));
-            $(document.body).trigger("mousedown");
-            assert.isOk(!pager.list.hasClass("k-state-expanded"));
         });
 
         it("page size is correctly calculated when all options is set and total is not set", function() {
@@ -742,19 +735,10 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("add k-pager-lg class", function() {
-            var pager = setup();
-
-            pager.css("width", "1000px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-lg"));
-        });
-
         it("add k-pager-md class", function() {
             var pager = setup();
 
-            pager.css("width", "600px");
+            pager.css("width", "500px");
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-md"));
@@ -767,6 +751,23 @@
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-sm"));
+        });
+
+        it("no k-pager-sm class on breakpoint width", function() {
+            var dataOptions = {
+                data: [1, 2, 3, 4, 5],
+                page: 1,
+                pageSize: 1
+            };
+            var dataSource = new DataSource(dataOptions);
+            var options = {
+                dataSource: dataSource,
+                previousNext: false
+            };
+            var element = $("<div style='width: 480px;' />").appendTo(Mocha.fixture).kendoPager(options);
+            var pager = element.data("kendoPager");
+
+            assert.isOk(!pager.element.hasClass("k-pager-sm"));
         });
 
         it("no k-pager-lg class when responsive is false", function() {
@@ -796,7 +797,7 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("currentPage li element is present when AutoBind is false", function() {
+        it("numbers wrap select element is present when AutoBind is false", function() {
             var dataSource = new DataSource({
                 pageSize: 1,
                 data: [1, 2, 3]
@@ -807,10 +808,10 @@
                 autoBind: false
             });
 
-            assert.equal(pager.find(".k-pager-numbers .k-current-page").length, 1);
+            assert.equal(pager.find(".k-pager-numbers-wrap > select.k-dropdown").length, 1);
         });
 
-        it("select li is present when AutoBind is false", function() {
+        it("selected li is present when AutoBind is false", function() {
             var dataSource = new DataSource({
                 pageSize: 1,
                 data: [1, 2, 3]
@@ -822,6 +823,33 @@
             });
 
             assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
+        });
+
+        it("info message is correct with dataSource with groupPaging enabled", function() {
+            var dataSource = new DataSource({
+                pageSize: 10,
+                data: [
+                    { name: "Tea", category: "Beverages" },
+                    { name: "Coffee", category: "Beverages" },
+                    { name: "Ham", category: "Food" }
+                  ],
+                  // group by the "category" field
+                  group: { field: "category" },
+                  groupPaging: true
+            });
+
+            dataSource.fetch(function(){
+                var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                    dataSource: dataSource
+                }).data('kendoPager');
+                debugger
+                dataSource._groupsState[dataSource.view()[0].uid] = true
+                pager.refresh();
+
+                assert.equal(pager.element.find(".k-pager-info").text(), "1 - 3 of 4 items");
+
+            });
+
         });
     });
 }());

@@ -145,7 +145,7 @@ The proxy will receive a POST request with the following parameters in the reque
 
 An object containing any images used in the Spreadsheet.  The keys
 should be image ID-s (they are referenced by this ID in
-(`sheets.drawings`)[#configuration-sheets.drawings]) and the values
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings)) and the values
 should be image URLs.
 
 The image URLs can be either
@@ -193,7 +193,7 @@ cannot fetch the image, export to Excel or PDF might not work.
 
 Note, we can reference the same image ID in two different drawings,
 anchored to cells C2 and E3.  See the
-(`sheets.drawings`)[#configuration-sheets.drawings] property for more
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings) property for more
 information about a drawing's properties.
 
 ### pdf `Object`
@@ -258,6 +258,11 @@ The author of the PDF document.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -426,6 +431,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -992,6 +1005,11 @@ The format of the cell text. For more information, refer to the article on [crea
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
 
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
+
 ### sheets.rows.cells.index `Number`
 
 The zero-based index of the cell. Required to ensure correct positioning.
@@ -1333,7 +1351,7 @@ The following list indicates the available tools. The tools which are part of a 
             toolbar: {
                 home: [
                     // for all available options, see the toolbar items configuration
-                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",
@@ -1457,7 +1475,7 @@ The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
 
 #### Returns
 
-`kendo.spreadsheet.Sheet` - The active sheet.
+`kendo.spreadsheet.Sheet` - The active [sheet](/api/javascript/spreadsheet/sheet).
 
 #### Example - changing the active sheet
 
@@ -1624,7 +1642,7 @@ Returns an array with the sheets in the workbook.
 
 Clears the spreadsheet and populates it with data from the specified Excel (`.xlsx`) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/supporting/export-support#jszip-library) for the import from file functionality.
 
 #### Parameters
 
@@ -1681,7 +1699,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1725,7 +1743,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
 ### sheetByName
 
@@ -2353,7 +2371,7 @@ The [`Range`](/api/javascript/spreadsheet/range) that triggered the change.
 
 ### render
 
-Triggered after the widget has completed rendering.
+Triggered after the widget has completed rendering. The event will also fire when a cell is selected or when the Spreadsheet's tools (bold, italic) are used, as the target element is re-generated with new styles (e.g background-color, box-shadow, font-weight, etc.).
 
 #### Event Data
 
@@ -2458,7 +2476,7 @@ If invoked, the Spreadsheet will not import the file.
 
 A promise that will be resolved when the import operation completes.
 
-The [progress handler](http://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
+The [progress handler](https://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
 * `sheet` - The current sheet. An instance of [`kendo.spreadsheet.Sheet`](/api/javascript/spreadsheet/sheet).
 * `progress` - A number if the range is from `0` to `1` which indicates the progress of the current import operation.
 

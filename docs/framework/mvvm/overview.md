@@ -6,11 +6,15 @@ slug: overview_mvvmpattern_kendoui
 position: 1
 ---
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
+
 # MVVM Pattern Overview
 
-[Model View ViewModel (MVVM)](http://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI).
+[Model View ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI).
 
-The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View. The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
+The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View. The [Kendo UI MVVM component](https://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
 
 > Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
 
@@ -37,7 +41,7 @@ The View-Model part of the MVVM is responsible for exposing the data objects fro
 
 ## Setting the data-* Options
 
-For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](http://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options).
+For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#setting-the-data-options).
 
 > The hybrid widgets and frameworks in Kendo UI are not included in the default list of initialized namespaces. You can initialize them explicitly by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 

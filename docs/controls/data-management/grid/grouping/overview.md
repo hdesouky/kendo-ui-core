@@ -1,12 +1,12 @@
 ---
-title: Basics
-page_title: jQuery Grid Documentation | Grouping Basics | Kendo UI
+title: Overview
+page_title: jQuery Grid Documentation | Grouping Overview
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: grouping_kendoui_grid_widget
 position: 1
 ---
 
-# Grouping Basics
+# Grouping Overview
 
 By default, the grouping functionality of the Grid is disabled.
 
@@ -15,8 +15,6 @@ For more information on displaying aggregate results, refer to the article on [g
 ## Getting Started
 
 To enable grouping, set the `groupable` option to `true`. As a result, the Grid exposes a new area in its header which enables the user to group the Grid data by a column. To group the data by multiple columns, users can drag the desired columns to the grouping header.
-
-###### Example
 
     $("#grid").kendoGrid({
          groupable: true
@@ -36,8 +34,6 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 ## Using with Row Templates
 
 A row template explicitly defines the row markup while grouping requires you to change the row markup. To use the two features simultaneously, include a script in the row template which adds additional cells depending on the number of the existing groups.
-
-###### Example
 
     $(document).ready(function () {
         // window. can be omitted if the function is defined outside the document.ready closure.
@@ -71,7 +67,13 @@ When you use grouping with paging, paging occurs before grouping. As a result:
 
 To enable the Grid to execute grouping before paging, group the whole data source. In this case, however, the performance of the Grid will be reduced.
 
+## KB Articles on Grouping
+
+* [Enable Grouping for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
+* [Persisting the Collapsed State of Grouped Records]({% slug howto_persist_collapsed_stateof_grouped_records_grid %})
+* [Changing the Group Header Position When Columns Are Locked]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

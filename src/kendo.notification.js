@@ -41,8 +41,8 @@ var __meta__ = { // jshint ignore:line
         WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
                 '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
-                '#=content#' +
-                '<span class="k-icon k-i-close" title="Hide"></span>' +
+                '<div class="k-notification-content">#=content#</div>' +
+                '<span class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -215,6 +215,7 @@ var __meta__ = { // jshint ignore:line
                 origin: that._popupOrigin,
                 position: that._popupPosition,
                 animation: options.animation,
+                copyAnchorStyles: false,
                 modal: true,
                 collision: "",
                 isRtl: that._isRtl,
@@ -236,11 +237,11 @@ var __meta__ = { // jshint ignore:line
                 popup.open();
             } else {
                 if (x === null) {
-                    x = $(window).width() - wrapper.width() - options.position.right;
+                    x = $(window).width() - wrapper.outerWidth() - options.position.right;
                 }
 
                 if (y === null) {
-                    y = $(window).height() - wrapper.height() - options.position.bottom;
+                    y = $(window).height() - wrapper.outerHeight() - options.position.bottom;
                 }
 
                 popup.open(x, y);
@@ -364,7 +365,7 @@ var __meta__ = { // jshint ignore:line
                     content = content();
                 }
 
-                defaultArgs = {typeIcon: type, content: ""};
+                defaultArgs = {typeIcon: type, content: "", closeButton: options.button};
 
                 if ($.isPlainObject(content)) {
                     args = extend(defaultArgs, content);
@@ -375,6 +376,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
                     .toggleClass(KNOTIFICATION + "-button", options.button)
+                    .toggleClass(KNOTIFICATION + "-closable", options.button)
                     .attr("data-role", "alert")
                     .css({width: options.width, height: options.height})
                     .append(that._getCompiled(type, safe)(args));

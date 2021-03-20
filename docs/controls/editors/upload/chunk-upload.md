@@ -1,6 +1,6 @@
 ---
 title: File Processing
-page_title: jQuery Upload Documentation | File Processing | Kendo UI
+page_title: jQuery Upload Documentation | File Processing
 description: "Get started with the jQuery Upload by Kendo UI and learn how to persist the initially selected files, upload batches of files, and do a chunk upload for files selected through multiple requests."
 slug: chunkupload_upload_widget
 position: 3
@@ -105,11 +105,11 @@ The server-side implementation entirely depends on the requirements and logic of
 
 The following list of Kendo UI demos provides examples of server-side logic that handles chunks:
 
-* [Client-side solution with ASP.NET MVC service](http://demos.telerik.com/kendo-ui/upload/chunkupload)
-* [ASP.NET MVC](http://demos.telerik.com/aspnet-mvc/upload/chunkupload)
-* [ASP.NET Core](http://demos.telerik.com/aspnet-core/upload/chunkupload)
-* [PHP](http://demos.telerik.com/php-ui/upload/chunkupload)
-* [Java/JSP](http://demos.telerik.com/jsp-ui/upload/chunkupload)
+* [Client-side solution with ASP.NET MVC service](https://demos.telerik.com/kendo-ui/upload/chunkupload)
+* [ASP.NET MVC](https://demos.telerik.com/aspnet-mvc/upload/chunkupload)
+* [ASP.NET Core](https://demos.telerik.com/aspnet-core/upload/chunkupload)
+* [PHP](https://demos.telerik.com/php-ui/upload/chunkupload)
+* [Java/JSP](https://demos.telerik.com/jsp-ui/upload/chunkupload)
 
 ## See Also
 

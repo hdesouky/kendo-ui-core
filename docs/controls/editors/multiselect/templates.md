@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery MultiSelect Documentation | Templates | Kendo UI
+page_title: jQuery MultiSelect Documentation | Templates
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to customize its item, value, header, footer, and no-data templates."
 slug: templates_multiselect
 position: 7
@@ -170,4 +170,4 @@ The MultiSelect widget displays `noDataTemplate` in the popup when the data sour
 ## See Also
 
 * [Customizing the Templates in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/template)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

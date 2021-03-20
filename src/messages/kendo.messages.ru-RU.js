@@ -513,4 +513,95 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
 });
 }
 
+/* Gantt */
+
+if (kendo.ui.Gantt) {
+kendo.ui.Gantt.prototype.options.messages =
+$.extend(true, kendo.ui.Gantt.prototype.options.messages, {
+  "actions": {
+    "addChild": "Добавить подзадачу",
+    "append": "Добавить задачу",
+    "insertAfter": "Добавить после",
+    "insertBefore": "Добавить до",
+    "pdf": "Экспорт в PDF"
+  },
+  "cancel": "Отмена",
+  "deleteDependencyWindowTitle": "Удалить зависимость",
+  "deleteTaskWindowTitle": "Удалить задачу",
+  "destroy": "Удалить",
+  "editor": {
+    "assingButton": "Задать",
+    "editorTitle": "Задача",
+    "end": "Окончание",
+    "percentComplete": "Завершено",
+    "resources": "Ресурсы",
+    "resourcesEditorTitle": "Ресурсы",
+    "resourcesHeader": "Ресурсы",
+    "start": "Начало",
+    "title": "Название",
+    "unitsHeader": "Единицы"
+  },
+  "save": "Сохранить",
+  "views": {
+    "day": "День",
+    "end": "Окончание",
+    "month": "Месяц",
+    "start": "Начало",
+    "week": "Неделя",
+    "year": "Год"
+  }
+});
+}
+
+/* Filter messages */
+  
+if (kendo.ui.Filter) {
+  kendo.ui.Filter.prototype.options.messages = $.extend(
+  true,
+    kendo.ui.Filter.prototype.options.messages,
+      {
+        and: "И",
+        or: "Или",
+        apply: "Применить"
+      }
+  );
+}
+
+if (kendo.ui.Filter) {
+kendo.ui.Filter.prototype.options.operators = $.extend(
+true,
+kendo.ui.Filter.prototype.options.operators,
+{
+  date: {
+    eq: "равна",
+    gte: "после или равна",
+    gt: "после",
+    lte: "до или равна",
+    lt: "до",
+    neq: "не равна"
+  },
+  number: {
+    eq: "равно",
+    gte: "больше или равно",
+    gt: "больше",
+    lte: "меньше или равно",
+    lt: "меньше",
+    neq: "не равно"
+  },
+  string: {
+    endswith: "оканчивается на",
+    eq: "равно",
+    neq: "не равно",
+    startswith: "начинающимися на",
+    contains: "содержащими",
+    doesnotcontain: "не содержит"
+  },
+  enums: {
+    eq: "равно",
+    neq: "не равно"
+  }
+}
+);
+}
+
 })(window.kendo.jQuery);

@@ -34,15 +34,16 @@ var __meta__ = { // jshint ignore:line
         CONTENTLOAD = "contentLoad",
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
-                '<div class="k-tooltip-content"></div>' +
-                '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
-            '</div>',
+        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">' +
+            '<div class="k-tooltip-content"></div>' +
+            '#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
+            '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
+        '</div>',
         IFRAMETEMPLATE = kendo.template(
-        "<iframe frameborder='0' class='" + KCONTENTFRAME + "' " +
-                "src='#= content.url #'>" +
-                    "This page requires frames in order to show content" +
-        "</iframe>"),
+            "<iframe frameborder='0' class='" + KCONTENTFRAME + "' src='#= content.url #'>" +
+                "This page requires frames in order to show content" +
+            "</iframe>"
+        ),
         NS = ".kendoTooltip",
         POSITIONS = {
             bottom: {
@@ -139,6 +140,10 @@ var __meta__ = { // jshint ignore:line
 
             that._documentKeyDownHandler = proxy(that._documentKeyDown, that);
 
+            if (kendo.support.touch && this._isShownOnMouseEnter()) {
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._showOn, that));
+            }
+
             that.element.on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
 
             if (this._isShownOnMouseEnter() || this._isShownOnClick()) {
@@ -151,6 +156,10 @@ var __meta__ = { // jshint ignore:line
 
             if (this.options.autoHide && this._isShownOnFocus()) {
                 that.element.on("blur" + NS, that.options.filter, proxy(that._blur, that));
+            }
+
+            if (kendo.support.touch) {
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._mouseenter, that));
             }
         },
 
@@ -269,6 +278,8 @@ var __meta__ = { // jshint ignore:line
         _ajaxRequest: function(options) {
             var that = this;
 
+            that.contentLoading = true;
+
             jQuery.ajax(extend({
                 type: "GET",
                 dataType: "html",
@@ -283,7 +294,11 @@ var __meta__ = { // jshint ignore:line
 
                     that.content.html(data);
 
+                    that.contentLoading = false;
+
                     that.trigger(CONTENTLOAD);
+
+                    that._openPopup();
                 }, that)
             }, options));
         },
@@ -336,7 +351,8 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
-                target.removeAttr(DESCRIBEDBY);
+
+                that._removeDescribedBy(target);
 
                 this.element
                     .removeAttr("id")
@@ -345,7 +361,18 @@ var __meta__ = { // jshint ignore:line
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
 
-            that.popup.open();
+            if (!that.contentLoading) {
+                that._openPopup();
+            }
+        },
+
+        _openPopup: function() {
+            if (!this.popup) {
+                return;
+            }
+
+            this.popup._hovered = true;
+            this.popup.open();
         },
 
         _initPopup: function() {
@@ -361,10 +388,16 @@ var __meta__ = { // jshint ignore:line
                 autosize:true,
                 activate: function() {
                     var anchor = this.options.anchor,
-                        ariaId = anchor[0].id || that.element[0].id;
+                        ariaId = anchor[0].id || that.element[0].id || kendo.guid(),
+                        describedBy = [];
+
+                    if(anchor.attr(DESCRIBEDBY)) {
+                        describedBy.push(anchor.attr(DESCRIBEDBY));
+                    }
 
                     if (ariaId) {
-                        anchor.attr(DESCRIBEDBY, ariaId + ARIAIDSUFFIX);
+                        describedBy.push(ariaId + ARIAIDSUFFIX);
+                        anchor.attr(DESCRIBEDBY, describedBy.join(" "));
                         this.element.attr("id", ariaId + ARIAIDSUFFIX);
                     }
 
@@ -379,6 +412,7 @@ var __meta__ = { // jshint ignore:line
                     DOCUMENT.on("keydown" + NS, that._documentKeyDownHandler);
 
                     that.trigger(SHOW);
+                    that.popup._hovered = undefined;
                 },
                 close: function() {
                     that.trigger(HIDE);
@@ -454,6 +488,25 @@ var __meta__ = { // jshint ignore:line
                .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
                .addClass("k-callout-" + cssClass)
                .css(offset, offsetAmount);
+        },
+
+        _removeDescribedBy: function(target) {
+            var tooltipId = this.popup.element.attr("id"),
+                arrayAttr = target.attr(DESCRIBEDBY).split(" "),
+                finalArray, finalDescribedbyAttr;
+
+            if(arrayAttr && arrayAttr.length > 0) {
+                finalArray = arrayAttr.filter(function (val) {
+                    return val !== tooltipId;
+                });
+            }
+
+            if(finalArray && finalArray.length > 0) {
+                finalDescribedbyAttr = finalArray.join(" ");
+                target.attr(DESCRIBEDBY, finalDescribedbyAttr);
+            } else {
+                target.removeAttr(DESCRIBEDBY);
+            }
         },
 
         destroy: function() {

@@ -43,12 +43,15 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
+        AUTOCOMPLETEVALUE = "off",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy,
-        newLineRegEx = /(\r\n|\n|\r)/gm;
+        newLineRegEx = /(\r\n|\n|\r)/gm,
+        NON_PRINTABLE_KEYS = [16,17,18,19,20,33,34,37,39,45,91,92,144,145];
 
     var ComboBox = Select.extend({
         init: function(element, options) {
@@ -185,6 +188,7 @@ var __meta__ = { // jshint ignore:line
             that.input.off(ns);
             that.input.off(nsFocusEvent);
             that.element.off(ns);
+            that.wrapper.off(ns);
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
@@ -192,6 +196,11 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
+        },
+
+        _isValueChanged: function(value) {
+            return value !== List.unifyType(this._old, typeof value) &&
+                value !== List.unifyType(this._oldText, typeof value);
         },
 
         _change: function() {
@@ -217,6 +226,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             Select.fn._change.call(that);
+
+            that._oldText = that.text && that.text();
+
             that._toggleCloseVisibility();
         },
 
@@ -226,8 +238,10 @@ var __meta__ = { // jshint ignore:line
                       .on("focusout" + nsFocusEvent, proxy(that._inputFocusout, that));
         },
 
-        _focusHandler: function() {
-            this.input.focus();
+        _focusHandler: function(e) {
+            if(e.target === this.element[0]) {
+                this.input.focus();
+            }
         },
 
         _arrowClick: function() {
@@ -239,16 +253,19 @@ var __meta__ = { // jshint ignore:line
             this._placeholder(false);
         },
 
-        _inputFocusout: function() {
+        _inputFocusout: function(e) {
             var that = this;
             var value = that.value();
+            var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
 
             that._userTriggered = true;
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            that.text(that.text());
+            if (isClearButton) {
+              that.text(that.text());
+            }
 
             var item = that._focus();
             var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
@@ -259,9 +276,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._placeholder();
-            that._blur();
+            that._valueBeforeCascade = that._old;
 
-            that.element.blur();
+            if (isClearButton) {
+                that._blur();
+
+                that.element.blur();
+            }
         },
 
         _inputPaste: function() {
@@ -291,19 +312,20 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false);
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that))
-                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 
+                that.wrapper.on(CLICK + ns, proxy(that._focusHandler, that));
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -311,7 +333,8 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable);
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
 
             that._toggleCloseVisibility();
@@ -330,6 +353,7 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
+
                 if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
@@ -480,8 +504,6 @@ var __meta__ = { // jshint ignore:line
 
             that._buildOptions(data);
 
-            that._makeUnselectable();
-
             that._updateSelection();
 
             if (data.length && isFirstPage) {
@@ -540,6 +562,7 @@ var __meta__ = { // jshint ignore:line
 
         _select: function(candidate, keepState) {
             var that = this;
+
             candidate = that._get(candidate);
 
             if (candidate === -1) {
@@ -718,6 +741,10 @@ var __meta__ = { // jshint ignore:line
                 loweredText = loweredText.toLowerCase();
             }
 
+            if(that.dataItem() && that._text(that.dataItem()) === text){
+                return;
+            }
+
             that._select(function(data) {
                 data = that._text(data);
                 if (ignoreCase) {
@@ -761,7 +788,8 @@ var __meta__ = { // jshint ignore:line
 
             that.trigger("set", { value: value });
 
-            if (value === options.value && that.input.val() === options.text) {
+            if (value === options.value && that.input.val() === options.text &&
+            !that.options.cascadeFrom) {
                 return;
             }
 
@@ -782,10 +810,15 @@ var __meta__ = { // jshint ignore:line
                         that._placeholder(true);
                     }
 
-                    that._old = that._valueBeforeCascade = that._accessor();
+                    if(that._userTriggered) {
+                         that._old = that._accessor();
+                    } else {
+                         that._old = that._valueBeforeCascade = that._accessor();
+                    }
+
                     that._oldIndex = that.selectedIndex;
 
-                    that._prev = that.input.val();
+                    that._prev = that._oldText = that.input.val();
 
                     if (that._state === STATE_FILTER) {
                         that._state = STATE_ACCEPT;
@@ -906,7 +939,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -921,15 +954,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .css({
+                .css({
                     width: "",
-                    height: element.style.height
-                 })
-                 .attr({
-                     "role": "combobox",
-                     "aria-expanded": false
-                 })
-                 .show();
+                    height: element.style.height,
+                    position: ""
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false
+                })
+                .show();
 
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
@@ -965,7 +999,10 @@ var __meta__ = { // jshint ignore:line
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                textField = that.options.dataTextField || "text",
+                isFkey = key >= 112 && key <= 135,
+                isNonPrintableKey = NON_PRINTABLE_KEYS.indexOf(key) > -1;
 
             that._last = key;
 
@@ -1008,13 +1045,19 @@ var __meta__ = { // jshint ignore:line
                     });
                 } else {
                     if(that._syncValueAndText() || that._isSelect){
-                        that._accessor(that.input.val());
+                        if(!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
+                            that._accessor(that.input.val());
+                        }
                     }
 
-                    that.listView.value(that.input.val());
-                    that._blur();
+                    if (that.options.highlightFirst) {
+                        that.listView.value(that.input.val());
+                        that._blur();
+                    } else {
+                        that._oldText = that.text();
+                    }
                 }
-            } else if (key != keys.TAB && !that._move(e)) {
+            } else if (key != keys.TAB && !that._move(e) && !isNonPrintableKey && !isFkey && !e.ctrlKey) {
                that._search();
             } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
@@ -1064,7 +1107,7 @@ var __meta__ = { // jshint ignore:line
             that._typingTimeout = setTimeout(function() {
                 var value = that.text();
 
-                if (that._prev !== value) {
+                if (value !== "" && that._prev !== value) {
                     that._prev = value;
 
                     if (that.options.filter === "none" && that.options.virtual) {
@@ -1072,7 +1115,13 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that.search(value);
+
                     that._toggleCloseVisibility();
+                }
+                else if (value === "" && that._prev !== "" && that._prev !== undefined) {
+                    that._clearValue();
+                    that._open = true;
+                    that._state = STATE_REBIND;
                 }
 
                 that._typingTimeout = null;
@@ -1096,6 +1145,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = wrapper.addClass("k-widget k-combobox")
                 .addClass(element[0].className)
+                .removeClass('input-validation-error')
                 .css("display", "");
         },
 
@@ -1111,8 +1161,6 @@ var __meta__ = { // jshint ignore:line
             if (isFiltered || !hasValue || custom) {
                 that.options.value = "";
                 that.value("");
-                // Reset selected value for cascading
-                that._selectedValue = null;
             }
         },
 
@@ -1129,6 +1177,16 @@ var __meta__ = { // jshint ignore:line
             this._initialIndex = null;
             this._presetValue = true;
             this._toggleCloseVisibility();
+        },
+
+        _clearText: function() {
+            this._old = this.value();
+            this.text("");
+        },
+
+        _clearValue: function() {
+            Select.fn._clearValue.call(this);
+            this.input.focus();
         }
     });
 

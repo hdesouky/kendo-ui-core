@@ -2,7 +2,7 @@
 title: Filter Columns with DropDownList
 description: An example on how to filter Kendo UI Grid columns with complex objects.
 type: how-to
-page_title: Filter Columns with Complex Objects | Kendo UI Grid
+page_title: Filter Columns with Complex Objects | Kendo UI Grid for jQuery
 slug: grid-filter-column-with-dropdownlist
 tags: grid, filter, dropdownlist
 ticketid: 1144229
@@ -28,11 +28,11 @@ How can I filter a column with a drop-down editor when the column is bound to a 
 
 ## Solution
 
-Programmatically apply the filters on the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid. This approach  also requires you to programmatically clear the filters for that column when the user clicks the **Clear** button.
+Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/events/filter) event of the Grid. This approach  also requires you to programmatically clear the filters for that column when the user clicks the **Clear** button.
 
 ```dojo
    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-    
+
     <div id="example">
       <div id="grid"></div>
 

@@ -9,7 +9,7 @@ position: 1
 
 # Less-Based Themes
 
-All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) support a set of predefined themes.
+All [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) support a set of predefined themes.
 
 **Figure 1: Kendo UI themes for the Web**
 
@@ -23,7 +23,7 @@ This is how the same themes are rendered in widgets that visualize data, such as
 
 ## Getting Started
 
-Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](http://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
+Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
 * `kendo.common.css`&mdash;This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function in a proper way.
 * `kendo.[theme].css`&mdash;This stylesheet applies theme-specific styles such color palette, background gradients and patterns, etc.
@@ -68,7 +68,7 @@ Some themes require a different common (base) stylesheet that applies different 
 Apart from the common stylesheet and theme stylesheet, the following folders must be available in your application.
 
 * `/ThemeName/`&mdash;This is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, e.g. `Default`, `Bootstrap`, `Silver`, etc. The theme image folders for unused themes can be removed.
-* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug drawingofhtmlelements_drawingapi %}).
+* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug introduction_pdfexport_kendoui %}).
 * `/images/`&mdash;This where the Kendo UI font icons for the mobile widgets reside.
 * `/textures/`&mdash;This is where some fallback theme images are stored for browsers that do not support the CSS3 linear gradients.
 
@@ -89,7 +89,7 @@ The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 Kendo UI widgets use primitives, meaning that different HTML elements in different widgets use the same CSS classes to provide a level of abstraction and allow common styling.
 
-You can use some CSS classes to apply borders and background colors to containers&mdash;for example, `k-info-colored`, `k-success-colored`, and `k-error-colored`. For more examples, refer to the [StylingPanels demo](http://demos.telerik.com/kendo-ui/styling/panels).
+You can use some CSS classes to apply borders and background colors to containers&mdash;for example, `k-info-colored`, `k-success-colored`, and `k-error-colored`. For more examples, refer to the [StylingPanels demo](https://demos.telerik.com/kendo-ui/styling/panels).
 
 ### Common CSS Classes
 
@@ -156,28 +156,16 @@ To customize the appearance of a particular widget instance, you will need a cus
         color: red;
     }
 
-## Customizing Checkboxes and Radio Buttons
-
-As of the 2014 Q3 release, Kendo UI provides customized presentation for checkboxes and radio buttons via the `k-checkbox` and `k-radio` classes respectively. At this time these two types of input cannot be styled with CSS only. Therefore, Kendo UI Checkboxes and Radio buttons appearance relies on the `<input>` element being immediately followed by a `<label>` element with the respective `k-checkbox-label` or `k-radio-label` class. The following example demonstrates the expected HTML.
-
-    <!-- Kendo UI Checkbox -->
-    <input type="checkbox" id="checkbox" class="k-checkbox">
-    <label class="k-checkbox-label" for="checkbox"></label>
-
-    <!-- Kendo UI Radio button -->
-    <input type="radio" id="radiobutton" class="k-radio">
-    <label class="k-radio-label" for="radiobutton"></label>
-
 ## Customizing Themes
 
 To create a custom theme with Kendo UI, use either of the following approaches:
 
-1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
+1. Use the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
 2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [Less command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.
 
 ### Using the Less Theme Builder
 
-The [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
+The [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
 
 When you customize a theme, you can either:
 

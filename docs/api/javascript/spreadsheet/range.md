@@ -339,7 +339,7 @@ Gets or sets the editor of the cells in the range.
 
 ##### value `String` *optional*
 
-The name of the custom cell editor, registered as [described in this help article](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
 
 #### Returns
 
@@ -453,6 +453,35 @@ True to make the cell enabled; false to disable it.
     sheet.range("A1").enable(false);
 </script>
 ```
+
+### html
+
+Gets or sets the html rendering of the cells in the range.
+
+##### value `Boolean` *optional*
+
+True to make the cell render the value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
+
+> When the value is 'true ' the value of the cell should be always sanitized on the server for passing safe html.
+
+#### Returns
+
+`Boolean` the current html state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("<b>bold</b>");
+    sheet.range("A1").html(true);
+</script>
+```
+
 
 ### fillFrom
 
@@ -709,7 +738,7 @@ The function that will be executed against every cell. The function receives the
 
 - **rowIndex** - the row index of the cell
 - **columnIndex** - the column index of the cell
-- **value** - the cell properties
+- **cellProperties** - the cell properties
 
 #### Example
 
@@ -735,8 +764,8 @@ The function that will be executed against every cell. The function receives the
     var sheet = spreadsheet.activeSheet();
     var range = sheet.range("A1:B2");
 
-    range.forEachCell(function (row, column, value) {
-        console.log(row, column, value);
+    range.forEachCell(function (row, column, cellProperties) {
+        console.log(row, column, cellProperties);
     });
 </script>
 ```
@@ -993,7 +1022,7 @@ Omit argument to get the existing URL, if any.
     var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
     var sheet = spreadsheet.activeSheet();
     sheet.range("A1").value("Visit telerik.com!");
-    sheet.range("A1").link("http://www.telerik.com/");
+    sheet.range("A1").link("https://www.telerik.com/");
 </script>
 ```
 

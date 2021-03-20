@@ -12,6 +12,22 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            componentType: "modern"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.
@@ -22,10 +38,10 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="calendar"></div>
@@ -315,7 +331,7 @@ By default user is able to select a single date. The property can also be set to
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
 
 ### selectDates `Array`  *(default: [])*
 
@@ -332,7 +348,7 @@ Specifies which dates to be selected when the calendar is initialized.
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
 
 ### weekNumber `Boolean` *(default: false)*
 

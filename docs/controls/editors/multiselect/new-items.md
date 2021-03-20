@@ -1,6 +1,6 @@
 ---
 title: Adding New Items
-page_title: jQuery MultiSelect Documentation | Adding New Items | Kendo UI
+page_title: jQuery MultiSelect Documentation | Adding New Items
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to add new items."
 slug: newitems_multiselect
 position: 8
@@ -62,5 +62,5 @@ For a runnable example, refer to the demo on [adding new items to the MultiSelec
 
 ## See Also
 
-* [Adding New Items to the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/MultiSelect/addnewitem)
+* [Adding New Items to the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/addnewitem)
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

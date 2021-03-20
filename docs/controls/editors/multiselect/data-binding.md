@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery MultiSelect Documentation | Data Binding | Kendo UI
+page_title: jQuery MultiSelect Documentation | Data Binding
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to bind the MultiSelect to local data arrays and to remote data sources."
 slug: databinding_multiselect
 position: 2
@@ -35,7 +35,7 @@ To initialize the MultiSelect by binding the widget to a local data array and ut
 
 ## Binding to Remote Data
 
-To initialize the DropDownList by binding the widget to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+To initialize the MultiSelect by binding the widget to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
     <select id="multiselect" multiple></select>
 
@@ -94,5 +94,5 @@ The MultiSelect enables you to remove the values from its input area by using th
 
 ## See Also
 
-* [Basic Usage of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [Binding the MultiSelect over MVVM (Demo)](https://demos.telerik.com/kendo-ui/multiselect/mvvm)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

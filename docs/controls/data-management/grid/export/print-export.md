@@ -1,6 +1,6 @@
 ---
 title: Printing
-page_title: jQuery Grid Documentation | Printing | Kendo UI
+page_title: jQuery Grid Documentation | Printing
 description: "Get started with the jQuery Grid by Kendo UI allowing you to select only the Grid content on a page for printing."
 previous_url: /print-export
 slug: printing_kendoui_grid
@@ -27,8 +27,6 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 * If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug scrolling_kendoui_grid_widget %}). Because the browser does not relate the two Grid tables, it will not repeat the header row on top of every printed page. The following example demonstrates how to address this issue by cloning the header table row into the data table.
 * When you print a Grid with locked (frozen) columns, it is possible that the resulting columns or rows get misaligned or that the overall layout gets broken. In such cases, use a separate print-friendly Grid instance with no frozen columns.
 
-###### Example
-
 ```tab-HTML
 
     <div id="grid"></div>
@@ -51,7 +49,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 				'<head>' +
 				'<meta charset="utf-8" />' +
 				'<title>Kendo UI Grid</title>' +
-				'<link href="http://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
+				'<link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
 				'<style>' +
 				'html { font: 11pt sans-serif; }' +
 				'.k-grid { border-top-width: 0; }' +

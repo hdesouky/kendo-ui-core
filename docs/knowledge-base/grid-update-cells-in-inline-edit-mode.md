@@ -2,7 +2,7 @@
 title: Update Adjacent Cells in Grid Rows while in Inline Edit Mode
 description: An example on how to update the value of adjacent cells while the Kendo UI Grid is in inline edit mode.
 type: how-to
-page_title: Update Adjacent Cells in Rows in Inline Edit Mode | Kendo UI Grid
+page_title: Update Adjacent Cells in Rows in Inline Edit Mode | Kendo UI Grid for jQuery
 slug: grid-update-cells-in-inline-edit-mode
 tags: grid, inline, edit, mode, update, cells, next, contiguous
 ticketid: 1147034
@@ -101,17 +101,11 @@ To update the value of the Grid cells in an inline edit row mode when another fi
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
           { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-          { field: "Discontinued", width: "120px", editor: customBoolEditor },
+          { field: "Discontinued", width: "120px" },
           { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
         editable: "inline"
       });
     });
-
-    function customBoolEditor(container, options) {
-      var guid = kendo.guid();
-      $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 
     function onChange(e) {
       if (e.action == "itemchange" && e.field == "ProductName")

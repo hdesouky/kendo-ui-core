@@ -1,10 +1,10 @@
 ---
 title: Resizing
-page_title: jQuery Grid Documentation | Resizing of Columns | Kendo UI
+page_title: jQuery Grid Documentation | Resizing of Columns
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable column resizing in order to modify the width of columns."
 previous_url: /appearance/columns/resizing
 slug: column_resizing_kendoui_grid_widget
-position: 5
+position: 6
 ---
 
 # Resizing of Columns
@@ -24,12 +24,15 @@ When scrolling is enabled and a column is resized, all other columns maintain th
 
 By design, the last column of the Grid has no right border, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid widget width. If needed, you can apply a right border with the CSS code from the following example. The color value of the `#ccc` border has to match the color of the cell border from the [Kendo UI theme]({% slug themesandappearnce_kendoui_desktopwidgets %}). To obtain this, check the styles of the table cell by using a DOM inspector.
 
-###### Example
-
     .k-grid-header-wrap > table,
     .k-grid-content > table {
         border-right: 1px solid #ccc;
     }
+
+## KB Articles on Column Resizing
+
+* [Resizing the Grid Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 

@@ -421,7 +421,7 @@ The supported operators are:
 * `"isempty"`
 * `"isnotempty"`
 
-The last five are supported only for string fields.
+The last eight are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -730,6 +730,10 @@ The data item field to group by.
     });
     </script>
 
+### groupPaging `Boolean` *(default: false)*
+
+When set to true, dataSource treats groups as items during pagination.
+
 ### inPlaceSort `Boolean` *(default: false)*
 
 If set to `true`, the original `Array` used as [`data`](/api/javascript/data/datasource#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](/api/javascript/data/datasource#configuration-data) option.
@@ -910,7 +914,7 @@ The aggregate results should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       schema: {
         aggregates: "aggregates" // aggregate results are returned in the "aggregates" field of the response
@@ -1136,7 +1140,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
               validation: { required: true }
             },
             UnitPrice: {
-              //data type of the field {Number|String|Boolean|Date} default is String
+              //data type of the field {number|string|boolean|date} default is string
               type: "number",
               // used when new model is created
               defaultValue: 42,
@@ -1165,7 +1169,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
           validation: { required: true }
         },
         UnitPrice: {
-          //data type of the field {Number|String|Boolean|Date} default is String
+          //data type of the field {number|string|boolean|date} default is string
           type: "number",
           // used when new model is created
           defaultValue: 42,

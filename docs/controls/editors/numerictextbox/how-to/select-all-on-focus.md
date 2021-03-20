@@ -8,9 +8,11 @@ slug: howto_select_all_texton_focus_numerictextbox
 
 # Select All Text on Focus
 
+> As of the 2020 R3 release, selecting the whole NumericTextBox input value on `focus` is available out of the box. For more information, refer to the [`selectOnFocus`](/api/javascript/ui/numerictextbox/configuration/selectonfocus) property.
+
 The following example demonstrates how to select the whole NumericTextBox input value on `focus`.
 
-###### Example
+
 
 ```dojo
 <input id="numeric" type="number" value="17" min="0" max="100" step="1" />

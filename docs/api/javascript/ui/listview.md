@@ -38,6 +38,24 @@ data source is fired. By default the widget will bind to the data source specifi
       });
     </script>
 
+### bordered `Boolean` *(default: true)*
+
+Renders border around the listview element.
+
+### borders `String` *(default: '')*
+
+Renders border around the listview items. Valid values are:
+
+* `all`: renders borders around listview items.
+* `horizontal`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: column`.
+* `vertical`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: row`.
+
+> Note: in order for the property to work, set `k-listview-item` class name to listview items in your template.
+
+### contentElement `String` *(default: 'div')*
+
+Defines the type of element that holds the listview content.
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/javascript/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -177,6 +195,390 @@ The height of the listview. Numeric values are treated as pixels.
         height: "1em"
     });
     </script>
+
+### layout `String` *(default: '')*
+
+Specify the layout of listview content. Valid options are:
+
+* `flex`: This is equivalent to `display: flex`. It defines a flex container and enables a flex context for all its direct children. Think of flex items as primarily laying out either in horizontal rows or vertical columns.
+* `grid`: This is equivalent to `display: grid`. It defines the element as a grid container and establishes a new grid formatting context for its contents.
+
+> Note: Flex and grid layout are supporteed only on modern browsers. Even so, not all browsers that support flex and grid layout, support all features.
+
+#### Example of ListView with flex layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 9
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "flex",
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+
+### flex `Object`
+
+Flex layout settings
+
+### flex.direction `String` *(default: 'row')*
+
+Defines the direction flex items are placed in the flex container. Think of flex items as primarily laying out either in horizontal rows or vertical columns. Valid values are:
+
+* `row`: This is equivalent to `flex-direction: row`. This establishes the main-axis to be horizontal, thus defining the direction flex items are placed in the flex container: left to right in `ltr`; right to left in `rtl`.
+* `row-reverse`: This is equivalent to `flex-direction: row-reverse`. This establishes the main-axis to be horizontal, thus defining the direction flex items are placed in the flex container: right to left in `ltr`; left to right in `rtl`.
+* `column`: This is equivalent to `flex-direction: column`. This establishes the main-axis to be vertical, thus defining the direction flex items are placed in the flex container: top to bottom.
+* `column-reverse`: This is equivalent to `flex-direction: column-reverse`. This establishes the main-axis to be vertical, thus defining the direction flex items are placed in the flex container: bottom to top.
+
+#### Example of ListView with flex column layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "flex",
+          flex: {
+            direction: "column",
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+
+### flex.wrap `String` *(default: 'nowrap')*
+
+By default, flex items will all try to fit onto one line. Customizing the property defines how items wrap or not within flex continer. Valid values are:
+
+* `wrap`: This is equivalent to `flex-wrap: wrap`. It allows flex items to wrap as needed onto multiple lines, from top to bottom.
+* `nowrap`: This is equivalent to `flex-wrap: nowrap`. All flex items will be on one line.
+* `wrap-reverse`:This is equivalent to `flex-wrap: wrap-reverse`. It allows flex items to wrap as needed onto multiple lines, from bottom to top.
+
+#### Example of ListView with wrapped flex layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "flex",
+          flex: {
+            wrap: "wrap"
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+    
+
+### grid `Object`
+
+Grid layout settings.
+
+#### Example of ListView with grid layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "grid",
+          grid: {
+            cols: 5,
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+
+### grid.cols `Number|String`
+
+Defines the columns of the grid.
+
+#### Example of the cols setting of the grid layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "grid",
+          grid: {
+            cols: 11,
+            gutter: 20
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+
+### grid.rows `Number|String`
+
+Defines the rows of the grid.
+
+#### Example of the rows setting of the grid layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "grid",
+          grid: {
+            cols: 11,
+	    rows: 3, 
+            gutter: 20
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
+
+### grid.gutter `Number|String`
+
+Defines the width of the gutters between the columns / rows.
+
+#### Example of the gutter setting of the grid layout
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+    <div id="listView"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+    </script>
+
+    <script>
+      $(function() {
+        var dataSource = new kendo.data.DataSource({
+          data: products,
+          pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+          dataSource: dataSource,
+          layout: "grid",
+          grid: {
+            cols: 11,
+            gutter: 20
+          },
+          template: kendo.template($("#template").html())
+        });
+      });
+    </script>
+    <style>
+      .product{
+        width: 100px;
+      }
+      .product h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .9em;
+      }
+    </style>
 
 ### scrollable `Boolean|String` *(default: false)*
 
@@ -684,7 +1086,7 @@ Puts the specified ListView item in edit mode. Fires the [edit](/api/javascript/
         // get a reference to the ListView widget
         var listView = $("#listView").data("kendoListView");
         // edit the first ListView item
-        listView.edit(listView.element.children().first());
+        listView.edit(listView.content.children().first());
       });
     </script>
 
@@ -771,7 +1173,7 @@ Removes the specified item from the ListView. Triggers [remove](/api/javascript/
         // get a reference to the list view widget
         var listView = $("#listView").data("kendoListView");
         // remove first list view item
-        listView.remove(listView.element.children().first());
+        listView.remove(listView.content.children().first());
       });
     </script>
 
@@ -882,7 +1284,7 @@ Gets/sets the selected ListView item(s).
         // get a reference to the ListView widget
         var listView = $("#listView").data("kendoListView");
         // selects first ListView item
-        listView.select(listView.element.children().first());
+        listView.select(listView.content.children().first());
       });
     </script>
 
@@ -983,7 +1385,7 @@ The event handler function context (available via the `this` keyword) will be se
         }
       });
       var listView = $("#listView").data("kendoListView");
-      listView.edit(listView.element.children().first());
+      listView.edit(listView.content.children().first());
     </script>
 
 #### To set after initialization
@@ -1029,7 +1431,7 @@ The event handler function context (available via the `this` keyword) will be se
       listView.bind("cancel", function(e) {
         console.log("Cancelled editing of item with id " + e.model.id);
       });
-      listView.edit(listView.element.children().first());
+      listView.edit(listView.content.children().first());
     </script>
 
 #### Event Data
@@ -1159,7 +1561,7 @@ The event handler function context (available via the `this` keyword) will be se
         ],
         dataBinding: function(e) {
           // call e.preventDefault() if you want to cancel binding.
-          console.log("ListView is ready to bind to data").
+          console.log("ListView is ready to bind to data");
         }
       });
     </script>

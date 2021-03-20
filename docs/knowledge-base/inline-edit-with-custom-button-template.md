@@ -2,12 +2,12 @@
 title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities
 description: An example on how to use custom button templates instead of the default commands to edit and delete records in a Kendo UI Grid in inline edit mode.
 type: how-to
-page_title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities | Kendo UI Grid
+page_title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities | Kendo UI Grid for jQuery
 slug: inline-edit-with-custom-button-template
 tags: inline, edit, delete, custom, button, template, commands, grid
 ticketid: 1133582
 res_type: kb
-component: scheduler
+component: grid
 ---
 
 ## Environment
@@ -112,15 +112,10 @@ Use the `addRow` and `removeRow` methods of the Grid.
                 { field: "UnitsInStock", title:"Units In Stock"},
                 { template: "<button class='customEdit'>My Edit</button>", title:"Custom Edit"},
                 { template: "<button class='customDelete'>My Delete</button>", title:"Custom Delete"},
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }]
             });
           });
-
-          function customBoolEditor(container, options) {
-            $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-            $('<label class="k-checkbox-label">​</label>').appendTo(container);
-          }
         </script>
     ```
 

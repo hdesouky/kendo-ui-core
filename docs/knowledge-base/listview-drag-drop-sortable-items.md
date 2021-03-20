@@ -2,7 +2,7 @@
 title: Drag and Drop Sortable ListView Items
 description: An example on how to configure the drag-and-drop functionality in the ListView to perform a copy instead of a move operation while sorting is enabled.
 type: how-to
-page_title: Copy with Drag-and-Drop and Sorting Enabled | Kendo UI ListView
+page_title: Copy with Drag-and-Drop and Sorting Enabled | Kendo UI ListView for jQuery
 slug: listview-drag-drop-sortable-items
 tags: kendo, kendo-ui, listview, sortable, drag, drop, drag-drop, droptarget, draggable
 ticketid: 1163175
@@ -99,6 +99,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#itemlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#newlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;
@@ -113,6 +114,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#newlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#itemlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;

@@ -14,7 +14,7 @@ The complete implementation of the sample project is available in the [Kendo UI 
 
 ## Prerequisites
 
-Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/).
+Basic knowledge on the organization of [Azure Portal](https://docs.microsoft.com/en-us/azure/azure-portal/).
 
 ## Creating Azure Cosmos DB Applications
 
@@ -26,7 +26,7 @@ Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.co
 
 ## Adding CSS and JavaScript References
 
-To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references](https://docs.telerik.com/kendo-ui/intro/installation/getting-started#add-css-and-javascript-references) in the head tag of the `_Layout.cshtml` file.
+To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references]({% slug getting_started_installation_kendoui %}) in the head tag of the `_Layout.cshtml` file.
 
 ```HTML
 <head>

@@ -123,7 +123,7 @@
         });
 
         it("content is updated for every element", function() {
-            container.append($('<span id="first"/><span id="second"/>'));
+            container.append($('<span id="first"></span><span id="second"></span>'));
 
             var tooltip = new Tooltip(container, {
                 filter: "span",
@@ -141,7 +141,7 @@
         });
 
         it("show is trigger on hover of  every matched element", function() {
-            container.append($('<span id="first"/><span id="second"/>'));
+            container.append($('<span id="first"></span><span id="second"></span>'));
 
             var tooltip = new Tooltip(container, {
                 filter: "span",
@@ -179,7 +179,7 @@
         });
 
         it("same popup instance is used for multiple elements", function() {
-            container.append($('<span id="first"/><span id="second"/>'));
+            container.append($('<span id="first"></span><span id="second"></span>'));
 
             var tooltip = new Tooltip(container, {
                 filter: "span"
@@ -223,7 +223,7 @@
         });
 
         it("popup is moved to the new element matched by the filter", function() {
-            container.append($('<span id="first"/><span id="second"/>'));
+            container.append($('<span id="first"></span><span id="second"></span>'));
 
             var tooltip = new Tooltip(container, {
                 filter: "span"
@@ -470,7 +470,7 @@
             });
 
             tooltip.show(container);
-            assert.equal(tooltip.content.width(), 100);
+            assert.equal(tooltip.popup.element.outerWidth(), 100);
         });
 
         it("height is set to the popup", function() {
@@ -480,7 +480,7 @@
 
             tooltip.show(container);
 
-            assert.equal(tooltip.popup.element.height(), 100);
+            assert.equal(tooltip.popup.element.outerHeight(), 100);
         });
 
         it("callout is not rendered if center position", function() {
@@ -604,7 +604,7 @@
         });
 
         it("leaving the element closes the popup", function(done) {
-            container.append('<span title="foo"/><span/>');
+            container.append('<span title="foo"></span><span></span>');
 
             var tooltip = new Tooltip(container, {
                 filter: "[title]"
@@ -621,7 +621,7 @@
         });
 
         it("element without title clear the tooltip", function() {
-            container.append('<span id="first" title="foo"/><span id="second"/>');
+            container.append('<span id="first" title="foo"></span><span id="second"></span>');
 
             var tooltip = new Tooltip(container, {
                 filter: "span"
@@ -650,7 +650,7 @@
             var firstText = "foo";
             var secondText = "some very long text";
 
-            container.append('<span id="first" title="' + firstText + '"/><span id="second" title="' + secondText + '"/>');
+            container.append('<span id="first" title="' + firstText + '"></span><span id="second" title="' + secondText + '"></span>');
 
             var tooltip = new Tooltip(container, {
                 filter: "span"
@@ -724,6 +724,7 @@
             var anchorPosition;
 
             tooltip.show(container);
+
             anchorPosition = tooltip.popup.options.anchor.offset().top;
             calloutPosition = tooltip.popup.wrapper.find(".k-callout").offset().top + calloutDefaultBorderWidth;
 

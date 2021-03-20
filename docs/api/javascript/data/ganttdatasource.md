@@ -22,6 +22,8 @@ The schema configuration of the GanttDataSource.
 
 The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework/gantttask#configuration) for more information.
 
+Note that if the `parentId` type is `number`, its `defaultValue` should be set to `null`.
+
 #### Example - configure the data source model schema
 
     <script>
@@ -50,7 +52,7 @@ The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", validation: { required: true } },
+            parentId: { from: "ParentID", type: "number", validation: { required: true }, defaultValue: null },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },
@@ -174,6 +176,10 @@ Returns a list of all direct child tasks.
 ##### task `kendo.data.GanttTask` *(optional)*
 
 The parent task. If this parameter is not specified, all root-level tasks will be returned.
+
+##### fromView `bool` *(optional)*
+
+Whether the data should be taken from the `dataSource.view()` (only the filtered items) or from the `.data()` call (all items in the DataSource). If this parameter is not specified, the `data()` call will be used and filter would not be taken into account.
 
 #### Returns
 

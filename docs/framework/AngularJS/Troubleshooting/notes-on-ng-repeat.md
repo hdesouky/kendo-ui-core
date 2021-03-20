@@ -2,7 +2,7 @@
 title: ng-* Directives in Widget Markup
 page_title: ng-* Directives in Widget Markup | AngularJS Directives
 description: "Learn more about the `ng-repeat`, `ng-if`, and `ng-bind` directives supported by Kendo UI controls in AngularJS."
-previous_url: /AngularJS/notes-on-ng-repeat
+previous_url: /AngularJS/notes-on-ng-repeat, /AngularJS/Troubleshooting/notes-on-ng-repeat
 slug: ngrepeat_ngif_ngbind_support_angularjs
 position: 3
 ---
@@ -72,7 +72,7 @@ The following example demonstrates a Kendo UI PanelBar widget with `DataSource` 
         {
           text: "Item 1 (link)",
           cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-          url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+          url: "https://www.telerik.com/kendo-ui/"                  // link URL if navigation is needed (optional)
         },
         {
           text: "<b>Item 2</b>",
@@ -148,7 +148,7 @@ The following example demonstrates a Kendo UI Menu widget with `DataSource` in A
             $scope.menuDataSource = [{
                 text: "Item 1 {{foo}}",
                 cssClass: "myClass",
-                url: "http://www.kendoui.com"
+                url: "https://www.telerik.com/kendo-ui"
             },
             {
                 text: "<b>Item 2</b>",
@@ -187,11 +187,11 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
             <div kendo-tab-strip k-ng-delay="tabStripDelay">
               <!-- tab list -->
               <ul>
-                <li ng-repeat="tab in tabs">{{tab}}</li>
+                <li ng-repeat="tab in tabs">Tab</li>
               </ul>
 
               <div ng-repeat="tabContent in tabContents">
-                {{ tabContent }}
+                TabContent
               </div>
 
             </div>
@@ -205,7 +205,7 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
           $scope.tabs = [ "t1", "t2" ];
           $scope.tabContents = [ "tc1", "tc2" ];
 
-                $timeout(function() {
+          $timeout(function() {
             $scope.tabStripDelay = true;
           });
       })

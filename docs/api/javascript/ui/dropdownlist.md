@@ -391,6 +391,21 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterTitle `String`
+
+When filtering is enabled, allows custom title to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterTitle: "custom title"
+    });
+    </script>
+
 ### fixedGroupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
@@ -515,6 +530,42 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize DropDownList messages
+
+    <input id="dropdownlist" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#dropdownlist").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdownlist" />
+    <script>
+      $("#dropdownlist").kendoDropDownList({
+        dataSource: [],
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a filter is performed. Set to higher value than `1` if the search could match a lot of items.
@@ -532,7 +583,7 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -722,9 +773,27 @@ in the optionLabel object**.
 
 ### optionLabelTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the option label.
+The [template](/api/javascript/kendo/methods/template) used to render the option label. Use optionLabelTemplate if you want to customize the markup of the optionLabel.
 
-> Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+> * [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) has to be defined for the optionLabelTemplate to take effect.
+> * Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+
+#### Example - specify the optionLabelTemplate as a string
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: [
+          { productName: "Product 1", productId: 1 },
+          { productName: "Product 2", productId: 2 },
+          { productName: "Product 3", productId: 3 },
+          { productName: "Product 4", productId: 4 }
+        ],
+        dataTextField: "productName",
+        dataValueField: "productId",
+        optionLabel: "-- Please select --",
+        optionLabelTemplate:'<span style="color:red">-- Please select --</span>'
+    });
+    </script>
 
 ### headerTemplate `String|Function`
 
@@ -796,8 +865,7 @@ The [valueTemplate](/api/javascript/kendo/methods/template) used to render the s
 
     <input id="dropdownlist" />
     <script id="valueTemplate" type="text/x-kendo-template">
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
+        <strong>#: name #</strong>
     </script>
     <script>
     $("#dropdownlist").kendoDropDownList({
@@ -822,7 +890,7 @@ The [valueTemplate](/api/javascript/kendo/methods/template) used to render the s
       ],
       dataTextField: "name",
       dataValueField: "id",
-      valueTemplate: '<img src="/img/#: id #.png" alt="#: name #" />#: name #'
+      valueTemplate: '<strong>#: name #</strong>'
     });
     </script>
 
@@ -1092,7 +1160,10 @@ A jQuery object of the filter input element, where the user types.
 
     <input id="dropdownlist" />
     <script>
-    $("#dropdownlist").kendoDropDownList();
+    $("#dropdownlist").kendoDropDownList({
+      filter:"startswith",
+      dataSource:["Chai", "Chang","Tofu"]
+    });
 
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
@@ -1100,7 +1171,7 @@ A jQuery object of the filter input element, where the user types.
     </script>
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the information about the configuration options of the widget.
 
 #### Example - get options of the widget
 

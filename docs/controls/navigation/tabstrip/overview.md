@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TabStrip Documentation | TabStrip Overview | Kendo UI
+page_title: jQuery TabStrip Documentation | TabStrip Overview
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_tabstrip_widget
 position: 1
@@ -8,7 +8,11 @@ position: 1
 
 # TabStrip Overview
 
-The [Kendo UI TabStrip widget](http://demos.telerik.com/kendo-ui/tabstrip/index) displays a collection of tabs with associated content and contains an unordered list of items which represent its tabs and a collection of `div` elements which hold the content for each tab.
+The TabStrip displays a collection of tabs with associated content.
+
+It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
+
+* [Demo page for the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index)
 
 ## Initializing the TabStrip
 
@@ -20,7 +24,7 @@ To initialize the TabStrip, use either of the following approaches:
 > * When you initialize the TabStrip, create it within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 > * It is not mandatory for the tabs to have content. Therefore, when you create an empty tab, you can skip its associated `div` element.
 
-### Using HTML Markup
+### From HTML
 
 The following example demonstrates how to initialize the TabStrip from HTML markup.
 
@@ -39,7 +43,7 @@ The following example demonstrates how to initialize the TabStrip from HTML mark
         });
     </script>
 
-### Using JSON data Object
+### From JSON
 
 The following example demonstrates how to initialize the TabStrip from a JSON `data` object.
 
@@ -57,7 +61,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
           dataSource:
           [{
             text: "Item 1",
-            url: "http://www.telerik.com"               // (Optional) Link URL if navigation is needed
+            url: "https://www.telerik.com"               // (Optional) Link URL if navigation is needed
           },
            {
              text: "Item 2",
@@ -69,7 +73,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
            },
            {
              text: "Item 4",
-             imageUrl: "http://www.telerik.com/test.jpg" // (Optional) Item image URL
+             imageUrl: "https://www.telerik.com/test.jpg" // (Optional) Item image URL
            },
            {
              text: "Item 5",
@@ -79,7 +83,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
       });
     </script>
 
-## Features and Functionality
+## Functionality and Features
 
 * [Icon TabStrip]({% slug icons_tabstrip %})
 * [Tabs]({% slug tabs_tabstrip %})

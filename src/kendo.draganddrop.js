@@ -641,6 +641,10 @@ var __meta__ = { // jshint ignore:line
                 select: proxy(that._select, that)
             });
 
+            if (kendo.support.touch) {
+                that.element.find(that.options.filter).css('touch-action', 'none');
+            }
+
             that._afterEndHandler = proxy(that._afterEnd, that);
             that._captureEscape = proxy(that._captureEscape, that);
         },
@@ -790,7 +794,7 @@ var __meta__ = { // jshint ignore:line
         _hold: function(e) {
             this.currentTarget = e.target;
 
-            if (this.options.holdToDrag && this._trigger(HOLD, e)) {
+            if (this._trigger(HOLD, e)) {
                 this.userEvents.cancel();
             } else {
                 this._activated = true;

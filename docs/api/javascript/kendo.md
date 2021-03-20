@@ -27,7 +27,7 @@ The text to be shown in the Alert popup.
 
 ### antiForgeryTokens
 Returns an object that contains common
-[CSRF tokens](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet)
+[CSRF tokens](https://owasp.org/www-community/attacks/csrf)
 found on the page.
 
 These include tokens used by ASP.NET, Ruby on Rails and others.
@@ -294,6 +294,62 @@ Optional namespace too look in when instantiating Kendo UI widgets. The valid na
 
      kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
      </script>
+
+
+### observableFileManagerData
+
+Creates an ObservableArray instance that is bound to a FileManagerDataSource. Required to bind a FileManagerDataSource-enabled widget (such as the Kendo UI FileManager) to a view-model.
+
+#### Example
+
+    <div id="example">      
+        <div name="files"               
+            data-role="filemanager"              
+            data-bind="source: localData"></div>
+    </div>
+    <script>
+        var myData = [{
+            name: "Folder",
+            isDirectory: true,
+            hasDirectories: false,
+            path: "Folder",
+            extension: "",
+            size: 0,
+            createdUtc: new Date(),
+            items: [
+                {
+                    name: "Image.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image.jpg",
+                    extension: ".jpg",
+                    size: 20,
+                    createdUtc: new Date(),
+                },
+                {
+                    name: "Image2.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image2.jpg",
+                    extension: ".jpg", 
+                    size: 20,
+                    createdUtc: new Date(),
+                }
+            ]}
+        ];
+        
+        var viewModel = kendo.observable({        
+            localData: kendo.observableFileManagerData(myData),
+        });
+
+        kendo.bind($("#example"), viewModel);
+    </script>
+
+#### Parameters
+
+##### array `Array`
+
+The array that will be converted to an ObservableArray.
 
 
 ### observableHierarchy
@@ -898,6 +954,29 @@ Unbinds a tree of HTML elements from a View-Model.
 The root element(s) from which the unbinding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
 All descendant elements are traversed.
 
+### unescape
+
+Decodes string from UTF-8 or a Unicode character set. Substitutes the native [`unescape`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape) function, which should not be used according to the recommendations of the ECMA-262 standard.
+
+#### Example
+    <script>
+        var result = kendo.unescape("This is a test: %97 %3f %D5 %e5 %U0107 %U123F %u39f5 %uDEe5");
+        console.log(result);
+
+        var second = kendo.unescape("This is a test: %D1%88%D0%B5%D0%BB%D0%BB%D1%8B");
+        console.log(second);
+    </script>
+
+#### Parameters
+
+##### value `String`
+
+The string that needs to be unescaped (decoded).
+
+#### Returns
+
+`String` The unescaped (decoded) string.
+
 ### widgetInstance
 
 Returns a Kendo UI widget instance, attached to the provided element.
@@ -1090,13 +1169,13 @@ The current browser major version, e.g. "7" in Internet Explorer 7.
 Returns the Kendo UI version as a string, for example `"2013.3.1119"` or `"2013.2.918"`, etc. In general, Kendo UI version identifiers provide the following information:
 
 * year in YYYY format (2013, 2012, etc);
-* major release as "1", "2" or "3" (derived from Q1, Q2 and Q3). All service packs and internal builds, which come after a given major release, share the same major release number;
+* major release as "1", "2" or "3" (derived from R1, R2 and R3). All service packs and internal builds, which come after a given major release, share the same major release number;
 * month and day of the release in Mdd format (November 19, September 18, etc);
 
-Q3 service packs and internal builds may be released in the following year. In this case 12 is added to the month number, e.g. 13 means January, 14 means February and so on.
-For example `"2012.3.1315"` means a service pack (internal build) released after Q3 **2012** on January 15, **2013**.
+R3 service packs and internal builds may be released in the following year. In this case 12 is added to the month number, e.g. 13 means January, 14 means February and so on.
+For example `"2012.3.1315"` means a service pack (internal build) released after R3 **2012** on January 15, **2013**.
 
-The returned value does not give clues whether the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
+The returned value does not indicate if the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
 
 ## Standard number formats
 

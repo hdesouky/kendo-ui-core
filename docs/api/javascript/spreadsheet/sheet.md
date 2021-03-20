@@ -193,6 +193,10 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 
 The zero-based index of the row
 
+##### skipDataSourceDelete `Boolean` *optional*
+
+If passed `true`, the method does not delete item from the DataSource.
+
 #### Example
 
 
@@ -431,6 +435,10 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 
 The zero-based index of the column
 
+##### skipDataSourceInsert `Boolean` *optional*
+
+If passed `true`, the method does not insert item in the DataSource.
+
 #### Example
 
     <div id="spreadsheet"></div>
@@ -463,7 +471,7 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 ##### columnCount `Number` *optional*
 
-If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) reference of the cells.
+If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](https://excelribbon.tips.net/T008803_Understanding_R1C1_References) reference of the cells.
 
 If the parameters are `Numbers`, the first two would represent the row index (the first parameter) and the column index (the second parameter) of the top-left cell of the `range`. If there are only two parameters, only one cell will be included in the `range`. If the other two `Numbers` are also present, they will represent the number of rows (the third parameter) and number of columns (the forth parameter) that would be included in the `range`, starting from the specified top-left cell. If the third or the forth parameter is set to 0 or 1, only one row / column will be included in the `range`.
 

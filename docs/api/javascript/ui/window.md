@@ -191,7 +191,62 @@ Specifies a URL or request options from where the Window will load its content.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
-      content: "/details"
+      content: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+    });
+    </script>
+
+### content.url `String`
+
+Specifies the url from which the content is fetched
+
+#### Example - fetching JSON and displaying it through a template
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        content: {
+          url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html",
+        }
+      });
+    </script>
+
+### content.dataType `String` *(default: "html")*
+
+The type of result expected from the remote service. Used values are "html" and "json".
+
+#### Example - fetching and displaying JSON content it in the Window
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        content: {
+          url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+          dataType: "json"
+        }
+      });
+    </script>
+
+### content.iframe `Boolean`
+
+If the URL for the Window content contains a protocol, the Window creates an iframe for the content and assumes that the nested page resides in another domain.
+
+If the URL does not contain a protocol, the URL is treated as a local URL which will load a partial view and the Window does not create an iframe for the content.
+
+To control the creation of iframe Window content, you have to explicitly configure the option.
+
+#### Example - Explicitly configure an iframe
+
+    <div id="dialog"></div>
+
+    <script>
+    $("#dialog").kendoWindow({
+      content: {
+        url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+        dataType: "json",
+        iframe: true
+      }
     });
     </script>
 
@@ -199,7 +254,7 @@ Specifies a URL or request options from where the Window will load its content.
 
 The template for the content of a Window. Returned data from the server will be given as the `data` of this template.
 
-If the returned data is JSON, the [`dataType`](http://api.jquery.com/jQuery.ajax/) parameter has to be passed so that the data gets parsed by jQuery.
+If the returned data is JSON, the [`dataType`](https://api.jquery.com/jQuery.ajax/) parameter has to be passed so that the data gets parsed by jQuery.
 
 If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON response will be injected in the content area of the Window as is.
 
@@ -259,7 +314,7 @@ Enables (`true`) or disables (`false`) the dragging of the widget.
 
 ### draggable.containment `String|Element|jQuery` *default: ""*
 
-Defines the element in which the window will be able to move. The window is appended to this element and in this way overrides the [`appendTo`](/api/javascript/ui/window/configuration/draggable.containment) option. Accepts either a selector or an element.
+Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/javascript/ui/window/configuration/draggable.containment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
 
 > The containment element has to be positioned, that is, its CSS `position` attribute has to be set to `relative`, `absolute`, or `fixed`.
 
@@ -344,7 +399,7 @@ Explicitly states whether a content `iframe` will be created. For more informati
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
-      content: "http://www.telerik.com/",
+      content: "https://www.telerik.com/",
       iframe: true
     });
     </script>
@@ -887,7 +942,7 @@ Indicates whether the content will be fetched within an `iframe` or with AJAX, a
 
 ### restore
 
-Restores a maximized or minimized Window to its previous state. Triggers the `resize` event.
+Restores a maximized or minimized Window to its previous state. Triggers the `resize` and `restore` events.
 
 #### Returns
 
@@ -1057,13 +1112,17 @@ Triggered when a Window is closed either by the user or through the `close()` me
 
 Indicates whether the close action was triggered by the user either by clicking the **Close** button or by pressing `Esc`. When the `close` method was called, this field is `false`.
 
+##### e.preventDefault `Function`
+
+If invoked prevents the Window from closing.
+
 #### Example - subscribing to the close event during initialization
 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
       close: function(e) {
-        // the closing animation has finished
+        // the closing animation is about to start
       }
     });
     </script>
@@ -1073,7 +1132,7 @@ Indicates whether the close action was triggered by the user either by clicking 
     <div id="dialog"></div>
     <script>
     function window_close(e) {
-      // the closing animation has finished
+      // the closing animation is about to start
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
@@ -1090,7 +1149,7 @@ Triggered when a Window has finished its closing animation.
     <script>
     $("#dialog").kendoWindow({
       deactivate: function() {
-        // the closing animation is about to finish
+        // the closing animation has finished
       }
     });
     </script>
@@ -1100,7 +1159,7 @@ Triggered when a Window has finished its closing animation.
     <div id="dialog"></div>
     <script>
     function window_deactivate() {
-      // the closing animation is about to start
+      // the closing animation has finished
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
@@ -1169,11 +1228,11 @@ Triggered when an Ajax request for content fails.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object as returned from [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The XHR request object as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 ##### e.status `String`
 
-The status of the request as returned from [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The status of the request as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 #### Example - subscribing to the error event during initialization
 
@@ -1333,4 +1392,34 @@ Triggered when the user resizes the Window.
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.bind("resize", window_resize);
+    </script>
+
+### restore
+
+Triggered when the Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+
+#### Example - subscribing to the restore event during initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        restore: function() {
+          // the Window is back to its previous state
+        }
+      });
+    </script>
+
+#### Example - subscribing to the restore event after initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      function window_restore() {
+        // the Window is back to its previous state
+      }
+
+      var dialog = $("#dialog").kendoWindow().getKendoWindow();
+
+      dialog.bind("restore", window_restore);
     </script>

@@ -63,18 +63,19 @@ it("wraps element if no wrapper span.k-widget and hide element", function() {
 });
 
 it("create a text input", function() {
-   var combobox = new ComboBox(input.attr("name", "combo1"), {
-       text: "test"
-   });
+    var autocompleteAttr = "off";
+    var combobox = new ComboBox(input.attr("name", "combo1"), {
+        text: "test"
+    });
 
-   var text = combobox.input;
+    var text = combobox.input;
 
-   assert.isOk(text.is("input"));
-   assert.isOk(text.hasClass("k-input"));
+    assert.isOk(text.is("input"));
+    assert.isOk(text.hasClass("k-input"));
 
-   assert.equal(text.val(), "test");
-   assert.equal(text.attr("autocomplete"), "off");
-   assert.equal(text.attr("name"), "combo1_input");
+    assert.equal(text.val(), "test");
+    assert.equal(text.attr("autocomplete"), autocompleteAttr);
+    assert.equal(text.attr("name"), "combo1_input");
 });
 
 it("text input should be wrapped with span", function(){
@@ -589,6 +590,15 @@ it("copy input className to the wrapper", function() {
 
    assert.isOk(combobox.wrapper.hasClass("test"));
 });
+
+it("copy position style to the wrapper only", function() {
+    input.css("position", "absolute").kendoComboBox();
+
+    var combobox = input.data("kendoComboBox");
+
+    assert.equal(combobox.wrapper.css("position"), "absolute");
+    assert.equal(combobox.input.css("position"), "static");
+ });
 
 it("set height if items height is bigger than options.height", function() {
    var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);

@@ -1734,8 +1734,7 @@ function pad(number, digits, end) {
     }
 
     function wrap(element, autosize) {
-        var browser = support.browser,
-            percentage,
+        var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
             parent = element.parent(),
@@ -1781,11 +1780,6 @@ function pad(number, digits, end) {
             parent.addClass("k-animation-container-sm");
 
             wrapResize(element, autosize);
-        }
-
-        if (browser.msie && math.floor(browser.version) <= 7) {
-            element.css({ zoom: 1 });
-            element.children(".k-menu").width(element.width());
         }
 
         return parent;
@@ -1852,7 +1846,8 @@ function pad(number, digits, end) {
 
             if (propInit &&
                 propInit !== Array && propInit !== ObservableArray && propInit !== LazyObservableArray &&
-                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp) {
+                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp &&
+                (!kendo.isFunction(window.ArrayBuffer) || propInit !== ArrayBuffer)) {
 
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
@@ -1930,31 +1925,43 @@ function pad(number, digits, end) {
         }
 
         var overflow = getComputedStyles(element, ["overflow"]).overflow;
-        return overflow == "auto" || overflow == "scroll";
+        return overflow.indexOf("auto") > -1 || overflow.indexOf("scroll") > -1;
     }
 
     function scrollLeft(element, value) {
         var webkit = support.browser.webkit;
         var mozila = support.browser.mozilla;
-        var el = element instanceof $ ? element[0] : element;
-        var isRtl;
+        var browserVersion = support.browser.version;
+        var el, isRtl;
 
-        if (!element) {
+        if(element instanceof $ && value !== undefined) {
+            element.each(function(i, e) {
+                scrollLeft(e, value);
+            });
+
+            return;
+        } else {
+            el = element instanceof $ ? element[0] : element;
+        }
+
+        if (!el) {
             return;
         }
 
         isRtl = support.isRtl(element);
 
+        // After updating browser detection,
+        // Test in which if should the Safari browsers go
         if (value !== undefined) {
-            if (isRtl && webkit) {
+            if (isRtl && webkit && (browserVersion < 85 || support.browser.safari)) {
                 el.scrollLeft = el.scrollWidth - el.clientWidth - value;
-            } else if (isRtl && mozila) {
+            } else if (isRtl && (mozila || webkit) && value > 0) {
                 el.scrollLeft = -value;
             } else {
                 el.scrollLeft = value;
             }
         } else {
-            if (isRtl && webkit) {
+            if (isRtl && webkit && (browserVersion < 85 || support.browser.safari)) {
                 return el.scrollWidth - el.clientWidth - el.scrollLeft;
             } else {
                 return Math.abs(el.scrollLeft);
@@ -2226,8 +2233,6 @@ function pad(number, digits, end) {
             }
         };
 
-        support.cssBorderSpacing = typeof docStyle.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
-
         (function(browser) {
             // add browser-specific CSS class
             var cssClass = "",
@@ -2338,16 +2343,16 @@ function pad(number, digits, end) {
 
         support.pushState = window.history && window.history.pushState;
 
-        var documentMode = document.documentMode;
+        support.hashChange = "onhashchange" in window;
 
-        support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
-
-        support.customElements = ("registerElement" in window.document);
+        support.customElements = "registerElement" in window.document;
 
         var chrome = support.browser.chrome,
-            mozilla = support.browser.mozilla;
+            mobileChrome = support.browser.crios,
+            mozilla = support.browser.mozilla,
+            safari = support.browser.safari;
         support.msPointers = !chrome && window.MSPointerEvent;
-        support.pointers = !chrome && !mozilla && window.PointerEvent;
+        support.pointers = !chrome && !mobileChrome && !mozilla && !safari && window.PointerEvent;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
@@ -2554,6 +2559,23 @@ function pad(number, digits, end) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
+    function unescape(value) {
+        var template;
+
+        try {
+            template = window.decodeURIComponent(value);
+        } catch(error) {
+            // If the string contains Unicode characters
+            // the decodeURIComponent() will throw an error.
+            // Therefore: convert to UTF-8 character
+            template = value.replace(/%u([\dA-F]{4})|%([\dA-F]{2})/gi, function(_, m1, m2) {
+                return String.fromCharCode(parseInt("0x" + (m1 || m2), 16));
+            });
+        }
+
+        return template;
+    }
+
     var eventTarget = function (e) {
         return e.target;
     };
@@ -2703,6 +2725,7 @@ function pad(number, digits, end) {
         stringify: proxy(JSON.stringify, JSON),
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
+        unescape: unescape,
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
@@ -2750,9 +2773,11 @@ function pad(number, digits, end) {
         },
 
         guid: function() {
-            var id = "", i, random;
+            var id = "", i, random, chars = "abcdef";
 
-            for (i = 0; i < 32; i++) {
+            id += chars[Math.floor(Math.random() * Math.floor(chars.length))];
+
+            for (i = 1; i < 32; i++) {
                 random = math.random() * 16 | 0;
 
                 if (i == 8 || i == 12 || i == 16 || i == 20) {
@@ -2814,13 +2839,18 @@ function pad(number, digits, end) {
             Observable.fn.init.call(that);
 
             var dataSource = options ? options.dataSource : null;
+            var props;
+
+            if (options) {
+                props = (that.componentTypes || {})[(options || {}).componentType];
+            }
 
             if (dataSource) {
                 // avoid deep cloning the data source
                 options = extend({}, options, { dataSource: {} });
             }
 
-            options = that.options = extend(true, {}, that.options, options);
+            options = that.options = extend(true, {}, that.options, that.defaults, props || {}, options);
 
             if (dataSource) {
                 options.dataSource = dataSource;
@@ -2872,6 +2902,9 @@ function pad(number, digits, end) {
                 e = that.events[idx];
                 if (that.options[e] && options[e]) {
                     that.unbind(e, that.options[e]);
+                    if (that._events && that._events[e]) {
+                        delete that._events[e];
+                    }
                 }
             }
 
@@ -3084,7 +3117,7 @@ function pad(number, digits, end) {
 
         dataSource = parseOption(element, "dataSource");
 
-        options = $.extend({}, parseOptions(element, widget.fn.options), options);
+        options = $.extend({}, parseOptions(element, $.extend({}, widget.fn.options, widget.fn.defaults) ), options);
 
         if (dataSource) {
             if (typeof dataSource === STRING) {
@@ -3155,7 +3188,7 @@ function pad(number, digits, end) {
 
     function resizableWidget() {
         var widget = $(this);
-        return ($.inArray(widget.attr("data-" + kendo.ns + "role"), ["slider", "rangeslider"]) > -1) || widget.is(":visible");
+        return ($.inArray(widget.attr("data-" + kendo.ns + "role"), ["slider", "rangeslider", "breadcrumb"]) > -1) || widget.is(":visible");
     }
 
     kendo.resize = function(element, force) {
@@ -3203,10 +3236,10 @@ function pad(number, digits, end) {
                 if (!mask.length) {
                     isRtl = support.isRtl(container);
                     leftRight = isRtl ? "right" : "left";
-                    containerScrollLeft = container.scrollLeft();
+                    containerScrollLeft = kendo.scrollLeft(container);
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'/><div class='k-loading-color'/></div>", cssClass, kendo.ui.progress.messages.loading))
+                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>", cssClass, kendo.ui.progress.messages.loading))
                         .width(options.width).height(options.height)
                         .css("top", options.top)
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
@@ -3383,7 +3416,8 @@ function pad(number, digits, end) {
 
     kendo.widgetInstance = function(element, suites) {
         var role = element.data(kendo.ns + "role"),
-            widgets = [], i, length;
+            widgets = [], i, length,
+            elementData = element.data("kendoView");
 
         if (role) {
             // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
@@ -3401,8 +3435,9 @@ function pad(number, digits, end) {
             }
 
             // kendo.View is not a ui plugin
-            if (role === "view") {
-                return element.data("kendoView");
+
+            if (role === "view" && elementData) {
+                return elementData;
             }
 
             if (suites) {
@@ -3614,6 +3649,23 @@ function pad(number, digits, end) {
         return events;
     };
 
+    kendo.keyDownHandler = function(e, widget) {
+        var events = widget._events.kendoKeydown;
+
+        if(!events){
+            return true;
+        }
+
+        events = events.slice();
+        e.sender = widget;
+        e.preventKendoKeydown = false;
+        for (var idx = 0, length = events.length; idx < length; idx++) {
+            events[idx].call(widget, e);
+        }
+
+        return !e.preventKendoKeydown;
+    };
+
     var on = $.fn.on;
 
     function kendoJQuery(selector, context) {
@@ -3686,6 +3738,19 @@ function pad(number, digits, end) {
                     });
             }
 
+            if(arguments[0].indexOf("keydown") !== -1 && args[1] && args[1].options){
+                args[0] = events;
+                var widget = args[1];
+                var keyDownCallBack = args[args.length - 1];
+                args[args.length - 1]= function(e){
+                    if(kendo.keyDownHandler(e, widget)){
+                       return keyDownCallBack.apply(this, [e]);
+                    }
+                };
+                on.apply(that, args);
+                return that;
+            }
+
             if (typeof callback === STRING) {
                 context = that.data("handler");
                 callback = context[callback];
@@ -3753,6 +3818,13 @@ function pad(number, digits, end) {
                 ourDay = date.getUTCDay();
 
                 date.setUTCDate(date.getUTCDate() + targetDay - ourDay + (targetDay < ourDay ? 7 : 0));
+            } else if (on.indexOf("<=") >= 0) {
+                date = new Date(Date.UTC(year, months[month], on.substr(5), time[0], time[1], time[2], 0));
+
+                targetDay = days[on.substr(0, 3)];
+                ourDay = date.getUTCDay();
+
+                date.setUTCDate(date.getUTCDate() + targetDay - ourDay - (targetDay > ourDay ? 7 : 0));
             }
 
             return cache[year] = date;
@@ -4090,7 +4162,7 @@ function pad(number, digits, end) {
         }
 
         function setHours(date, time) {
-            date = new Date(kendo.date.getDate(date).getTime() + kendo.date.getMilliseconds(time));
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
             adjustDST(date, time.getHours());
             return date;
         }
@@ -4430,6 +4502,68 @@ function pad(number, digits, end) {
         });
     };
 
+    kendo.focusNextElement = function () {
+        if (document.activeElement) {
+            var focussable = $(":kendoFocusable");
+            var index = focussable.index(document.activeElement);
+
+            if(index > -1) {
+               var nextElement = focussable[index + 1] || focussable[0];
+               nextElement.focus();
+            }
+        }
+    };
+
+    kendo.trim = function(value) {
+        if(!!value) {
+            return value.toString().trim();
+        } else {
+            return "";
+        }
+    };
+
+    kendo.getWidgetFocusableElement = function(element) {
+        var nextFocusable = element.closest(":kendoFocusable"),
+            widgetInstance = kendo.widgetInstance(element),
+            target;
+
+        if (nextFocusable.length) {
+            target = nextFocusable;
+        } else if (widgetInstance) {
+            target = widgetInstance.options.name === 'Editor' ?
+                $(widgetInstance.body) :
+                widgetInstance.wrapper.find(":kendoFocusable").first();
+        } else {
+            target = element;
+        }
+
+        return target;
+    };
+
+    kendo.addAttribute =  function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        if (current.indexOf(value) < 0) {
+            element.attr(attribute, (current + " " + value).trim());
+        }
+    };
+
+    kendo.removeAttribute = function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        element.attr(attribute, current.replace(value, "").trim());
+    };
+
+    kendo.toggleAttribute = function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        if (current.indexOf(value) < 0) {
+            kendo.addAttribute(element, attribute, value);
+        } else {
+            kendo.removeAttribute(element, attribute, value);
+        }
+    };
+
     kendo.matchesMedia = function(mediaQuery) {
         var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
         return support.matchMedia && window.matchMedia(media).matches;
@@ -4443,6 +4577,157 @@ function pad(number, digits, end) {
             "lg": "(min-width: 992px)",
             "xl": "(min-width: 1200px)"
         }[bootstrapMedia];
+    };
+
+    kendo.fileGroupMap = {
+        audio: [".aif", ".iff", ".m3u", ".m4a", ".mid", ".mp3", ".mpa", ".wav", ".wma", ".ogg", ".wav", ".wma", ".wpl"],
+        video: [".3g2", ".3gp", ".avi", ".asf", ".flv", ".m4u", ".rm", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg",
+                ".rm", ".swf", ".vob", ".wmv"],
+        image: [".ai", ".dds", ".heic", ".jpe", "jfif", ".jif", ".jp2", ".jps", ".eps", ".bmp", ".gif", ".jpeg",
+                ".jpg", ".png", ".ps", ".psd", ".svg", ".svgz", ".tif", ".tiff"],
+        txt: [".doc", ".docx", ".log", ".pages", ".tex", ".wpd", ".wps", ".odt", ".rtf", ".text", ".txt", ".wks"],
+        presentation: [".key", ".odp", ".pps", ".ppt", ".pptx"],
+        data: [".xlr", ".xls", ".xlsx"],
+        programming: [".tmp", ".bak", ".msi", ".cab", ".cpl", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ico", ".link",
+                      ".sys", ".cfg", ".ini", ".asp", ".aspx", ".cer", ".csr", ".css", ".dcr", ".htm", ".html", ".js",
+                      ".php", ".rss", ".xhtml"],
+        pdf: [".pdf"],
+        config: [".apk", ".app", ".bat", ".cgi", ".com", ".exe", ".gadget", ".jar", ".wsf"],
+        zip: [".7z", ".cbr", ".gz", ".sitx", ".arj", ".deb", ".pkg", ".rar", ".rpm", ".tar.gz", ".z", ".zip", ".zipx"],
+        "disc-image": [".dmg", ".iso", ".toast", ".vcd", ".bin", ".cue", ".mdf"]
+    };
+
+    kendo.getFileGroup = function(extension, withPrefix) {
+        var fileTypeMap = kendo.fileGroupMap;
+        var groups = Object.keys(fileTypeMap);
+        var type = "file";
+
+        if (extension === undefined || !extension.length) {
+            return type;
+        }
+
+        for (var i = 0; i < groups.length; i += 1) {
+            var extensions = fileTypeMap[groups[i]];
+
+            if (extensions.indexOf(extension.toLowerCase()) > -1) {
+               return withPrefix ? "file-" + groups[i] : groups[i];
+            }
+        }
+
+        return type;
+    };
+
+    kendo.getFileSizeMessage = function(size) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+        if (size === 0) {
+            return '0 Byte';
+        }
+
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)), 10);
+        return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    };
+
+    kendo.selectorFromClasses = function(classes) {
+        return "."+classes.split(" ").join(".");
+    };
+
+    // Standardized Properties and CSS classes
+
+    var themeColorValues = ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'];
+    var fillValues = ['solid', 'outline', 'flat'];
+    var postitionValues = ['edge', 'outside', 'inside'];
+    var shapeValues = ['circle', 'rectangle', 'rounded', 'dot', 'pill'];
+    var sizeValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
+    var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
+    var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
+
+    kendo.propertyToCssClassMap = {};
+
+    kendo.registerCssClass = function (propName, value, shorthand) {
+        if (!kendo.propertyToCssClassMap[propName]) {
+            kendo.propertyToCssClassMap[propName] = {};
+        }
+
+        kendo.propertyToCssClassMap[propName][value] = shorthand || value;
+    };
+
+    kendo.registerCssClasses = function (propName, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (isArray(arr[i])) {
+                kendo.registerCssClass(propName, arr[i][0], arr[i][1]);
+            } else {
+                kendo.registerCssClass(propName, arr[i]);
+            }
+        }
+    };
+
+    kendo.getValidCssClass = function (prefix, propName, value) {
+        var validValue = kendo.propertyToCssClassMap[propName][value];
+
+        if (validValue) {
+            return prefix + validValue;
+        }
+    };
+
+    kendo.registerCssClasses("themeColor", themeColorValues);
+    kendo.registerCssClasses("fill", fillValues);
+    kendo.registerCssClasses("postition", postitionValues);
+    kendo.registerCssClasses("shape", shapeValues);
+    kendo.registerCssClasses("size", sizeValues);
+    kendo.registerCssClasses("align", alignValues);
+    kendo.registerCssClasses("positionMode", positionModeValues);
+
+    // jQuery deferred helpers
+
+    // influenced from: https://gist.github.com/fearphage/4341799
+    kendo.whenAll = function(array) {
+        var resolveValues = arguments.length == 1 && $.isArray(array) ? array : Array.prototype.slice.call(arguments),
+            length = resolveValues.length,
+            remaining = length,
+            deferred = $.Deferred(),
+            i = 0,
+            failed = 0,
+            rejectContexts = Array(length),
+            rejectValues = Array(length),
+            resolveContexts = Array(length),
+            value;
+
+        function updateFunc (index, contexts, values) {
+            return function() {
+                if(values != resolveValues) {
+                    failed++;
+                }
+
+                deferred.notifyWith(
+                    contexts[index] = this,
+                    values[index] = Array.prototype.slice.call(arguments)
+                );
+
+                if (!(--remaining)) {
+                    deferred[(!failed ? 'resolve' : 'reject') + 'With'](contexts, values);
+                }
+            };
+        }
+
+        for (; i < length; i++) {
+            if ((value = resolveValues[i]) && $.isFunction(value.promise)) {
+                value.promise()
+                    .done(updateFunc(i, resolveContexts, resolveValues))
+                    .fail(updateFunc(i, rejectContexts, rejectValues));
+            }
+
+            else {
+                deferred.notifyWith(this, value);
+                --remaining;
+            }
+        }
+
+        if (!remaining) {
+            deferred.resolveWith(resolveContexts, resolveValues);
+        }
+
+        return deferred.promise();
     };
 
     // kendo.saveAs -----------------------------------------------
@@ -4546,6 +4831,34 @@ function pad(number, digits, end) {
 
         return observable;
     };
+
+
+    // Kendo defaults
+    (function() {
+
+        kendo.defaults = kendo.defaults || {};
+        kendo.setDefaults = function(key, value) {
+            var path = key.split(".");
+            var curr = kendo.defaults;
+
+            key = path.pop();
+
+            path.forEach(function(part) {
+                if (curr[part] === undefined) {
+                    curr[part] = {};
+                }
+
+                curr = curr[part];
+            });
+
+            if (value.constructor === Object) {
+                curr[key] = deepExtend({}, curr[key], value);
+            } else {
+                curr[key] = value;
+            }
+        };
+
+    })();
 
 })(jQuery, window);
 

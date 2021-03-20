@@ -1,6 +1,6 @@
 ---
 title: Sorting
-page_title: jQuery Grid Documentation | Sorting | Kendo UI
+page_title: jQuery Grid Documentation | Sorting
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: sorting_kendoui_grid_widget
 position: 7
@@ -32,8 +32,6 @@ The Grid supports the following sort modes:
 
 By default, the Grid applies single-column sorting when `sortable` is set to `true`. You can also configure the single-column sort mode by setting the `mode` option of `editable` to `single`.
 
-###### Example
-
     $("#grid").kendoGrid({
          sortable: true
          // Other configuration.
@@ -43,8 +41,6 @@ By default, the Grid applies single-column sorting when `sortable` is set to `tr
 
 To enable multi-column sorting, set the `mode` option of `editable` to `multiple`.
 
-###### Example
-
     $("#grid").kendoGrid({
         sortable: {
             mode: "multiple"
@@ -52,8 +48,16 @@ To enable multi-column sorting, set the `mode` option of `editable` to `multiple
         // Other configuration.
     });
 
+## KB Articles on Sorting
+
+* [Enable Sorting for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
+* [Enabling the ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
+* [Implementing Stable Sorting in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
+* [Implementing Stable Sorting for Grouped Data in Chrome]({% slug howto_implement_stable_sortwithgroupingin_chrome_grid %})
+* [Adding Background Color to Sorted Columns by Using LESS Themes]({% slug howto_add_background_sorted_columns_LESS_themes_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Sorting by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/sorting)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

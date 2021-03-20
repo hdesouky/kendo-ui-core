@@ -1,16 +1,39 @@
 ---
-title: Create Custom Editors
-page_title: jQuery Grid Documentation | Create Custom Editors | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to create custom editors by using AngularJS."
+title: Create Custom Editors in AngularJS
+page_title: Create Custom Editors in AngularJS | Kendo UI Grid for jQuery
+description: "An example on how to create custom editors in the Kendo UI Grid by using AngularJS."
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
+tags: grid, create, custom, editors, angularjs
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Create Custom Editors
+## Environment
 
-The following example demonstrates how to create a custom editor in the [Grid](http://www.telerik.com/kendo-ui/grid) in AngularJS applications.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress AngularJS Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+ <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
 
-###### Example
+## Description
+
+How can I create a custom editor in the Kendo UI Grid in AngularJS applications?
+
+## Solution
+
+The following example demonstrates how to create a custom editor in the [Grid](https://www.telerik.com/kendo-ui/grid) in AngularJS applications.
 
 ```dojo
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -73,11 +96,3 @@ The following example demonstrates how to create a custom editor in the [Grid](h
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
-* [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
-* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
-* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
-* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
-* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

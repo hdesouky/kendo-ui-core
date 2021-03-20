@@ -52,7 +52,7 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper = element.parent();
             } else {
                 that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
-                that.wrapper.addClass(element[0].className);
+                that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
                     width: "100%",
@@ -354,11 +354,16 @@ var __meta__ = { // jshint ignore:line
             var element = that.element;
             var formId = element.attr("form");
             var form = formId ? $("#" + formId) : element.closest("form");
+            var initialValue = element[0].value;
+
+            if (!initialValue && that.options.value) {
+                initialValue = that.options.value;
+            }
 
             if (form[0]) {
                 that._resetHandler = function () {
                     setTimeout(function () {
-                        that.value(element[0].value);
+                        that.value(initialValue);
                     });
                 };
 
@@ -394,7 +399,11 @@ var __meta__ = { // jshint ignore:line
                 selection = caret(this.element[0]);
                 var symbol = this._format[selection[0]];
                 if (knownSymbols.indexOf(symbol) >= 0) {
-                    this._dateTime.modifyPart(symbol, key == 38 ? 1 : -1);
+                    var interval = 1;
+                    if (symbol == 'm') {
+                        interval = this.options.interval || 1;
+                    }
+                    this._dateTime.modifyPart(symbol, key == 38 ? interval * 1 : interval * -1);
                     this._updateElementValue();
                     this._selectSegment(symbol);
                     this.element.trigger(CHANGE);
@@ -610,12 +619,13 @@ var __meta__ = { // jshint ignore:line
                 return true;
             }
             var newValue = new Date((value && value.getTime) ? value.getTime() : value);
+            var lastDateOfMonth = new Date(newValue.getFullYear(), newValue.getMonth() + 1, 0).getDate();
             var newHours;
             switch (symbol) {
                 case "d":
                     var newDate = (date ? newValue.getDate() * 10 : 0) + parseInt(currentChar, 10);
                     if (isNaN(newDate)) { return; }
-                    while (newDate > 31) {
+                    while (newDate > lastDateOfMonth) {
                         newDate = parseInt(newDate.toString().slice(1), 10);
                     }
                     if (newDate < 1) {

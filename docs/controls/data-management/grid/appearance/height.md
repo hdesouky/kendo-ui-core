@@ -1,6 +1,6 @@
 ---
 title: Height
-page_title: jQuery Grid Documentation | Height | Kendo UI
+page_title: jQuery Grid Documentation | Height
 description: "Get started with the jQuery Grid by Kendo UI and learn how to apply different heights to the widget."
 slug: height_kendoui_grid_widget
 position: 1
@@ -10,7 +10,7 @@ position: 1
 
 By default, the Grid has no set height and expands to fit all table rows.
 
-## Setting the Height
+## Getting Started 
 
 > Set the height to the Grid only when its scrolling is enabled. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).  
 
@@ -31,9 +31,7 @@ In specific scenarios you can set a height style to the scrollable data area eit
 
 > Not applicable when virtual scrolling is enabled. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
-You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). Instead of the `GridID`, you can also use the `.k-grid` class to target all widget instances.
-
-###### Example
+You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, [remove the default data area height](https://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). Instead of the `GridID`, you can also use the `.k-grid` class to target all widget instances.
 
     #GridID .k-grid-content
     {
@@ -51,8 +49,6 @@ You can make the Grid expand and shrink vertically according to the number of it
   * If the vertical space that is available for the Grid depends on a custom resizing of the layout, which is controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked columns.
 
 The `resize` method works for the Kendo UI versions after the Kendo UI Q3 2013 release. For earlier versions, instead of `resize`, use the following approach which practically functions in the same way. For more information, refer to the article on [how to resize the Grid when the window is resized]({% slug howto_resize_whenthe_windowis_resized_grid %}).
-
-###### Example
 
     $(window).resize(function() {
         var gridElement = $("#GridID"),
@@ -76,8 +72,15 @@ Internally, the Grid uses the [`kendo.ui.progress`](/api/javascript/ui/ui/method
 
 For more information, refer to the [the example of setting the height within certain limits](#setting-limits-to-the-height). For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
+## KB Articles on Height
+
+* [Changing the Height of the Grid When Using Frozen Columns]({% slug howto_change_grid_height_frozen_columns %})
+* [Hiding the Vertical Scrollbar]({% slug howto_hide_vertical_scrollbar_grid %})
+* [Disabling Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
+* [Creating Fixed Headers on Scroll]({% slug howto_create_fixed_headers_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Scroll Modes of the Grid]({% slug scrolling_kendoui_grid_widget %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Kendo UI Knowledge Base](/knowledge-base)

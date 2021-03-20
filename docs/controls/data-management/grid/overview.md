@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grid Overview | Kendo UI
+page_title: jQuery Grid Documentation | Grid Overview
 description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
@@ -9,9 +9,11 @@ position: 1
 
 # Grid Overview
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format.
+The Grid is a powerful control for displaying data in a tabular format.
 
-It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
+It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
+
+* [Demo page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
 ## Advance Reading
 
@@ -33,8 +35,7 @@ To initialize the Grid, use either of the following approaches:
 
 When you initialize the Grid from an empty `<div>` element, all Grid settings are provided in the initialization script statement. This means that you have to describe the layout and configuration of the Grid in JavaScript.
 
-###### Example
-
+```dojo
     // Define the HTML div that will contain the Grid.
     <div id="grid"></div>
 
@@ -65,6 +66,7 @@ When you initialize the Grid from an empty `<div>` element, all Grid settings ar
         });
 
     </script>
+```
 
 ### Using an HTML Table
 
@@ -98,8 +100,7 @@ It is not possible to define other column-related settings through HTML attribut
 
 As the previous and the following examples demonstrate, the client object of the Grid is attached to a `<div>` in the first case and to a `<table>` in the second case. However, the generated HTML output of the Grid entirely depends on the settings of the widget and it will always be the same regardless of the way the widget is initialized. For the complete example, refer to the [demo on initializing the Grid from an HTML table](https://demos.telerik.com/kendo-ui/grid/from-table).
 
-###### Example
-
+```dojo
     // Define the HTML table with rows, columns, and data.
     <table id="grid">
         <colgroup>
@@ -135,17 +136,7 @@ As the previous and the following examples demonstrate, the client object of the
         });
 
     </script>
-
-## Referencing Existing Instances
-
-To refer to an existing Grid instance:
-
-1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
-
-###### Example
-
-    var grid = $("#grid").data("kendoGrid");
+```
 
 ## Functionality and Features
 
@@ -174,6 +165,15 @@ To refer to an existing Grid instance:
     * [Accessibility]({% slug accessibility_kendoui_grid_widget %})
 
 For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
+
+## Referencing Existing Instances
+
+To refer to an existing Grid instance:
+
+1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
+1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
+
+        var grid = $("#grid").data("kendoGrid");
 
 ## See Also
 

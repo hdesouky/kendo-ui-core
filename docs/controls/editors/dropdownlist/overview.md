@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DropDownList Documentation | DropDownList Overview | Kendo UI
+page_title: jQuery DropDownList Documentation | DropDownList Overview
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_dropdownlist_widget
 position: 1
@@ -8,9 +8,11 @@ position: 1
 
 # DropDownList Overview
 
-The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list.
+The DropDownList displays a list of values and allows for a single selection from the list.
 
 The user input is restricted within the predefined options. To apply a keyboard input, use the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}).
+
+* [Demo page for the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index)
 
 ## Initializing the DropDownList
 
@@ -25,8 +27,7 @@ Regardless of the applied initialization, the performance and functionality of t
 
 The following example demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 
-###### Example
-
+```dojo
     <select id="dropdownlist">
         <option>Item 1</option>
         <option>Item 2</option>
@@ -38,6 +39,7 @@ The following example demonstrates how to initialize the DropDownList from an ex
             $("#dropdownlist").kendoDropDownList();
         });
     </script>
+```
 
 ## Functionality and Features
 

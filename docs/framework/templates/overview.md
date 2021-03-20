@@ -8,7 +8,7 @@ position: 1
 
 # Templates Overview
 
-The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI toolkit.
+The [Kendo UI Templates](https://demos.telerik.com/kendo-ui/templates/index) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI toolkit.
 
 Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript. Kendo UI Templates focus on providing essential templating features needed for common user interface (UI) rendering scenarios, with a heavy emphasis on performance over feature glut. Kendo UI Templates trade convenient [syntax sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) for improved performance, which distinguishes it from other templating JavaScript libraries.
 
@@ -40,7 +40,7 @@ The following example demonstrates what consuming the template in an application
         <script>
             var template = kendo.template("<div id='box'>#= firstName #</div>");
             var data = { firstName: "Todd" }; //A value in JavaScript/JSON
-            var result = template(data); /Pass the data to the compiled template
+            var result = template(data); //Pass the data to the compiled template
             $("#example").html(result); //display the result
         </script>
 

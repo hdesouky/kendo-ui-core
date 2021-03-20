@@ -1,6 +1,6 @@
 ---
 title: Aggregates
-page_title: jQuery Grid Documentation | Aggregates | Kendo UI
+page_title: jQuery Grid Documentation | Aggregates
 description: "Get started with the jQuery Grid by Kendo UI and group its data by using aggregate functions."
 slug: aggregates_kendoui_grid_widget
 position: 2
@@ -16,5 +16,4 @@ To enable grouping by using aggregate functions, use the `aggregates`, `groupFoo
 
 * [Grouping with Aggregates by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/aggregates)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Group Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)
-* [Knowledge Base Section](/knowledge-base)
+* [Group Templates](https://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)

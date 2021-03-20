@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery Grid Documentation | Keyboard Navigation | Kendo UI
+page_title: jQuery Grid Documentation | Keyboard Navigation
 description: "Get started with the jQuery Grid by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_kendoui_grid_widget
 position: 2
@@ -10,11 +10,11 @@ position: 2
 
 The keyboard navigation of the Grid is always available.
 
+For a complete example, refer to the [demo on using the keyboard navigation of the Grid](https://demos.telerik.com/kendo-ui/web/grid/navigation.html).  
+
 The Grid supports its keyboard navigation functionality through the `navigatable` option. When set to `true`, you can initially select a row or cell and then move within the Grid by using the `Arrow` keys. The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press `Space`.
 
 The following example demonstrates how to enable the key navigation in the Grid.
-
-###### Example
 
     $("#grid").kendoGrid({
          navigatable: true
@@ -33,6 +33,6 @@ You can also avoid the procedure and bypass the keyboard navigation of the Grid,
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in the Grid]({% slug keyboard_shortcuts_accessibility_support %})

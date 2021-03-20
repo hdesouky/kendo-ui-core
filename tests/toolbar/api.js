@@ -355,6 +355,7 @@
 
             toolbar.hide("#foo");
 
+            assert.isOk($("#foo").hasClass("k-hidden"));
             assert.isOk($("#foo").hasClass("k-state-hidden"));
             assert.isOk($("#foo").is(":hidden"));
 
@@ -472,6 +473,7 @@
 
             toolbar.hide($("#splitButton_wrapper"));
 
+            assert.isOk($("#splitButton_wrapper").hasClass("k-hidden"));
             assert.isOk($("#splitButton_wrapper").hasClass("k-state-hidden"));
         });
 
@@ -485,6 +487,7 @@
 
             toolbar.show("#foo");
 
+            assert.isOk(!($("#foo").hasClass("k-hidden")));
             assert.isOk(!($("#foo").hasClass("k-state-hidden")));
             assert.isOk($("#foo").is(":visible"));
 
@@ -525,6 +528,23 @@
             toolbar.show("#splitButton_wrapper");
             //toolbar element is `div`, overflow element is `li`
             assert.isOk($("#splitButton_wrapper").is(":visible"));
+        });
+
+        it("Show method shows hidden button in SplitButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "splitButton",
+                    id: "splitButton",
+                    text: "split button",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar", hidden: true }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.show($("#bar"));
+            assert.isOk(!$("#bar").hasClass(".k-hidden"));
         });
 
         it("After showing hidden button the button group updates k-group-start button", function() {
@@ -577,6 +597,7 @@
 
             toolbar.show($("#splitButton_wrapper"));
 
+            assert.isOk(!($("#splitButton_wrapper").hasClass("k-hidden")));
             assert.isOk(!($("#splitButton_wrapper").hasClass("k-state-hidden")));
         });
 

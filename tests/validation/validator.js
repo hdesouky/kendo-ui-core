@@ -25,7 +25,7 @@
             kendo.destroy(Mocha.fixture);
 
             kendo.ns = "";
-            kendo.ui.validator = { rules: {}, messages: {} };
+            kendo.ui.validator = { rules: {}, messages: {}, allowSubmit: $.noop, validateOnInit: $.noop };
             container.remove();
         });
 
@@ -41,6 +41,17 @@
                 validator = setup(input, {
                     validate: function(e) {
                         assert.isOk(!e.valid);
+                    }
+                });
+
+            validator.validate();
+        });
+
+        it("validate event contains errors data", function() {
+            var input = $('<input type="text" required />'),
+                validator = setup(input, {
+                    validate: function(e) {
+                        assert.equal(e.errors.length, 1);
                     }
                 });
 
@@ -199,14 +210,14 @@
             assert.equal(messages[0], "message");
         });
 
-        it("errors returns title if no validationMessage attribute for single invalid element", function() {
-            var input = $('<input type="text" required  title="message" />'),
+        it("errors returns name plus validator default message if no validationMessage attribute for single invalid element", function() {
+            var input = $('<input type="text" required  name="message" title="message" />'),
                 validator = setup(input);
 
                 validator.validate();
             var messages = validator.errors();
             assert.equal(messages.length, 1);
-            assert.equal(messages[0], "message");
+            assert.equal(messages[0], "message is required");
         });
 
         it("errors returns validationMessage if both validationMessage and title are set for single invalid element", function() {
@@ -238,8 +249,8 @@
 
             var messages = validator.errors();
             assert.equal(messages.length, 2);
-            assert.equal(messages[0], "input1 message");
-            assert.equal(messages[1], "input2 message");
+            assert.equal(messages[0], "input1 is required");
+            assert.equal(messages[1], "input2 is required");
         });
 
         it("errors is cleared if revalidated single input", function() {
@@ -266,7 +277,7 @@
 
             var messages = validator.errors();
             assert.equal(messages.length, 1);
-            assert.equal(messages[0], "input2 message");
+            assert.equal(messages[0], "input2 is required");
         });
 
         it("existing error message element container is reused", function() {
@@ -290,7 +301,7 @@
         });
 
         it("existing error message element in multiple containers is reused", function() {
-            container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/></div>')),
+            container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"></span></div>')),
             validator = setup(container.find("div"), { errorTemplate: "<span>${message}</span>" });
             validator.validate();
 
@@ -310,7 +321,7 @@
         });
 
         it("correct error message element container for the validated element is used", function() {
-            container.append($('<div><span class="k-invalid-msg" data-kendo-for="foo"/><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg" data-kendo-for="someotherfield"/></div>')),
+            container.append($('<div><span class="k-invalid-msg k-hidden" data-kendo-for="foo"></span><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg k-hidden" data-kendo-for="someotherfield"></span></div>')),
             validator = setup(container);
             validator.validate();
 
@@ -353,6 +364,16 @@
 
             assert.equal(container.find("span.k-invalid-msg").length, 2);
             assert.isOk(!container.find("span.k-invalid-msg").is(":visible"));
+        });
+
+        it("hideMessages disassociates the validation message", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+
+            validator.validate();
+            validator.hideMessages();
+
+            assert.equal(input.attr("aria-describedby"), "");
         });
 
         it("multiple calls to validation does not render multiple messages", function() {
@@ -821,13 +842,24 @@
             assert.isOk(input.filter("[aria-invalid]").length);
         });
 
-        it("aria-alert is added to the invalid input message", function() {
-            var input = $('<input type="text" required />'),
+        it("aria-describedby is added to the validated input", function() {
+            var input = $('<input type="text" name="username" required />'),
                 validator = setup(input);
 
             validator.validate();
 
-            assert.isOk(input.next().filter("[role=alert]").length);
+            assert.equal(input.attr("aria-describedby"), "username-error");
+        });
+
+        it("aria-describedby is removed after input becomes valid", function() {
+            var input = $('<input type="text" name="username" required />'),
+                validator = setup(input);
+
+            validator.validate();
+            input.val("foo");
+            validator.validate();
+
+            assert.isOk(!input.attr("aria-describedby"));
         });
 
         it("aria-invalid is removed after input become valid", function() {
@@ -1107,7 +1139,7 @@
         });
 
         it("validate skips button elements", function() {
-            container.append("<button type=button /><input type=submit /><input type=submit />");
+            container.append("<button type=button></button><input type=submit /><input type=submit />");
             var calledCount = 0,
                 validator = setup(container, {
                     rules: {
@@ -1675,5 +1707,150 @@
 
             validator.validate();
         });
+
+        it("validateInput contains data for the error message", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+            var input = container.find("#foo1");
+            validator.bind("validateInput", function(e) {
+                assert.equal(e.error, input.attr("validationMessage"));
+            });
+
+            validator.validate();
+        });
+
+        it("setOptions updates options", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+
+            validator.setOptions({
+                errorTemplate: "<span>#=message#</span>",
+                validateOnBlur: false,
+                messages: {
+                    custom: "Please enter valid value for my custom rule"
+                },
+                rules: {
+                    customRule1: function(input) { return false; }
+                }
+            });
+            var options = validator.options;
+
+            assert.equal(options.errorTemplate, "<span>#=message#</span>");
+            assert.equal(options.validateOnBlur, false);
+            assert.equal(options.messages.custom, "Please enter valid value for my custom rule");
+            assert.equal(options.rules.customRule1.length, 1);
+        });
+
+        it("reset hides validation messages and summary", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+
+            validator.validate();
+            validator.reset();
+
+            assert.isOk(!input.next("span").is(":visible"));
+            assert.isOk(!$(".k-validation-summary").is(":visible"));
+            assert.equal(validator.errors().length, 0);
+        });
+
+        it("reset clears registered errors", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+
+            validator.validate();
+            validator.reset();
+
+            assert.equal(validator.errors().length, 0);
+        });
+
+        it("reset clears invalid TextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoTextBox({
+                label: "text"
+            }).data("kendoTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid NumericTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoNumericTextBox({
+                label: "text"
+            }).data("kendoNumericTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid MaskedTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoMaskedTextBox({
+                label: "text"
+            }).data("kendoMaskedTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("validate returns false with server errors", function() {
+            kendo.ui.validator.allowSubmit = function() {
+                return true;
+
+            };
+            container.append("<input type='text' data-val-server='Server error' name='test' />");
+
+            var validator = setup(container, { rules: { server: function() { return false; } } });
+
+            assert.isOk(!validator.validate());
+        });
+
+        it("form submit is possible if server errors are shown", function() {
+            kendo.ui.validator.allowSubmit = function() {
+                return true;
+            };
+            container.append($("<form><input type='text' data-val-server='Server error' name='test' /></form>"));
+
+            var validator = setup(container.find("form"), { rules: { server: function() { return false; } } });
+            var called = false;
+
+            container.find("form").bind("submit", function(e) {
+                called = true;
+                e.preventDefault();
+            }).trigger("submit");
+
+            assert.isOk(called);
+        });
+
+        it("validation is triggered initially if there are server errors", function() {
+            kendo.ui.validator.validateOnInit = function() {
+                return true;
+            };
+
+            container.append($("<form><input type='text' data-val-server='Server error' name='test' /></form>"));
+
+            var called = false;
+            var validator = setup(container.find("form"), {
+                rules: { server: function() { return false; } },
+                validate: function(ev) {
+                    called = true;
+                }
+            });
+
+            assert.isOk(called);
+        });
+
     });
 }());

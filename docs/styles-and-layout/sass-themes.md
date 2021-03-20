@@ -14,7 +14,7 @@ As of the R1 2017 release, the Kendo UI distribution includes Sass-based themes.
 Currently, Kendo UI delivers the following Sass themes:
 
 * Kendo UI Default v.2&mdash;The latest update of the Kendo UI Default theme.
-* Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. Thsi means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
+* Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. This means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
 * Kendo UI Material&mdash;An update of the Kendo UI Material Theme to closely implement the [Material Design Guidelines](https://material.io/design/).
 
 ## Less- vs. Sass-Based Themes
@@ -41,8 +41,8 @@ The following CSS features, which are used by the Sass-based themes, provide lim
 
 To get the Sass-based Kendo UI themes, you can:
 
-* Use the pre-build CSS files.
-* Use the NPM packages.
+* [Use the pre-built CSS files](#using-the-pre-built-css).
+* [Use the NPM packages](#using-npm-packages).
 
 ### Using Pre-Built CSS
 
@@ -63,15 +63,17 @@ To access the Progress NPM registry, you need an active Telerik account with an 
 
 ## Customizing the Themes
 
-To customize a Sass-based theme, use any of the following approaches:
+Each Kendo UI theme package includes the source files of the respective theme and, thus, provides options for you to modify and rebuild the theme as part of your build process.
 
-* [Create a `.scss` file](#creating-scss-files)
-* [Use variables](#using-variables)
-* [Use mixins](#using-mixins)
+For example, you can change the theme colors, remove the CSS of unused components, or use specific theme colors to style your application. The theme source files are located in the `scss` folder of the theme package.
 
-To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository it is stored in.
+For the full list of variables that can be modified in a theme, refer to the [Using Variables](#using-variables) section.
 
-### Creating SCSS Files
+To build a custom theme by using the theme variables, apply either of the following approaches:
+* [(Recommended) Use the build process of your application](#using-the-build-process-of-the-application)&mdash;This approach simplifies the upgrades to new theme package versions.
+* [Use the build process of the themes](#using-the-build-process-of-the-themes)&mdash;This approach requires you to build the theme each time the theme packages are updated.
+
+### Using the Build Process of the Application
 
 To customize a Sass-based theme, create a `.scss` file and consume the theme package in the following way:
 
@@ -79,26 +81,98 @@ To customize a Sass-based theme, create a `.scss` file and consume the theme pac
 
         npm install @progress/kendo-theme-default
 
-2. Create a `.scss` file that will consume the theme. For the purposes of the this example, this is `styles.scss`.
+1. Create a `.scss` file that will consume the theme. For the purposes of the example, this is `styles.scss`.
 
-3. To build the theme files, import them into the file.
+1. To build the theme files, import them into the `styles.scss` file.
 
-        @import "node_modules/@progress/kendo-theme-default/scss/all";
+        @import "node_modules/@progress/kendo-theme-default/dist/all.scss";
 
-   To include the styles of specific widgets, use their names in the path.
+   The `dist/all` file adds the styles for all components that are available in the theme. To trim down the size of the generated CSS, import only the source for the components that you use in your application. Each of them could be found in `scss/` folder.
 
-        @import "node_modules/@progress/kendo-theme-default/scss/grid";
-        @import "node_modules/@progress/kendo-theme-default/scss/treeview";
+        // Import only the Grid and TreeView styles using Node Sass
+        @import "~@progress/kendo-theme-default/scss/grid/_index.scss";
+        @import "~@progress/kendo-theme-default/scss/treeview/_index.scss";
 
-4. To customize the variables that are used in the theme, change the theme before you import the theme files.
+        // or using Dart Sass
+        @import "~@progress/kendo-theme-default/scss/grid/";
+        @import "~@progress/kendo-theme-default/scss/treeview/";
 
-        $accent: #E82C0C; // brand color
+1. To customize the variables that are used in the theme, change the theme before you import the theme files.
 
-        @import "node_modules/@progress/kendo-theme-default/scss/all";
+        $primary: #E82C0C; // brand color
 
-5. Build the `styles.scss` file through a Sass compiler. For example, use `node-sass`.
+        @import "~@progress/kendo-theme-default/dist/all.scss";
+
+1. Build the `styles.scss` file through a Sass compiler.
+
+    To use Node Sass (which uses [LibSass](https://sass-lang.com/libsass)), install the compiler with `npm install node-sass --save` and then compile the file with the following command
 
         node-sass styles.scss styles.css
+
+    To use [Dart Sass](https://sass-lang.com/dart-sass), install the compiler with `npm install node-sass@npm:sass --save` and then compile the file with the following command
+
+        sass styles.scss styles.css
+
+
+### Using the Build Process of the Themes
+
+While each Sass-based theme has a dedicated NPM package (for example, @progress/kendo-theme-default), the source code for all themes is located in the [kendo-themes](https://github.com/telerik/kendo-themes) repository which contains a build task that compiles the theme sources to CSS. To customize a theme, modify the source code of the theme and use the build task to produce a CSS file for your application. This approach avoids the need for a setting up a build configuration when you compile SCSS, but may be harder to maintain as the process has to be repeated each time a theme is updated.
+
+#### Customizing Themes with Swatches
+
+A swatch is a set of variables which customizes the appearance of the theme.
+
+* Each swatch is placed in a separate file. A theme may contain multiple swatches.
+* Swatches are useful for creating multiple, persistent theme variations.
+* The `.css` output file can be shared across projects and requires no further processing.
+
+To create a swatch:
+
+1. Clone the [kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository.
+1. Install the [node-gyp](https://github.com/nodejs/node-gyp#installation) package.
+1. Install the dependencies for all themes with `npm install && npx lerna bootstrap`.
+1. Switch the working directory to `packages/<THEME_NAME>`.
+1. Create a `SWATCH_NAME.scss` swatch file in the `scss/swatches` folder.
+1. To build the swatches for the theme by running `npm run sass:swatches` or `npm run dart:swatches`.
+1. Include the compiled CSS swatch file in your project. It could be found under `dist/SWATCH_NAME.css`.
+
+For example, in the Material theme create `blue-pink-dark` swatch with the following lines:
+
+    // Variables.
+    $primary-palette-name: blue;
+    $secondary-palette-name: pink;
+    $theme-type: dark;
+
+    // Import the theme file for the components you use.
+    @import "../panelbar/_index.scss";
+    @import "../grid/_index.scss";
+
+    // Alternatively, include all components.
+    @import "../all.scss";
+
+
+For the Default and Bootstrap themes, the swatch should look like:
+
+    // Variables.
+    $primary: blue;
+    $secondary: pink;
+
+    // Import the theme file for the components you use.
+    @import "../panelbar/_index.scss";
+    @import "../grid/_index.scss";
+
+    // Alternatively, include all components.
+    @import "../all.scss";
+
+#### Customizing the Source Code
+
+To create a custom theme by modifying the themes source code:
+
+1. Clone the [kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository.
+1. Install the dependencies for all themes with `npm install && npx lerna bootstrap`.
+1. Customize the theme variables in the `packages/THEME_NAME/scss/_variables.scss` files.
+1. Build the themes with the `npm run sass` or `npm run dart` command to create the customized version of the themes in the `packages/THEME_NAME/dist/all.css` file.
+1. After the build completes, reference the compiled CSS in your application.
 
 ### Using Variables
 
@@ -596,10 +670,9 @@ The following example demonstrates how to configure the Toolbar.
 </tr>
 </table>
 
-### Using Mixins
+## Contribution
 
-* `exports`&mdash;Outputs a module once, no matter how many times it is included.
-* Parameters&mdash;`name: String` which represents the name of the exported module.
+To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository it is stored in.
 
 ## Using the Sass Theme Builder
 
@@ -616,11 +689,14 @@ The tool renders the same look and feel as the look and feel of all other compon
 To create a new theme:
 
 1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
-1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default** and **Bootsrap**.
+1. Choose one of the existing themes to serve as a starting point.
+1. Select the widgets which you intend to style. You can also change the selection at a later stage.
 
-    **Figure 2: Selecting a base theme**
+    **Figure 2: Selecting a base theme and widgets**
 
-    ![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
+    ![Theme Builder Create](images/theme-builder-create.gif)
+
+Complex widgets, such as the Grid, rely on other widgets to deliver their full set of features. If you select the Grid, then all of its widgets dependencies styles (Button, AutoComplete, DropDownList, DatePicker, etc.) will also be included in the final bundle. The Theme Builder automatically updates the styling on all required widgets so that you do not need to customize each of them separately.
 
 ### Modifying Themes
 
@@ -633,9 +709,9 @@ The Sass Theme Builder supports the following options for customization:
 
 To customize an existing theme, use the following Sass Theme Builder features:
 
-1. Color swatches&mdash;Contains predefined color palettes that you can apply to all components in your application.
+1. Color swatches&mdash;Contains predefined color palettes that you can apply to all widgets in your application.
 1. Default&mdash;Provides the applicable color customization options.
-1. Preview components&mdash;Keeps the main view of the components. It reflects the customization changes you make each time you add or remove theme elements.
+1. Selected Widgets&mdash;List of widgets to include in the preview and the final CSS bundle.
 1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
 
 **Figure 3: Available options for customization**
@@ -656,7 +732,7 @@ When you complete the modifications and the theme is ready to be used:
 
 1. Download the theme as a compact archive by clicking the **Download** button.
 1. Add the newly created `Theme` folder to your application.
-1. Include the `all.css` file in the `head` tag of your HTML document.
+1. Include the `THEME_NAME.css` file in the `head` tag of your HTML document.
 
 > Avoid referencing the `kendo.common.min.css` and `kendo.rtl.min.css` files because the exported CSS file contains all styles you need.
 

@@ -474,6 +474,51 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignLeft: "Table Align Left"
+      }
+    });
+    </script>
+
+### messages.tableAlignCenter `String` *(default: 'Table Align Center')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignCenter: "Table Align Center"
+      }
+    });
+    </script>
+
+### messages.tableAlignRight `String` *(default: 'Table Align Right')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignRight: "Table Align Right"
+      }
+    });
+    </script>
+
 ### messages.alignment `String` *(default: 'Alignment')*
 
 The title of the tool that aligns the cell text.
@@ -485,6 +530,21 @@ The title of the tool that aligns the cell text.
     $("#editor").kendoEditor({
       messages: {
         alignment: "Alignment"
+      }
+    });
+    </script>
+
+### messages.applyFormat `String` *(default: 'Apply format')*
+
+The title of the format painter tool button that applies the copied format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyFormat: "Apply the format that has been copied"
       }
     });
     </script>
@@ -695,6 +755,21 @@ The title of the Columns tool in Table Wizard.
     $("#editor").kendoEditor({
       messages: {
         columns: "Columns"
+      }
+    });
+    </script>
+
+### messages.copyFormat `String` *(default: 'Copy format')*
+
+The title of the format painter tool button that copies format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        copyFormat: "Copy format from selected range"
       }
     });
     </script>
@@ -1175,6 +1250,36 @@ The title of the tool that inserts an unordered list.
     $("#editor").kendoEditor({
       messages: {
         insertUnorderedList: "Insert unordered list"
+      }
+    });
+    </script>
+
+### messages.insertUpperRomanList `String` *(default: "Insert upper roman list")*
+
+The title of the tool that inserts an upper roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUpperRomanList: "Insert upper roman list"
+      }
+    });
+    </script>
+
+### messages.insertLowerRomanList `String` *(default: "Insert lower roman list")*
+
+The title of the tool that inserts an lower roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertLowerRomanList: "Insert lower roman list"
       }
     });
     </script>
@@ -1749,6 +1854,12 @@ The author of the PDF document.
         });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -1806,6 +1917,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2195,6 +2314,8 @@ The available editor commands are:
         - **print**
 *   Export to PDF
         - **pdf**
+*   Format painter
+        - **copyFormat**, **applyFormat**
 
 #### Example
 
@@ -2490,7 +2611,7 @@ Specifies the settings for loading and saving data.
 
 Options or URL for remote image retrieval.
 
-> **Important:** The value of `transport.read` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.read` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example - specify a read URL
 
@@ -2527,7 +2648,7 @@ Options or URL for remote image retrieval.
 ### imageBrowser.transport.read.contentType `String` *(default: "application/x-www-form-urlencoded")*
 
 The content-type HTTP header sent to the server. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2548,7 +2669,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -2588,7 +2709,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2608,7 +2729,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2751,7 +2872,7 @@ The URL responsible for serving the original image. A file name placeholder shou
 
 Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.
 
-> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -2769,7 +2890,7 @@ Options or URL which will handle the file and directory deletion. If not specifi
 ### imageBrowser.transport.destroy.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2789,7 +2910,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -2832,7 +2953,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2852,7 +2973,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2910,7 +3031,7 @@ The remote url to call when creating a new record.
 
 Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.
 
-> **Important:** The value of `transport.create` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.create` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -2928,7 +3049,7 @@ Options or URL which will handle the directory creation. If not specified that c
 ### imageBrowser.transport.create.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2948,7 +3069,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify data as object
 
@@ -2991,7 +3112,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3011,7 +3132,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3361,7 +3482,7 @@ Specifies the settings for loading and saving data.
 
 Options or URL for remote file retrieval.
 
-> **Important:** The value of `transport.read` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.read` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example - specify a read URL
 
@@ -3404,7 +3525,7 @@ Options or URL for remote file retrieval.
 ### fileBrowser.transport.read.contentType `String` *(default: "application/x-www-form-urlencoded")*
 
 The content-type HTTP header sent to the server. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3428,7 +3549,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -3474,7 +3595,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3497,7 +3618,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3622,7 +3743,7 @@ The URL responsible for serving the original file. A file name placeholder shoul
 
 Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.
 
-> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -3643,7 +3764,7 @@ Options or URL which will handle the file and directory deletion. If not specifi
 ### fileBrowser.transport.destroy.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3666,7 +3787,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -3715,7 +3836,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3738,7 +3859,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3805,7 +3926,7 @@ The remote url to call when creating a new record.
 
 Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.
 
-> **Important:** The value of `transport.create` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.create` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -3826,7 +3947,7 @@ Options or URL which will handle the directory creation. If not specified that c
 ### fileBrowser.transport.create.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3849,7 +3970,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify data as object
 
@@ -3898,7 +4019,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3921,7 +4042,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 

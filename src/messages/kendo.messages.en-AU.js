@@ -127,7 +127,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Border Style",
   "collapseBorders": "Collapse borders",
   "wrapText": "Wrap text",
-  "associateCellsWithHeaders": "Associate cells with headers",
+  "associateCellsWithHeaders": "Associate headers",
   "alignLeft": "Align Left",
   "alignCenter": "Align Center",
   "alignRight": "Align Right",
@@ -143,7 +143,15 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "Remove Alignment",
   "columns": "Columns",
   "rows": "Rows",
-  "selectAllCells": "Select All Cells"
+  "selectAllCells": "Select All Cells",
+  "headerRows": "Header Rows",
+  "headerColumns": "Header Columns",
+  "tableSummaryPlaceholder": "Summary attribute is not HTML5 compatible.",
+  "associateNone": "None",
+  "associateScope": "Associate using 'scope' attribute",
+  "associateIds": "Associate using Ids",
+  "copyFormat": "Copy format",
+  "applyFormat": "Apply format"
 });
 }
 
@@ -314,12 +322,23 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "editorTitle": "Task",
     "end": "End",
     "percentComplete": "Complete",
+    "plannedStart": "Planned Start",
+    "plannedEnd": "Planned End",
     "resources": "Resources",
     "resourcesEditorTitle": "Resources",
     "resourcesHeader": "Resources",
     "start": "Start",
     "title": "Title",
     "unitsHeader": "Units"
+  },
+  "plannedTasks": {
+    "switchText": "Planned Tasks",
+    "offsetTooltipAdvanced": "Met deadline earlier",
+    "offsetTooltipDelay": "Delay",
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "hours": "hours",
+    "days": "days"
   },
   "save": "Save",
   "views": {
@@ -458,6 +477,7 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "repeat": "Repeat",
   "frequencies": {
     "never": "Never",
     "hourly": "Hourly",
@@ -483,13 +503,16 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "repeatEvery": "Repeat every: ",
     "repeatOn": "Repeat on: ",
     "interval": " month(s)",
-    "day": "Day "
+    "day": "Day ",
+    "date": "Date"
   },
   "yearly": {
     "repeatEvery": "Repeat every: ",
     "repeatOn": "Repeat on: ",
     "interval": " year(s)",
-    "of": " of "
+    "of": " of ",
+    "month": "month",
+    "day": "day"
   },
   "end": {
     "label": "End:",
@@ -512,6 +535,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "weekend day"
   }
 });
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Repeat ends",
+      "repeatTitle": "Repeat pattern",
+      "headerTitle": "Repeat event",
+      "end": {
+        "patterns": {
+            "never": "Never",
+            "after": "After...",
+            "on": "On..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Repeat by: ",
+        "dayOfMonth": "Day of the month",
+        "dayOfWeek": "Day of the week",
+        "every": "Every"
+      },
+      "yearly": {
+        "repeatBy": "Repeat by: ",
+        "dayOfMonth": "Day of the month",
+        "dayOfWeek": "Day of the week",
+        "every": "Every",
+        "month": "Month",
+        "day": "Day"
+      }
+    });
 }
 
 /* Scheduler messages */
@@ -570,7 +625,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneTitle": "Time zones",
     "noTimezone": "No timezone",
     "editorTitle": "Event"
-  }
+  },
+  "search": "Search..."
 });
 }
 
@@ -994,6 +1050,161 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Cancel"
 });
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+    kendo.ui.List.prototype.options.messages =
+    $.extend(true, kendo.ui.List.prototype.options.messages,{
+      "clear": "clear",
+      "noData": "No data found."
+    });
+}
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+    kendo.ui.DropDownList.prototype.options.messages =
+    $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+    kendo.ui.ComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+    kendo.ui.AutoComplete.prototype.options.messages =
+    $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+    kendo.ui.DropDownTree.prototype.options.messages =
+    $.extend(true, kendo.ui.DropDownTree.prototype.options.messages,{
+        "singleTag": "item(s) selected",
+        "clear": "clear",
+        "deleteTag": "delete",
+        "noData": "No data found."
+    });
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+    kendo.ui.MultiSelect.prototype.options.messages =
+    $.extend(true, kendo.ui.MultiSelect.prototype.options.messages,{
+        "singleTag": "item(s) selected",
+        "clear": "clear",
+        "deleteTag": "delete",
+        "noData": "No data found."
+    });
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+    kendo.ui.Chat.prototype.options.messages =
+    $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "placeholder": "Type a message...",
+        "toggleButton": "Toggle toolbar",
+        "sendButton": "Send message"
+    });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Reset",
+        "previous": "Previous",
+        "next": "Next",
+        "done": "Done",
+        "step": "Step",
+        "of": "of"
+    });
+}
+
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+    $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Document",
+        toolbar: {
+            zoom: {
+                zoomLevel: "zoom level",
+                zoomOut: "Zoom Out",
+                zoomIn: "Zoom In",
+                actualWidth: "Actual Width",
+                autoWidth: "Automatic Width",
+                fitToWidth: "Fit to Width",
+                fitToPage: "Fit to Page"
+            },
+            open: "Open",
+            exportAs: "Export",
+            download: "Download",
+            pager:  {
+                first: "Go to the first page",
+                previous: "Go to the previous page",
+                next: "Go to the next page",
+                last: "Go to the last page",
+                of: " of {0} ",
+                page: "page",
+                pages: "pages"
+            },
+            print: "Print",
+            toggleSelection: "Enable Selection",
+            togglePan: "Enable Panning",
+            search: "Search"
+        },
+        errorMessages: {
+            notSupported: "Only pdf files allowed.",
+            parseError: "PDF file fails to process.",
+            notFound: "File is not found.",
+            popupBlocked: "Popup is blocked."
+        },
+        dialogs: {
+            exportAsDialog: {
+                title: "Export...",
+                defaultFileName: "Document",
+                pdf: "Portable Document Format (.pdf)",
+                png: "Portable Network Graphics (.png)",
+                svg: "Scalable Vector Graphics (.svg)",
+                labels: {
+                    fileName: "File name",
+                    saveAsType: "Save as",
+                    page: "Page"
+                }
+            },
+            okText: "OK",
+            save: "Save",
+            cancel: "Cancel",
+            search: {
+                inputLabel: "Search Text",
+                matchCase: "Match Case",
+                next: "Next Match",
+                previous: "Previous Match",
+                close: "Close",
+                of: "of"
+            }
+        }
+    });
 }
 
 })(window.kendo.jQuery);

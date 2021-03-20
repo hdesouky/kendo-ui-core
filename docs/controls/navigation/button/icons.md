@@ -1,6 +1,6 @@
 ---
 title: Icon Button
-page_title: jQuery Button Documentation | Icon Button | Kendo UI
+page_title: jQuery Button Documentation | Icon Button
 description: "Get started with the jQuery Button by Kendo UI and add background, image, or font icons to enhance the visualization of the widget."
 slug: icons_button
 position: 3
@@ -23,7 +23,7 @@ To visually enhance the Button:
 
 ## Background Icons
 
-Background icons are applied over the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The Button can automatically render the `span` element, or use an existing `span` element if it has a `k-sprite` CSS class or a `k-icon` class if the `icon` property is used. The difference between the `icon` or `spriteCssClass` properties is that `icon` is intended to be used for built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+Background icons are applied over the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The Button can automatically render the `span` element, or use an existing `span` element if it has a `k-sprite` CSS class or a `k-icon` class if the `icon` property is used. The difference between the `icon` or `spriteCssClass` properties is that `icon` is intended to be used for built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 The following example demonstrates how to use icons in the Button widget.
 

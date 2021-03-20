@@ -39,11 +39,11 @@ The new `<canvas>` tag creates an area on the page that can be drawn to with Jav
 
 ### CSS
 
-[CSS3](http://www.css3.info/) is the new standard for Cascading Style Sheets that has vastly expanded to including new layouts (such as the box), animations and transitions that are hardware accelerated (yes, you can move things around the page with CSS) and support for new color standards, such as [RGBA](http://www.css3.info/preview/rgba/) and [HSL](http://en.wikipedia.org/wiki/HSL_and_HSV).
+[CSS3](http://www.css3.info/) is the new standard for Cascading Style Sheets that has vastly expanded to including new layouts (such as the box), animations and transitions that are hardware accelerated (yes, you can move things around the page with CSS) and support for new color standards, such as [RGBA](http://www.css3.info/preview/rgba/) and [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV).
 
 ### JavaScript API
 
-The JavaScript Application Programming Interface (API) is one of the most important pieces of HTML5. JavaScript has gained massive popularity, largely in conjunction with the amazing success of jQuery. New APIs include [GeoLocation](http://en.wikipedia.org/wiki/Geolocation), [Device Orientation](http://dev.w3.org/geo/api/spec-source-orientation.html), [FileAPI](http://www.w3.org/TR/FileAPI/), [HistoryAPI](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and many others.
+The JavaScript Application Programming Interface (API) is one of the most important pieces of HTML5. JavaScript has gained massive popularity, largely in conjunction with the amazing success of jQuery. New APIs include [GeoLocation](https://en.wikipedia.org/wiki/Geolocation), [Device Orientation](http://dev.w3.org/geo/api/spec-source-orientation.html), [FileAPI](https://www.w3.org/TR/FileAPI/), [HistoryAPI](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and many others.
 
 ### Browser Support
 
@@ -73,7 +73,7 @@ The new HTML5 DOCTYPE is very simple and replaces much of the unnecessary verbos
 
 The example below demonstrates how to add the  new HTML5 DOCTYPE to your page by using a line of code where the previous DOCTYPE declaration is removed.
 
-###### Example
+
 
     <!doctype html>
 
@@ -141,7 +141,7 @@ Return to Visual Studio and add a stylesheet to the application by right-clickin
 
 Open `site.css` and add some style to change the background color of the article to `salmon`, as demonstrated in the example below.
 
-###### Example
+
 
     article {
 

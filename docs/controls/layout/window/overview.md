@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Window Documentation | Window Overview | Kendo UI
+page_title: jQuery Window Documentation | Window Overview
 description: "Get started with the jQuery Window by Kendo UI, get to know its basic usage, initialize and reference its existing instances, and use its events."
 slug: overview_kendoui_window_widget
 position: 1
@@ -8,7 +8,11 @@ position: 1
 
 # Window Overview
 
-The [Kendo UI Window widget](http://demos.telerik.com/kendo-ui/window/index) displays content in a modal or non-modal HTML window. By default, a Window can be moved, resized, and closed. Its content can also be defined with either as static HTML, or dynamically loaded via AJAX.
+The Window displays content in a modal or non-modal HTML window.
+
+By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded with AJAX.
+
+* [Demo page for the Window](https://demos.telerik.com/kendo-ui/window/index) 
 
 ## Basic Usage
 
@@ -105,7 +109,7 @@ To create a Kendo UI Window instance multiple times with the same ID, make sure 
 
 Alternatively, you can [`open`](/api/javascript/ui/window/methods/open) the existing Window instance, [`refresh`](/api/javascript/ui/window/methods/refresh) its AJAX content or [set some new static content](/api/javascript/ui/dialog/methods/content) without having to destroy the instance.
 
-## Features and Functionality
+## Functionality and Features
 
 * [Animations]({% slug animations_window %})
 * [Positioning]({% slug positiondrag_window %})
@@ -121,7 +125,7 @@ For a complete example on the basic Window events, refer to the [demo on using t
 
 ## Referencing Existing Instances
 
-To refer to an existing Window instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Window API](/api/javascript/ui/window) to control its behavior.
+To refer to an existing Window instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Window API](/api/javascript/ui/window) to control its behavior.
 
     var win = $("#window").data("kendoWindow");
 

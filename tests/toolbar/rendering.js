@@ -89,6 +89,30 @@
             assert.isOk(button.hasClass("k-state-disabled"));
         });
 
+        it("by default the button has aria-disabled attribute set to false", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", text: "foo" }
+                ]
+            });
+
+            var button = container.find("#foo");
+
+            assert.equal(button.attr("aria-disabled"), "false");
+        });
+
+        it("button with enable: false receives aria-disabled attribute", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", text: "foo", enable: false }
+                ]
+            });
+
+            var button = container.find("#foo");
+
+            assert.equal(button.attr("aria-disabled"), "true");
+        });
+
         it("splitbutton with enable: false receives k-state-disabled class", function() {
             container.kendoToolBar({
                 items: [{
@@ -109,6 +133,25 @@
 
             assert.isOk(mainbutton.hasClass("k-state-disabled"));
             assert.isOk(splitbutton.hasClass("k-state-disabled"));
+        });
+
+        it("splitbutton with enable: false has aria-disabled attribute equal to true", function() {
+            container.kendoToolBar({
+                items: [{
+                    type: "splitButton",
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    menuButtons: [
+                        { id: "btn", text: "text" }
+                    ]
+                }
+                ]
+            });
+
+            var mainbutton = container.find("#foo");
+
+            assert.equal(mainbutton.attr("aria-disabled"), "true");
         });
 
         it("by default button does not have k-primary class", function() {
@@ -547,10 +590,12 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.hasClass("k-state-hidden"));
             assert.isOk(button.is(":hidden"));
 
             var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 
@@ -629,6 +674,20 @@
 
             assert.isOk(kendo.isFunction(toggleHandler), "Toggle event handler is saved in the data of the button element");
             assert.isOk(kendo.isFunction(overflowToggleHandler), "Toggle event handler is saved in the data of the overflowButton element");
+        });
+
+        it("toggleButton receives aria-pressed attribute", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", togglable: true, text: "foo", selected: false },
+                    { type: "button", togglable: true, text: "bar", selected: true }
+                ]
+            });
+
+            var buttons = container.find(".k-toggle-button");
+
+            assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
+            assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
         });
 
         /* BUTTON GROUP */
@@ -906,9 +965,11 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#btn2");
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.hasClass("k-state-hidden"));
 
             var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 
@@ -950,6 +1011,24 @@
 
             var overflowButton = toolbar.popup.element.find("#btn2_overflow");
             assert.isOk(overflowButton.hasClass("k-group-end"));
+        });
+
+        it("ButtonGroup buttons receive aria-pressed attribute", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "buttonGroup", buttons: [
+                            { id: "btn1", text: "Btn1", togglable: true, selected: false },
+                            { id: "btn2", text: "Btn2", togglable: true, selected: true }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var buttons = toolbar.element.find(".k-toggle-button");
+
+            assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
+            assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
         });
 
         /* SPLIT BUTTON */
@@ -1165,7 +1244,9 @@
             var arrowButton = splitButton.find(".k-split-button-arrow");
 
             click(arrowButton);
-            assert.equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
+            // Use Math.floor due to chrome 79
+            // assert.equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
+            assert.equal(Math.floor(splitButton.outerWidth()), Math.floor(splitButton.data("kendoPopup").element.outerWidth()));
         });
 
         it("options.attribute are attached to the main button", function() {
@@ -1216,10 +1297,12 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find(".k-split-button");
-            assert.isOk(button.hasClass("k-state-hidden"));
+            assert.isOk(button.hasClass("k-hidden"));
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.is(":hidden"));
 
             var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 

@@ -59,7 +59,7 @@ var __meta__ = { // jshint ignore:line
             that.id = kendo.guid();
 
             Observable.fn.init.call(that);
-            that._initOptions(options);
+            this.options = $.extend({}, this.options, options);
 
             that.content = content;
 
@@ -135,7 +135,7 @@ var __meta__ = { // jshint ignore:line
                 element.css("display", "");
             }
 
-            this.trigger(SHOW, { view: this });
+            this.trigger(SHOW_START, { view: this });
         },
 
         showEnd: function() {
@@ -198,7 +198,7 @@ var __meta__ = { // jshint ignore:line
 
         _createElement: function() {
             var that = this,
-                wrapper = "<" + that.tagName + " />",
+                wrapper = "<" + that.tagName + ">",
                 element,
                 content;
 

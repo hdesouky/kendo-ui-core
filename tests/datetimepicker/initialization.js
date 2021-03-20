@@ -79,12 +79,17 @@
         });
 
         it("DateTimePicker sets correct options to TimeView", function() {
-            var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+            var datetimepicker = input.kendoDateTimePicker({
+                popup: {
+                    appendTo: "#container"
+                }
+            }).data("kendoDateTimePicker"),
                 timeView = datetimepicker.timeView;
 
             assert.equal(timeView.options.anchor, datetimepicker.wrapper);
             assert.equal(timeView.options.format, datetimepicker.options.timeFormat);
             assert.equal(timeView.options.interval, datetimepicker.options.interval);
+            assert.equal(timeView.options.popup, datetimepicker.options.popup);
         });
 
         it("datetimepicker wire date icon click", function() {
@@ -143,6 +148,37 @@
                 assert.equal(datetimepicker.dateView.calendar.value().getFullYear(), "2000");
                 done();
             }, 100);
+        });
+
+        it("form reset support works correctly with value from options", function(done) {
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+            datetimepicker = input.kendoDateTimePicker({ value: new Date(2018, 1, 1) }).data("kendoDateTimePicker");
+
+            datetimepicker.value(new Date(2011, 1, 1));
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(datetimepicker.element.val(), "2/1/2018 12:00 AM");
+                assert.deepEqual(datetimepicker.value(), new Date(2018, 1, 1));
+                done();
+            }, 200);
+        });
+
+        it("form reset support works correctly with value from options", function(done) {
+            input.attr("value", "dd MMM yyyy HH:mm");
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+            datetimepicker = input.kendoDateTimePicker({ value: new Date(2018, 1, 1) }).data("kendoDateTimePicker");
+
+            datetimepicker.value(new Date(2011, 1, 1));
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(datetimepicker.element.val(), "2/1/2018 12:00 AM");
+                assert.deepEqual(datetimepicker.value(), new Date(2018, 1, 1));
+                done();
+            }, 200);
         });
 
         it("extend popup options if datetimepicker.options.popup", function() {
@@ -398,5 +434,44 @@
             assert.equal(datetimepicker.element.val(), kendo.toString(value, datetimepicker.options.format));
         });
 
+        it("datetimepicker instantiates its own popup when component type is modern", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.isTrue(datetimepicker.popup instanceof kendo.ui.Popup);
+        });
+
+        it("datetimepicker Popup should contain a div with k-date-tab and k-datetime-wrap classes", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab.k-datetime-wrap').length, 1);
+        });
+
+        it("when time group is selected, date picker should display the time view", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            datetimepicker.popup.element.find('button.k-group-end').click();
+
+            assert.equal(datetimepicker.popup.element.find('.k-time-tab').length, 1);
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab').length, 0);
+        });
+
+        it("when time group is selected, date picker should display the time view", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                value: new Date(2020, 3, 5, 0, 0, 0),
+                min: new Date(2020, 3, 4, 0, 30, 0),
+                max: new Date(2020, 3, 5, 0, 0, 0)
+            }).data("kendoDateTimePicker");
+            var tv = datetimepicker.timeView;
+
+            tv.refresh();
+            assert.equal(tv.ul.children().length, 1);
+            assert.equal(tv.ul.find("li:last").html(), "12:00 AM");
+        });
     });
 }());

@@ -710,6 +710,55 @@
         assert.equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
     });
 
+    it("enabled autoWidth disables X scrolling", function() {
+        var multiselect = new MultiSelect(select, {
+            autoWidth: true,
+            animation:{
+                open: {
+                    duration:0
+                },
+                close: {
+                    duration:0
+                },
+            },
+            dataSource: {
+                data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+            }
+        });
+
+        multiselect.open();
+        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto")
+    });
+
+    it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
+        var multiselect = new MultiSelect(select, {
+            autoWidth: true,
+            animation:{
+                open: {
+                    duration:0
+                },
+                close: {
+                    duration:0
+                },
+            },
+            dataSource: {
+                data: [
+                    "Short item",
+                    "An item with really, really, really, really, really, really, really, really, really, long text",
+                    "Short item",
+                    "Short item",
+                    "Short item",
+                    "Short item",
+                    "Short item"
+                ]
+            }
+        });
+
+        multiselect.open();
+        assert.equal(multiselect.listView.content.css("overflow"), "hidden scroll")
+    });
+
     it("update popup height when no items are found", function(done) {
         popuplateSelect(30);
 
@@ -726,5 +775,24 @@
 
         multiselect.input.focus().val("test").keydown();
     });
+
+    it("MultiSelect caret is not moved on input focus", function(done) {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            filter: "startswith",
+            autoClose: false
+        });
+
+        multiselect.input.val("Option1");
+        kendo.caret(multiselect.input[0], 3);
+        multiselect.input.focus();
+
+        setTimeout(function() {
+            assert.equal(kendo.caret(multiselect.input[0])[0], 3);
+            done();
+        });
+    });
+
     });
 }());

@@ -26,6 +26,34 @@
             assert.equal(cp.wrapper.attr("tabIndex"), 5);
         });
 
+        it("unbinds events from hsv area container", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
+            var cp = dom.data("kendoFlatColorPicker");
+
+            cp.destroy();
+
+            assert.isOk($.isEmptyObject(cp._hsvEvents._events));
+        });
+
+        it("receives k-state-disabled class when disabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
+            var cp = dom.data("kendoFlatColorPicker");
+
+            cp.enable(false);
+
+            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+        it("removes k-state-disabled class when enabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
+            var cp = dom.data("kendoFlatColorPicker");
+
+            cp.enable(false);
+            cp.enable();
+
+            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+        });
+
     });
 }());
 
@@ -117,6 +145,38 @@
 
             cp.toggle();
         });
+
+        it("receives k-state-disabled class when disabled", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
+            cp.enable(false);
+
+            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+        it("removes k-state-disabled class when enabled", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
+            cp.enable(false);
+            cp.enable();
+
+            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+        it("picker inner wrapper has correct class", function() {
+            expect(0);
+
+            var dom = $("<input />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
+            assert.isOk(cp._inputWrapper.hasClass("k-picker-wrap"));
+        });
     });
 }());
 
@@ -132,6 +192,25 @@
             cp.enable(false);
             cp.enable(true);
             assert.equal(cp.wrapper.attr("tabIndex"), 5);
+        });
+
+        it("receives k-state-disabled class when disabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
+            var cp = dom.data("kendoColorPalette");
+
+            cp.enable(false);
+
+            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+        it("removes k-state-disabled class when enabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
+            var cp = dom.data("kendoColorPalette");
+
+            cp.enable(false);
+            cp.enable();
+
+            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
         });
     });
 }());

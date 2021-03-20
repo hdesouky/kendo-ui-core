@@ -15,9 +15,9 @@ To use any jQuery component in a React application, you need a trial of the [Ken
 ## KendoReact Suite
 
 If you are looking for native React components (no jQuery dependency), please visit [KendoReact](https://www.telerik.com/kendo-react-ui/).
-KendoReact a separate suite of 55+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
+KendoReact a separate suite of 85+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
 
-To access the native components, you need to sign up for a [KendoReact trial](https://www.telerik.com/kendo-react-ui/) or purchase a [KendoReact license](https://www.telerik.com/kendo-react-ui/#pricing).
+To access the native components, you need to sign up for a [KendoReact trial](https://www.telerik.com/download-login-v2-kendo-react-ui/) or purchase a [KendoReact license](https://www.telerik.com/kendo-react-ui/pricing/).
 
 At this time, most of the components in Kendo UI for jQuery can be found as native equivalents in KendoReact. However, there are still some that are not yet available and in those cases, you can utilize the jQuery equivalent in your React applications following the instructions below.
 
@@ -71,28 +71,14 @@ The KendoReact suite is still growing and some of the components will be availab
 
 For convenience, we created example wrapper packages of some of the components that can be used while we are developing a native React equivalent. These packages will handle the creation, updating and destroying of the widgets and will provide a declarative approach of creating the components:
 
-1. [Scheduler](#scheduler)
 1. [Spreadsheet](#spreadsheet)
-1. [TreeList](#treelist)
 1. [PivotGrid](#pivotgrid)
-
-### Scheduler
-
-The following example demonstrates how to use the Scheduler wrapper.
-
-<iframe src="https://stackblitz.com/edit/kendo-react-scheduler?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### Spreadsheet
 
 The following example demonstrates how to use the Spreadsheet wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-spreadsheet?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
-
-### TreeList
-
-The following example demonstrates how to use the TreeList wrapper.
-
-<iframe src="https://stackblitz.com/edit/kendo-react-treelist?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### PivotGrid
 

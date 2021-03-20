@@ -18,7 +18,7 @@ var __meta__ = { // jshint ignore:line
         isFunction = kendo.isFunction,
         keys = kendo.keys,
         outerWidth = kendo._outerWidth,
-
+        ns = ".kendoToolBar",
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
         OVERFLOW_BUTTON = "k-overflow-button",
@@ -34,9 +34,13 @@ var __meta__ = { // jshint ignore:line
         STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
         STATE_HIDDEN = "k-state-hidden",
+        HIDDEN = "k-hidden",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
+
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_PRESSED = "aria-pressed",
 
         ICON = "k-icon",
         ICON_PREFIX = "k-i-",
@@ -70,7 +74,7 @@ var __meta__ = { // jshint ignore:line
         kendo.toolbar = {};
 
         var components = {
-            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button"></div>',
+            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button" title="More tools" role="button"></div>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
@@ -109,13 +113,16 @@ var __meta__ = { // jshint ignore:line
             },
 
             show: function() {
-                this.element.removeClass(STATE_HIDDEN).show();
+                this.element.removeClass(STATE_HIDDEN);
+                this.element.removeClass(HIDDEN);
                 this.options.hidden = false;
             },
 
             hide: function() {
-                this.element.addClass(STATE_HIDDEN).hide();
-                if(this.overflow && this.overflowHidden){
+                this.element.addClass(STATE_HIDDEN);
+                this.element.addClass(HIDDEN);
+
+                if (this.overflow && this.overflowHidden){
                     this.overflowHidden();
                 }
                 this.options.hidden = true;
@@ -130,6 +137,8 @@ var __meta__ = { // jshint ignore:line
                     isEnabled = true;
                 }
                 this.element.toggleClass(STATE_DISABLED, !isEnabled);
+                this.element.attr(ARIA_DISABLED, !isEnabled);
+
                 this.options.enable = isEnabled;
             },
 
@@ -157,7 +166,7 @@ var __meta__ = { // jshint ignore:line
 
         var Button = Item.extend({
             init: function(options, toolbar) {
-                var element = options.useButtonTag ? $('<button tabindex="0"></button>') : $('<a href tabindex="0"></a>');
+                var element = options.useButtonTag ? $('<button tabindex="0"></button>') : $('<a role="button" href tabindex="0"></a>');
 
                 this.element = element;
                 this.options = options;
@@ -228,7 +237,7 @@ var __meta__ = { // jshint ignore:line
                     element.contents().filter(function() {
                         return (!$(this).hasClass("k-sprite") && !$(this).hasClass(ICON) && !$(this).hasClass("k-image"));
                     }).each(function(idx, el){
-                        if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
+                        if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
                             isEmpty = false;
                         }
                     });
@@ -307,6 +316,10 @@ var __meta__ = { // jshint ignore:line
             select: function(selected) {
                 if (selected === undefined) {
                     selected = false;
+                }
+
+                if (this.options.togglable) {
+                    this.element.attr(ARIA_PRESSED, selected);
                 }
 
                 this.element.toggleClass(STATE_ACTIVE, selected);
@@ -524,7 +537,7 @@ var __meta__ = { // jshint ignore:line
             _navigatable: function() {
                 var that = this;
 
-                that.popupElement.on("keydown", "." + BUTTON, function(e) {
+                that.popupElement.on("keydown" + ns, "." + BUTTON, function(e) {
                     var li = $(e.target).parent();
 
                     e.preventDefault();
@@ -598,7 +611,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }).data("kendoPopup");
 
-                this.popup.element.on(CLICK, "a.k-button", preventClick);
+                this.popup.element.on(CLICK + ns, "a.k-button", preventClick);
             },
 
             adjustPopupWidth: function (popup) {
@@ -621,7 +634,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             remove: function() {
-                this.popup.element.off(CLICK, "a.k-button");
+                this.popup.element.off(CLICK + ns, "a.k-button");
                 this.popup.destroy();
                 this.element.remove();
             },
@@ -639,6 +652,7 @@ var __meta__ = { // jshint ignore:line
 
                 this.mainButton.enable(isEnabled);
                 this.element.toggleClass(STATE_DISABLED, !isEnabled);
+                this.element.attr(ARIA_DISABLED, !isEnabled);
                 this.options.enable = isEnabled;
             },
 
@@ -651,12 +665,14 @@ var __meta__ = { // jshint ignore:line
                     this.popup.close();
                 }
 
-                this.element.addClass(STATE_HIDDEN).hide();
+                this.element.addClass(STATE_HIDDEN);
+                this.element.addClass(HIDDEN);
                 this.options.hidden = true;
             },
 
             show: function() {
-                this.element.removeClass(STATE_HIDDEN).hide();
+                this.element.removeClass(STATE_HIDDEN);
+                this.element.removeClass(HIDDEN);
                 this.options.hidden = false;
             }
         });
@@ -674,11 +690,11 @@ var __meta__ = { // jshint ignore:line
                 this.overflow = true;
                 splitContainerId = (options.id || options.uid) + OPTION_LIST_SUFFIX;
 
-                this.mainButton = new OverflowButton($.extend({ }, options));
+                this.mainButton = new OverflowButton($.extend({ isChild: true }, options));
                 this.mainButton.element.appendTo(element);
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId }, items[i]), this.toolbar);
+                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId, isChild: true }, items[i], { click: options.click }), this.toolbar);
                     item.element.appendTo(element);
                 }
 
@@ -905,7 +921,6 @@ var __meta__ = { // jshint ignore:line
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this;
-
                 Widget.fn.init.call(that, element, options);
 
                 options = that.options;
@@ -970,11 +985,11 @@ var __meta__ = { // jshint ignore:line
                     release: toggleActive
                 });
 
-                that.element.on(CLICK, "a.k-button", preventClick);
+                that.element.on(CLICK + ns, "a.k-button", preventClick);
                 that._navigatable();
 
                 if (options.resizable) {
-                    that.popup.element.on(CLICK, + "a.k-button", preventClick);
+                    that.popup.element.on(CLICK + ns, + "a.k-button", preventClick);
                 }
 
                 if (options.resizable) {
@@ -1020,14 +1035,14 @@ var __meta__ = { // jshint ignore:line
                     $(element).data("kendoPopup").destroy();
                 });
 
-                that.element.off(CLICK, "a.k-button");
+                that.element.off(ns, "a.k-button");
 
                 that.userEvents.destroy();
 
                 if (that.options.resizable) {
                     kendo.unbindResize(that._resizeHandler);
                     that.overflowUserEvents.destroy();
-                    that.popup.element.off(CLICK, "a.k-button");
+                    that.popup.element.off(ns, "a.k-button");
                     that.popup.destroy();
                 }
 
@@ -1167,10 +1182,10 @@ var __meta__ = { // jshint ignore:line
 
                         item.toolbar.hide();
 
-                        if(buttonGroupInstance) {
+                        if (buttonGroupInstance) {
                             buttonGroupInstance.refresh();
                         }
-                    } else if(!item.toolbar.options.hidden) {
+                    } else if (!item.toolbar.options.hidden) {
                         item.toolbar.hide();
                     }
                 }
@@ -1194,11 +1209,16 @@ var __meta__ = { // jshint ignore:line
 
             show: function(candidate) {
                 var item = this._getItem(candidate);
+                var buttonGroupInstance;
 
                 if (item.toolbar) {
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        buttonGroupInstance = item.toolbar.getParentGroup();
                         item.toolbar.show();
-                        item.toolbar.getParentGroup().refresh();
+
+                        if (buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(item.toolbar.options.hidden) {
                         item.toolbar.show();
                     }
@@ -1206,8 +1226,13 @@ var __meta__ = { // jshint ignore:line
 
                 if (item.overflow) {
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        buttonGroupInstance = item.overflow.getParentGroup();
+
                         item.toolbar.show();
-                        item.overflow.getParentGroup().refresh();
+
+                        if (buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(item.overflow.options.hidden) {
                         item.overflow.show();
                     }
@@ -1294,7 +1319,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
-                that.popup.element.on("keydown", "." + BUTTON, function(e) {
+                that.popup.element.on("keydown" + ns, "." + BUTTON, function(e) {
                     var target = $(e.target),
                         li = target.parent(),
                         isComplexTool = li.is("." + BUTTON_GROUP) || li.is("." + SPLIT_BUTTON),
@@ -1425,7 +1450,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.element
                     .attr("tabindex", 0)
-                    .on("focusin", function(ev) {
+                    .on("focusin" + ns, function(ev) {
                         var target = $(ev.target);
                         var element = $(this).find(":kendoFocusable:first");
 
@@ -1441,7 +1466,7 @@ var __meta__ = { // jshint ignore:line
                             element[0].focus();
                         }
                     })
-                    .on("keydown", proxy(that._keydown, that));
+                    .on("keydown" + ns, proxy(that._keydown, that));
             },
 
             _keydown: function(e) {
@@ -1687,6 +1712,7 @@ var __meta__ = { // jshint ignore:line
             _shrink: function(containerWidth) {
                 var commandElement,
                     visibleCommands;
+
                 if (containerWidth < this._childrenWidth()) {
                     visibleCommands = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")");
 
@@ -1719,7 +1745,8 @@ var __meta__ = { // jshint ignore:line
             },
 
             _hideItem: function(item) {
-                item.hide();
+                item.addClass(HIDDEN);
+
                 if (this.popup) {
                     this.popup.container
                         .find(">li[data-uid='" + item.data("uid") + "']")
@@ -1728,8 +1755,18 @@ var __meta__ = { // jshint ignore:line
             },
 
             _showItem: function(item, containerWidth) {
-                if (item.length && containerWidth > this._childrenWidth() + outerWidth(item, true)) {
-                    item.show();
+                // From jquery.outerWidth docs:
+                //  > jQuery will attempt to temporarily show and then re-hide an element
+                //  > in order to measure its dimensions, but this is unreliable
+                // Thus we show and hide the item
+                item.removeClass(HIDDEN);
+                var itemOuterWidth = outerWidth(item, true);
+                item.addClass(HIDDEN);
+
+                if (item.length && containerWidth > this._childrenWidth() + itemOuterWidth) {
+
+                    item.removeClass(HIDDEN);
+
                     if (this.popup) {
                         this.popup.container
                             .find(">li[data-uid='" + item.data("uid") + "']")

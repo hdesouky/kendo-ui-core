@@ -4,7 +4,7 @@ page_title: Global Events | AngularJS Directives
 description: "Learn more about the Kendo UI global events in AngularJS to take full advantage of AngularJS integration into Kendo UI controls."
 previous_url: /AngularJS/global-events
 slug: global_events_angularjs_directives
-position: 2
+position: 3
 ---
 
 # Global Events
@@ -119,4 +119,4 @@ angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($sco
 * [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
 * [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
-* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)
+* [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

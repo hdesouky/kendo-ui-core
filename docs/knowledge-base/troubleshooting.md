@@ -1,13 +1,14 @@
 ---
-title: Troubleshooting
-page_title: jQuery Grid Documentation | Editing Troubleshooting | Kendo UI
-description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and troubleshoot any issues that might occur while editing its data."
+title: Grid Troubleshooting on Editing
+page_title: Grid Troubleshooting on Editing | Kendo UI for jQuery
+description: "Troubleshoot any issues that might occur while editing the data of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
-position: 80
+tags: grid, editing, troubleshooting
+component: grid
+type: troubleshooting
+res_type: kb
 ---
-
-# Editing Troubleshooting
 
 This article provides solutions for issues you might encounter while working with the editing functionality of the Grid.
 
@@ -22,7 +23,7 @@ Normally, a foreign key column is bound to a numeric data field which points to 
 To work around the issue, use either of the following approaches:
 
 * Use zeros instead of nulls to match the data values with the declared data field type.
-* Use a [custom column editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with a manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) setting set to `true`.
+* Use a [custom column editor](https://demos.telerik.com/kendo-ui/grid/editing-custom) with a manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) setting set to `true`.
 
 For a runnable example on implementing foreign-key columns in the Grid, refer to [this demo](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn).
 
@@ -32,21 +33,7 @@ When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value
 
 To work around this issue, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect. For a runnable example, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
 
-## Editing Boolean columns renders styles improperly  
-
-When editing is applied to a Boolean column, the Grid renders a standard, CheckBox element input type by default. The custom CheckBox editor enables you to unify the look of the Grid editors by applying additional styles to the CheckBox that are based on the used CSS theme.
-
-The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](http://demos.telerik.com/kendo-ui/grid/editing).
-
-###### Example
-
-    function customBoolEditor(container, options) {
-        $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
-    }
-
 ## See Also
 
 * [Implementing Foreign-Key Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn)
-* [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

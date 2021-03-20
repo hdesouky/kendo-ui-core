@@ -22,9 +22,8 @@
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
             KICONCLOSE = ".k-dialog-close",
-            KCONTENTCLASS = "k-content k-window-content k-dialog-content",
+            KCONTENTCLASS = "k-window-content k-dialog-content",
             KCONTENTSELECTOR = ".k-window-content",
-            KCONTENT = ".k-content",
             KSCROLL = "k-scroll",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
@@ -46,7 +45,6 @@
             CLOSE = "close",
             SHOW = "show",
             HIDE = "hide",
-            WIDTH = "width",
             SIZE = {
                 small: "k-window-sm",
                 medium: "k-window-md",
@@ -56,8 +54,6 @@
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
             DATAHTMLTAPYRULE = "tap-y",
-            HUNDREDPERCENT = 100,
-            CSSFLEXBOX = kendo.support.cssFlexbox,
             messages = {
                 okText  : "OK",
                 cancel : "Cancel",
@@ -207,12 +203,10 @@
                 var that = this,
                     element = that.element,
                     maxHeight = that.options.maxHeight,
-                    paddingBox,
                     elementMaxHeight;
 
                 if (maxHeight != Infinity) {
-                    paddingBox = that._paddingBox(element);
-                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
+                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight();
                     if (elementMaxHeight > 0) {
                         element.css({
                             maxHeight: ceil(elementMaxHeight) + "px"
@@ -222,24 +216,11 @@
 
             },
 
-            _paddingBox: function(element) {
-                var paddingTop = parseFloat(element.css("padding-top"), 10),
-                    paddingLeft = parseFloat(element.css("padding-left"), 10),
-                    paddingBottom = parseFloat(element.css("padding-bottom"), 10),
-                    paddingRight = parseFloat(element.css("padding-right"), 10);
-
-                return {
-                    vertical: paddingTop + paddingBottom,
-                    horizontal: paddingLeft + paddingRight
-                };
-            },
-
             _setElementHeight: function() {
                 var that = this,
                     element = that.element,
-                    height = that.options.height,
-                    paddingBox = that._paddingBox(element),
-                    elementHeight = parseFloat(height, 10) - that._uiHeight() - paddingBox.vertical;
+                    height = that.wrapper.outerHeight(true),
+                    elementHeight = parseFloat(height, 10) - that._uiHeight();
 
                 if (elementHeight < 0) {
                     elementHeight = 0;
@@ -417,58 +398,36 @@
                 var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
 
                 this._addButtons(actionbar);
-                if(isStretchedLayout && !CSSFLEXBOX) {
-                    this._normalizeButtonSize(actionbar);
-                }
                 wrapper.append(actionbar);
             },
 
             _addButtons: function(actionbar) {
                 var that = this,
-                    o = that.options,
                     actionClick = proxy(that._actionClick, that),
                     actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
                     length = actions.length,
-                    buttonSize = Math.round(HUNDREDPERCENT / length),
                     action,
                     text;
 
                 for (var i = 0; i < length; i++) {
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
-                    var btn = $(templates.action(action))
+
+                    $(templates.action(action))
                         .autoApplyNS(NS)
                         .html(text)
                         .appendTo(actionbar)
+                        .addClass(action.cssClass)
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
-
-                    if (o.buttonLayout === "stretched" && !CSSFLEXBOX) {
-                        if (i == length - 1) {
-                             buttonSize = HUNDREDPERCENT - i*buttonSize;
-                        }
-                        btn.css(WIDTH, buttonSize + "%");
-                    }
                 }
             },
 
             _mergeTextWithOptions : function(action) {
                 var text = action.text;
                 return text ? template(text)(this.options) : "";
-            },
-
-            _normalizeButtonSize: function(actionbar) {
-                var that = this,
-                    options = that.options,
-                    lastButton = actionbar.children(KBUTTON + ":last"),
-                    currentSize = parseFloat(lastButton[0] ? lastButton[0].style[WIDTH] : 0),
-                    difference = HUNDREDPERCENT - (options.actions.length * currentSize);
-
-                if (difference > 0) {
-                    lastButton.css(WIDTH, (currentSize + difference) + "%");
-                }
             },
 
             _tabindex: function(target) {
@@ -493,6 +452,7 @@
 
             _actionKeyHandler: function(e) {
                 if (buttonKeyTrigger(e)) {
+                    e.preventDefault();
                     this._runActionBtn(e.currentTarget);
                 } else if (e.keyCode == keys.ESC) {
                     this.close(false);
@@ -816,11 +776,15 @@
                 var that = this;
 
                 var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                    var modal = that._object($(this));
 
-                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
+                    return modal &&
+                        modal.options &&
+                        modal.options.modal &&
+                        modal.options.visible &&
+                        modal.options.appendTo === that.options.appendTo &&
+                        !modal.containment &&
+                        $(modal.element).is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -831,7 +795,7 @@
             },
 
             _object: function(element) {
-                var content = element.children(KCONTENT);
+                var content = element.children(KCONTENTSELECTOR);
                 var widget = kendo.widgetInstance(content);
 
                 if (widget) {
@@ -846,6 +810,8 @@
                 that._destroy();
 
                 Widget.fn.destroy.call(that);
+
+                kendo.destroy(that.wrapper);
 
                 that.wrapper.remove();
                 that.wrapper = that.element = $();
@@ -892,7 +858,7 @@
 
             content: function(html, data) {
                 var that = this,
-                    content = that.wrapper.children(KCONTENT);
+                    content = that.wrapper.children(KCONTENTSELECTOR);
 
                 if (!defined(html)) {
                     return content.html();
@@ -1136,21 +1102,21 @@
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog' />"),
+            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog'></div>"),
             action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
-                "<div class='k-window-titlebar k-dialog-titlebar k-header'>" +
+                "<div class='k-window-titlebar k-dialog-titlebar'>" +
                     "<span class='k-window-title k-dialog-title'>#: title #</span>" +
-                    "<div class='k-window-actions k-dialog-actions' />" +
+                    "<div class='k-window-actions k-dialog-actions'></div>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
-            actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar' />"),
-            overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog' />"),
-            alert: "<div />",
-            confirm: "<div />",
-            prompt: "<div />",
+            close: template("<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
+            actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar'></div>"),
+            overlay: "<div class='k-overlay'></div>",
+            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
+            alert: "<div></div>",
+            confirm: "<div></div>",
+            prompt: "<div></div>",
             promptInputContainer: template("<div class='k-prompt-container'><input type='text' class='k-textbox' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
         };
 

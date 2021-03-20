@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery MultiSelect Documentation | MultiSelect Accessibility | Kendo UI
+page_title: jQuery MultiSelect Documentation | MultiSelect Accessibility
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_multiselect_widget
 position: 1
@@ -24,7 +24,7 @@ The MultiSelect has three building blocks which, depending on the current state 
 * Tag list&mdash;Displays the selected values.
 * Items popup&mdash;Displays the list of items that can be selected.
 
-![Structure of the MultiSelect](images/multiselect-structure.png)
+![Structure of the MultiSelect](../images/multiselect-structure.png)
 
 ### Search Input
 
@@ -75,11 +75,11 @@ The MultiSelect is compliant with the Section 508 requirements. For more informa
 
 ## WCAG 2.1
 
-The MultiSelect supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
+The MultiSelect supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 
-* [Keyboard Navigation by the MultiSelect (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)
 * [Keyboard Navigation by the MultiSelect]({% slug keynav_multiselect %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
